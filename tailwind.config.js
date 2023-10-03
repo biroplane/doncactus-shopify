@@ -111,8 +111,9 @@ module.exports = {
         black: "#2c2c2c",
       },
       fontFamily: {
-        body: "Barlow",
+        body: "Raleway",
         boysand: "Boysand",
+        barlow: "Barlow",
       },
       aspectRatio: {
         "3/4": "3 / 4",

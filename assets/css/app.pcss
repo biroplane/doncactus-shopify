@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@font-face {
+  font-family: "Boysand";
+  src: url("../fonts/Boysand.ttf");
+}
+
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+.cta {
+  position: relative;
+  @apply relative bg-primary-300 px-8 py-2 text-light-green-700 rounded-sm mt-4 inline-block;
+
+  &:after {
+    position: absolute;
+    content: "→";
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    animation: move 1s ease infinite alternate;
+  }
+
+  &:hover {
+    &:after {
+      opacity: 1;
+    }
+  }
+}
+
+@keyframes move {
+  0% {
+    transform: translateX(2px);
+  }
+
+  100% {
+    transform: translatex(5px);
+  }
+}
+
+@keyframes float {
+  0% {
+    /* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
+    transform: translatey(0px);
+  }
+
+  50% {
+    /* box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2); */
+    transform: translatey(-20px);
+  }
+
+  100% {
+    /* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
+    transform: translatey(0px);
+  }
+}
+
+.gradientText {
+  @apply text-transparent bg-clip-text bg-gradient-to-tr from-light-green-500 to-lime-600;
+}

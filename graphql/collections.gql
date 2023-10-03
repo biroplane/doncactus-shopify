@@ -1,0 +1,53 @@
+
+
+
+query getCollections($first: Int!, $query:String){
+
+  collections(first:$first,query:$query){
+    edges{
+      node{
+        id
+        title
+        description
+        descriptionHtml
+        handle
+        image{
+          id
+          src
+        }
+  products(first:5){
+    edges{
+      node{
+        id
+        title
+      }
+    }
+  }
+      }
+    }
+  }
+}
+
+query getCollectionByHandle($handle:String!){
+  collection(handle:$handle){
+    id
+  title
+  description
+  descriptionHtml
+  handle
+  image{
+    id
+    src
+  }
+  products(first:5){
+    edges{
+      node{
+        id
+        title
+      }
+    }
+  }
+
+  }
+}
+

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useCartStore } from "~/stores/cart";
-
+import { formatMoney } from "~/utils/format";
 const cartStore = useCartStore();
 defineProps({
   product: {
@@ -15,25 +15,32 @@ const addToChart = async (id: string) => {
 </script>
 
 <template>
-  <div>
-    <h4 class="font-bold text-2xl min-h-[6rem]">{{ product.node.title }}</h4>
-    <div class="w-full aspect-square">
+  <div to="#" class="group">
+    <div
+      class="aspect-square w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7"
+    >
       <img
         :src="product.node.images.edges[0].node.src"
-        class="w-full h-full object-cover"
+        alt="Tall slender porcelain bottle with natural clay textured body and cork stopper."
+        class="h-full w-full object-cover object-center group-hover:opacity-75"
       />
     </div>
-
-    <ul>
-      <li v-for="(variant, v) in product.node.variants?.edges" :key="v">
+    <div class="flex w-full">
+      <div class="flex-grow">
+        <h3 class="mt-4 text-sm text-gray-700">{{ product.node.title }}</h3>
+        <p class="mt-1 text-lg font-medium text-gray-900">
+          {{ formatMoney(product.node.variants?.edges[0].node.priceV2.amount) }}
+        </p>
+      </div>
+      <div class="flex-none bg-sand-500 flex items-center justify-center">
         <button
-          class="px-8 py-2 border-2 rounded-sm bg-neutral-100 shadow-sm mt-6"
-          @click="addToChart(variant.node.id)"
+          class="aspect-square w-12 h-full"
+          @click="addToChart(product.node.variants?.edges[0].node.id)"
         >
-          {{ variant.node.title }} {{ variant.node.priceV2.amount }}
+          Buy
         </button>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 </template>
 

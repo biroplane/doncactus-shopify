@@ -19,3 +19,9 @@ try {
     <NuxtPage />
   </NuxtLayout>
 </template>
+
+<style lang="postcss">
+body {
+  @apply font-body bg-light-green-50;
+}
+</style>
