@@ -1,0 +1,35 @@
+{
+  "id": "shopify_product",
+  "type": "SharedSlice",
+  "name": "ShopifyProduct",
+  "description": "ShopifyProduct",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "title",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {
+        "product": {
+          "type": "IntegrationFields",
+          "config": {
+            "catalog": "doncactus--don_cactus",
+            "label": "title",
+            "placeholder": "Title"
+          }
+        }
+      }
+    }
+  ]
+}

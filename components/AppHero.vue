@@ -8,7 +8,7 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div class="relative w-full h-screen overflow-x-hidden">
+  <div class="relative w-full h-[65vh] overflow-x-hidden">
     <div class="absolute inset-0 canvas-container">
       <canvas id="blob" class="w-full h-full"></canvas>
     </div>
@@ -41,14 +41,14 @@ onMounted(() => {
             class="absolute w-64 ml-48 overflow-hidden rounded-full h-96 lg:ml-0 bg-light-green-500 bg-opacity-70 filter backdrop-blur-lg blur-sm"
           >
             <img
-              src="/piante_grasse_2.jpg"
+              src="/piante_grasse_1.jpg"
               class="object-cover w-full h-full"
             />
           </div>
           <div
             class="absolute w-48 h-64 ml-48 duration-1000 lg:w-64 lg:h-96 lg:ml-0 float"
           >
-            <img src="/cactus_2.png" />
+            <img src="/cactus_4.png" />
           </div>
         </slot>
       </div>
@@ -60,9 +60,9 @@ onMounted(() => {
   &:before {
     content: "";
     position: absolute;
-    background-image: url("/piante_grasse_1.jpg");
+    background-image: url("/piante_grasse_2.jpg");
     background-size: cover;
-    opacity: 0.1;
+    opacity: 0.3;
     inset: 0;
     z-index: -1;
   }
