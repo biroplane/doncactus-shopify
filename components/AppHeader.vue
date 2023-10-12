@@ -27,7 +27,10 @@ onMounted(() => {
       <div
         class="flex items-center justify-center h-full md:hidden aspect-square"
       >
-        Burg
+        <!-- <button class="flex items-center justify-center w-8 aspect-square">
+          <Icon name="ci:hamburger-md" size="32" class="text-primary-600" />
+        </button> -->
+        <AppDrawer />
       </div>
     </div>
   </div>

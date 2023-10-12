@@ -357,6 +357,9 @@ export type EventsDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<EventsDocumentData>, "events", Lang>;
 
 type HomepageDocumentDataSlicesSlice =
+  | GoogleReviewsSlice
+  | ContactFormSlice
+  | NewsletterSlice
   | ShopifyProductSlice
   | CallToActionSlice
   | AlternateGridSlice
@@ -1133,6 +1136,71 @@ export type CustomerLogosSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *GoogleReviews → Primary*
+ */
+export interface GoogleReviewsSliceDefaultPrimary {
+  /**
+   * Background Image field in *GoogleReviews → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: google_reviews.primary.background_image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  background_image: prismic.ImageField<never>;
+
+  /**
+   * Title field in *GoogleReviews → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: google_reviews.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *GoogleReviews → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: google_reviews.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+}
+
+/**
+ * Default variation for GoogleReviews Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type GoogleReviewsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<GoogleReviewsSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *GoogleReviews*
+ */
+type GoogleReviewsSliceVariation = GoogleReviewsSliceDefault;
+
+/**
+ * GoogleReviews Shared Slice
+ *
+ * - **API ID**: `google_reviews`
+ * - **Description**: GoogleReviews
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type GoogleReviewsSlice = prismic.SharedSlice<
+  "google_reviews",
+  GoogleReviewsSliceVariation
+>;
+
+/**
  * Primary content in *Hero → Primary*
  */
 export interface HeroSliceDefaultPrimary {
@@ -1466,6 +1534,10 @@ declare module "@prismicio/client" {
       CustomerLogosSliceDefaultItem,
       CustomerLogosSliceVariation,
       CustomerLogosSliceDefault,
+      GoogleReviewsSlice,
+      GoogleReviewsSliceDefaultPrimary,
+      GoogleReviewsSliceVariation,
+      GoogleReviewsSliceDefault,
       HeroSlice,
       HeroSliceDefaultPrimary,
       HeroSliceImageRightPrimary,

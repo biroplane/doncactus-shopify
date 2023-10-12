@@ -14,6 +14,9 @@ export const components = defineSliceZoneComponents({
   customer_logos: defineAsyncComponent(
     () => import("./CustomerLogos/index.vue")
   ),
+  google_reviews: defineAsyncComponent(
+    () => import("./GoogleReviews/index.vue")
+  ),
   hero: defineAsyncComponent(() => import("./Hero/index.vue")),
   newsletter: defineAsyncComponent(() => import("./Newsletter/index.vue")),
   shopify_product: defineAsyncComponent(
