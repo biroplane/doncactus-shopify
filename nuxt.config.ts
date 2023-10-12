@@ -10,6 +10,8 @@ export default defineNuxtConfig({
     "nuxt-graphql-client",
     "@pinia/nuxt",
     "@nuxtjs/prismic",
+    "nuxt-icon",
+    "@dargmuesli/nuxt-cookie-control",
   ],
   experimental: {
     viewTransition: true,

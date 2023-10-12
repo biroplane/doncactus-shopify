@@ -1,9 +1,29 @@
 <script lang="ts" setup>
 const socials = [
-  { link: "https://www.facebook.com", icon: "facebook", alt: "Facebook" },
-  { link: "https://www.facebook.com", icon: "instagram", alt: "Facebook" },
-  { link: "https://www.facebook.com", icon: "twitter", alt: "Facebook" },
-  { link: "https://www.facebook.com", icon: "tiktok", alt: "Facebook" },
+  {
+    link: "https://www.facebook.com",
+    name: "Facebook",
+    icon: "cib:facebook",
+    alt: "Facebook",
+  },
+  {
+    link: "https://www.instagram.com/doncactus_apulia/",
+    name: "Instagram",
+    icon: "cib:instagram",
+    alt: "Facebook",
+  },
+  {
+    link: "https://www.facebook.com",
+    name: "Google",
+    icon: "cib:google",
+    alt: "Facebook",
+  },
+  {
+    link: "https://www.facebook.com",
+    name: "TikTok",
+    icon: "cib:tiktok",
+    alt: "Facebook",
+  },
 ];
 </script>
 
@@ -19,9 +39,14 @@ const socials = [
         </span>
       </div>
       <div class="">
-        <ul>
+        <ul class="flex flex-col gap-4">
           <li v-for="social in socials" :key="social.link">
-            <a :href="social.link" class="hover:underline">{{ social.icon }}</a>
+            <a class="flex items-baseline gap-2">
+              <Icon :name="social.icon" size="16" />
+              <p :href="social.link" class="hover:underline">
+                {{ social.name }}
+              </p>
+            </a>
           </li>
         </ul>
       </div>

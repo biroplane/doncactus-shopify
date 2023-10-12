@@ -17,11 +17,14 @@ defineProps(
   <section
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
+    class="container py-24"
   >
     <!-- <DcProductsList :products="slice.items" /> -->
-    <h4 class="text-3xl font-bold text-center">{{ slice.primary.title }}</h4>
+    <h4 class="mb-12 text-3xl font-bold text-center text-primary-500">
+      {{ slice.primary.title }}
+    </h4>
 
-    <div class="flex items-stretch gap-8">
+    <div class="flex flex-col items-stretch gap-12 md:flex-row">
       <PrismicProductItem
         v-for="(product, p) in slice.items"
         :key="p"
