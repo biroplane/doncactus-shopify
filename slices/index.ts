@@ -10,6 +10,9 @@ export const components = defineSliceZoneComponents({
   call_to_action: defineAsyncComponent(
     () => import("./CallToAction/index.vue")
   ),
+  collections_grid: defineAsyncComponent(
+    () => import("./CollectionsGrid/index.vue")
+  ),
   contact_form: defineAsyncComponent(() => import("./ContactForm/index.vue")),
   customer_logos: defineAsyncComponent(
     () => import("./CustomerLogos/index.vue")
@@ -19,7 +22,13 @@ export const components = defineSliceZoneComponents({
   ),
   hero: defineAsyncComponent(() => import("./Hero/index.vue")),
   newsletter: defineAsyncComponent(() => import("./Newsletter/index.vue")),
+  products_by_collection: defineAsyncComponent(
+    () => import("./ProductsByCollection/index.vue")
+  ),
   shopify_product: defineAsyncComponent(
     () => import("./ShopifyProduct/index.vue")
+  ),
+  single_collection: defineAsyncComponent(
+    () => import("./SingleCollection/index.vue")
   ),
 });

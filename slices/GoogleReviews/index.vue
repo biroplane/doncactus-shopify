@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import * as prismic from "@prismicio/client";
+import { useShopStore } from "~/stores/shop";
 
 // The array passed to `getSliceComponentProps` is purely optional.
 // Consider it as a visual hint for you when templating your slice.
@@ -11,8 +12,10 @@ defineProps(
     "context",
   ])
 );
-const data = await $fetch("/api/reviews");
-console.log("Reviews", data.result.reviews);
+const ss = useShopStore();
+if (ss.place.status !== "OK") {
+  await ss.loadPlace();
+}
 </script>
 
 <template>
@@ -38,7 +41,7 @@ console.log("Reviews", data.result.reviews);
         </p>
         <div class="grid grid-cols-3 gap-8 mt-12">
           <div
-            v-for="(review, r) in data.result.reviews.splice(0, 3)"
+            v-for="(review, r) in ss.place.result.reviews.splice(0, 3)"
             :key="r"
             class="card"
           >

@@ -1,0 +1,16 @@
+{
+  "id": "collections_grid",
+  "type": "SharedSlice",
+  "name": "CollectionsGrid",
+  "description": "CollectionsGrid",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": ""
+    }
+  ]
+}

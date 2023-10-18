@@ -2,13 +2,13 @@
 <template>
   <div class="relative w-full app_hero">
     <div
-      class="absolute bottom-0 w-full h-64 p-16 lg:shadow-xl box bg-brown-500 md:w-96 md:bottom-24 lg:left-24 lg:rounded-md"
+      class="absolute bottom-0 w-full h-64 px-8 py-12 md:p-16 lg:shadow-xl box bg-brown-500 md:w-96 md:bottom-24 lg:left-24 lg:rounded-md"
     >
-      <div
-        class="absolute w-32 duration-1000 -right-16 top-10 lg:-left-16 float"
+      <!-- <div
+        class="absolute w-32 duration-1000 -right-8 md:-right-16 top-10 lg:-left-16 float"
       >
         <img src="/cactus_4.png" class="object-contain w-full h-full" />
-      </div>
+      </div> -->
       <h1 class="mb-4 text-5xl font-bold text-white font-boysand lg:text-4xl">
         Don Cactus
       </h1>

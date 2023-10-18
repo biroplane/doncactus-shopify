@@ -17,15 +17,16 @@
     "@dargmuesli/nuxt-cookie-control": "^6.4.5",
     "@nuxtjs/prismic": "^3.0.3",
     "@nuxtjs/tailwindcss": "^6.8.0",
-    "@slicemachine/adapter-nuxt": "^0.3.19",
+    "@slicemachine/adapter-nuxt": "^0.3.20",
     "@types/node": "^20",
     "nuxt": "^3.7.4",
     "nuxt-icon": "^0.5.0",
-    "slice-machine-ui": "^1.16.0"
+    "slice-machine-ui": "^1.17.0"
   },
   "dependencies": {
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@pinia/nuxt": "^0.4.11",
+    "@tailwindcss/container-queries": "^0.1.1",
     "@typescript-eslint/parser": "^6.7.3",
     "@vueuse/motion": "^2.0.0",
     "eslint": "^8.50.0",

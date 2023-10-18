@@ -11,6 +11,15 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "single_collection": {
+              "type": "SharedSlice"
+            },
+            "collections_grid": {
+              "type": "SharedSlice"
+            },
+            "products_by_collection": {
+              "type": "SharedSlice"
+            },
             "alternate_grid": {
               "type": "SharedSlice"
             },

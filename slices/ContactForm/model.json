@@ -19,10 +19,10 @@
             "placeholder": ""
           }
         },
-        "body": {
+        "description": {
           "type": "StructuredText",
           "config": {
-            "label": "Body",
+            "label": "Description",
             "placeholder": "",
             "allowTargetBlank": true,
             "single": "paragraph,strong,em"

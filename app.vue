@@ -10,6 +10,7 @@ try {
     console.log("Cart initialized", cart);
   }
   await shopStore.load();
+  await shopStore.loadPlace();
 } catch (error) {
   console.log("Error while loading", error);
 }

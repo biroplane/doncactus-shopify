@@ -2,8 +2,8 @@
 import { components } from "~/slices";
 
 const prismic = usePrismic();
-const { data: page } = useAsyncData("[products]", () =>
-  prismic.client.getSingle("products")
+const { data: page } = useAsyncData("[categories]", () =>
+  prismic.client.getSingle("categories")
 );
 
 useHead({
@@ -18,12 +18,9 @@ useHead({
 </script>
 
 <template>
-  <div class="">
-    <SliceZone
-      wrapper="main"
-      :slices="page?.data.slices ?? []"
-      :components="components"
-    />
-    <pre>{{ page }}</pre>
-  </div>
+  <SliceZone
+    wrapper="main"
+    :slices="page?.data.slices ?? []"
+    :components="components"
+  />
 </template>
