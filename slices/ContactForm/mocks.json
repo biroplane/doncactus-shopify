@@ -5,17 +5,19 @@
 		"primary": {
 			"title": {
 				"__TYPE__": "FieldContent",
-				"value": "quite",
-				"type": "Text"
+				"type": "Text",
+				"value": "Resta in contatto con noi"
 			},
-			"body": {
+			"description": {
 				"__TYPE__": "StructuredTextContent",
 				"value": [
 					{
 						"type": "paragraph",
 						"content": {
-							"text": "Ea reprehenderit minim incididunt proident enim aliqua ipsum sunt. Excepteur officia do incididunt excepteur reprehenderit fugiat ullamco cillum. Eu exercitation mollit id."
-						}
+							"text": "Scrivi per ricevere informazioni o per un preventivo o per idee per il tuo prossimo evento",
+							"spans": []
+						},
+						"direction": "ltr"
 					}
 				]
 			}

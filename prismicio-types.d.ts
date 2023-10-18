@@ -78,6 +78,9 @@ export type CartDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<Simplify<CartDocumentData>, "cart", Lang>;
 
 type CategoriesDocumentDataSlicesSlice =
+  | SingleCollectionSlice
+  | CollectionsGridSlice
+  | ProductsByCollectionSlice
   | AlternateGridSlice
   | CustomerLogosSlice
   | NewsletterSlice
@@ -147,7 +150,9 @@ export type CategoriesDocument<Lang extends string = string> =
     Lang
   >;
 
-type CategoryDocumentDataSlicesSlice = never;
+type CategoryDocumentDataSlicesSlice =
+  | ProductsByCollectionSlice
+  | SingleCollectionSlice;
 
 /**
  * Content for Category documents
@@ -991,6 +996,36 @@ export type CallToActionSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Default variation for CollectionsGrid Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CollectionsGridSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  never
+>;
+
+/**
+ * Slice variation for *CollectionsGrid*
+ */
+type CollectionsGridSliceVariation = CollectionsGridSliceDefault;
+
+/**
+ * CollectionsGrid Shared Slice
+ *
+ * - **API ID**: `collections_grid`
+ * - **Description**: CollectionsGrid
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CollectionsGridSlice = prismic.SharedSlice<
+  "collections_grid",
+  CollectionsGridSliceVariation
+>;
+
+/**
  * Primary content in *ContactForm → Primary*
  */
 export interface ContactFormSliceDefaultPrimary {
@@ -1005,14 +1040,14 @@ export interface ContactFormSliceDefaultPrimary {
   title: prismic.KeyTextField;
 
   /**
-   * Body field in *ContactForm → Primary*
+   * Description field in *ContactForm → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: contact_form.primary.body
+   * - **API ID Path**: contact_form.primary.description
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  body: prismic.RichTextField;
+  description: prismic.RichTextField;
 }
 
 /**
@@ -1414,6 +1449,81 @@ export type NewsletterSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *ProductsByCollection → Primary*
+ */
+export interface ProductsByCollectionSliceDefaultPrimary {
+  /**
+   * Collection Handle field in *ProductsByCollection → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: products_by_collection.primary.collection_handle
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  collection_handle: prismic.KeyTextField;
+
+  /**
+   * Title field in *ProductsByCollection → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: products_by_collection.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Body field in *ProductsByCollection → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: products_by_collection.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Hero Image field in *ProductsByCollection → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: products_by_collection.primary.hero_image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  hero_image: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for ProductsByCollection Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ProductsByCollectionSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ProductsByCollectionSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ProductsByCollection*
+ */
+type ProductsByCollectionSliceVariation = ProductsByCollectionSliceDefault;
+
+/**
+ * ProductsByCollection Shared Slice
+ *
+ * - **API ID**: `products_by_collection`
+ * - **Description**: ProductsByCollection
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ProductsByCollectionSlice = prismic.SharedSlice<
+  "products_by_collection",
+  ProductsByCollectionSliceVariation
+>;
+
+/**
  * Primary content in *ShopifyProduct → Primary*
  */
 export interface ShopifyProductSliceDefaultPrimary {
@@ -1473,6 +1583,81 @@ export type ShopifyProductSlice = prismic.SharedSlice<
   ShopifyProductSliceVariation
 >;
 
+/**
+ * Primary content in *SingleCollection → Primary*
+ */
+export interface SingleCollectionSliceDefaultPrimary {
+  /**
+   * Collection Id field in *SingleCollection → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: single_collection.primary.collection_id
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  collection_id: prismic.KeyTextField;
+
+  /**
+   * Title field in *SingleCollection → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: single_collection.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Body field in *SingleCollection → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: single_collection.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Image field in *SingleCollection → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: single_collection.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for SingleCollection Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SingleCollectionSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<SingleCollectionSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *SingleCollection*
+ */
+type SingleCollectionSliceVariation = SingleCollectionSliceDefault;
+
+/**
+ * SingleCollection Shared Slice
+ *
+ * - **API ID**: `single_collection`
+ * - **Description**: SingleCollection
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SingleCollectionSlice = prismic.SharedSlice<
+  "single_collection",
+  SingleCollectionSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -1525,6 +1710,9 @@ declare module "@prismicio/client" {
       CallToActionSliceVariation,
       CallToActionSliceDefault,
       CallToActionSliceAlignLeft,
+      CollectionsGridSlice,
+      CollectionsGridSliceVariation,
+      CollectionsGridSliceDefault,
       ContactFormSlice,
       ContactFormSliceDefaultPrimary,
       ContactFormSliceVariation,
@@ -1548,11 +1736,19 @@ declare module "@prismicio/client" {
       NewsletterSliceVariation,
       NewsletterSliceDefault,
       NewsletterSliceDark,
+      ProductsByCollectionSlice,
+      ProductsByCollectionSliceDefaultPrimary,
+      ProductsByCollectionSliceVariation,
+      ProductsByCollectionSliceDefault,
       ShopifyProductSlice,
       ShopifyProductSliceDefaultPrimary,
       ShopifyProductSliceDefaultItem,
       ShopifyProductSliceVariation,
       ShopifyProductSliceDefault,
+      SingleCollectionSlice,
+      SingleCollectionSliceDefaultPrimary,
+      SingleCollectionSliceVariation,
+      SingleCollectionSliceDefault,
     };
   }
 }
