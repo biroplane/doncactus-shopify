@@ -1,29 +1,48 @@
 {
-  "id": "product",
-  "label": "Product",
+  "id": "single_category",
+  "label": "Single Category",
   "format": "page",
   "repeatable": false,
   "status": true,
   "json": {
     "Main": {
+      "title": {
+        "type": "Text",
+        "config": {
+          "label": "Title",
+          "placeholder": ""
+        }
+      },
+      "body": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Body",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "call_to_action": {
+            "customer_logos": {
               "type": "SharedSlice"
             },
-            "hero": {
+            "single_collection": {
               "type": "SharedSlice"
             },
-            "products_by_collection": {
+            "collections_grid": {
               "type": "SharedSlice"
             },
             "newsletter": {
               "type": "SharedSlice"
             },
-            "contact_form": {
+            "shopify_product": {
+              "type": "SharedSlice"
+            },
+            "products_by_collection": {
               "type": "SharedSlice"
             }
           }

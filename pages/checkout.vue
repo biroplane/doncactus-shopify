@@ -20,6 +20,9 @@ const getCheckout = async () => {
     },
   });
   console.log("Checkout ready", checkout, cartStore.cart);
+  if (cartStore.cart.checkoutUrl) {
+    window.location = cartStore.cart.checkoutUrl;
+  }
 };
 
 const prismic = usePrismic();

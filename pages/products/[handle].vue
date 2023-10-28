@@ -1,0 +1,101 @@
+<script setup lang="ts">
+import { useProductStore } from "~/stores/products";
+
+const ps = useProductStore();
+const route = useRoute();
+await ps.one(route.params.handle.toString());
+const recommended = ref(await ps.loadRecommended(ps.product.id));
+// import { components } from "~/slices";
+
+// const prismic = usePrismic();
+// const { data: page } = useAsyncData("[product]", () =>
+//   prismic.client.getSingle("product")
+// );
+
+// useHead({
+//   title: page.value?.data.meta_title,
+//   meta: [
+//     {
+//       name: "description",
+//       content: page.value?.data.meta_description,
+//     },
+//   ],
+// });
+</script>
+
+<template>
+  <div class="">
+    <div class="w-full">
+      <div class="w-full">
+        <img :src="ps.product.images.edges[0].node.src" alt="" />
+      </div>
+      <div
+        class="relative z-10 flex items-baseline justify-between h-20 mx-6 -mt-12 overflow-hidden rounded shadow-xl bg-gradient-to-b from-primary-300 to-primary-100"
+      >
+        <h2 class="px-6 text-2xl">{{ ps.product.title }}</h2>
+        <p
+          class="h-full aspect-[4/3] bg-primary-500 flex items-center justify-center font-barlow font-bold text-2xl"
+        >
+          {{ formatMoney(ps.product.priceRange.maxVariantPrice.amount) }}
+        </p>
+      </div>
+      <div class="p-6">{{ ps.product.description }}</div>
+      <div class="p-6">
+        <h4>Variants</h4>
+        <ul>
+          <li
+            v-for="variant in ps.product.variants.edges"
+            :key="variant"
+            class="chips"
+          >
+            {{ variant.node.title }}
+          </li>
+        </ul>
+      </div>
+      <div class="p-6 mx-6 border-t border-primary-500">
+        <ul class="grid gap-4 py-12 mt-6 border-t md:grid-cols-3">
+          <li
+            v-for="recommend in recommended"
+            :key="recommend.id"
+            class="shadow-xl"
+          >
+            <NuxtLink
+              :to="`/products/${recommend.handle}`"
+              class="hover:underline"
+            >
+              <div class="flex">
+                <div
+                  class="h-16 overflow-hidden aspect-square bg-primary-500 rounded-l-md"
+                >
+                  <img
+                    :src="(recommend.images.edges[0].node as any).src"
+                    alt=""
+                    class="object-cover w-full h-full"
+                  />
+                </div>
+
+                <div
+                  class="w-full px-4 py-1 bg-white text-primary-700 rounded-r-md"
+                >
+                  <h5 class="font-bold">{{ recommend.title }}</h5>
+                  <p>{{ recommend.description }}</p>
+                </div>
+              </div>
+            </NuxtLink>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- <SliceZone
+      wrapper="main"
+      :slices="page?.data.slices ?? []"
+      :components="components"
+    /> -->
+  </div>
+</template>
+<style>
+img {
+  view-transition-name: product-image;
+}
+</style>

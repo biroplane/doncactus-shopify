@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useCartStore } from "~/stores/cart";
 const cartStore = useCartStore();
+
 const opacity = ref(1);
 
 onMounted(() => {

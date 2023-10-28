@@ -43,7 +43,35 @@ query getCollectionByHandle($handle:String!){
     edges{
       node{
         id
+        images(first:1){
+          edges{ 
+            node{
+              src
+            }
+          }
+        }
         title
+        description
+        handle
+        priceRange{
+          maxVariantPrice{
+            amount
+            currencyCode
+          }
+        }
+        variants(first: 4) {
+          edges {
+            node {
+              id
+              title
+              priceV2 {
+                amount
+                currencyCode
+              }
+            }
+          }
+        }
+        tags
       }
     }
   }

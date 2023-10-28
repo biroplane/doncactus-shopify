@@ -437,9 +437,10 @@ export type HomepageDocument<Lang extends string = string> =
 
 type ProductDocumentDataSlicesSlice =
   | CallToActionSlice
+  | HeroSlice
+  | ProductsByCollectionSlice
   | NewsletterSlice
-  | AlternateGridSlice
-  | ShopifyProductSlice;
+  | ContactFormSlice;
 
 /**
  * Content for Product documents
@@ -493,15 +494,89 @@ interface ProductDocumentData {
  * Product document from Prismic
  *
  * - **API ID**: `product`
- * - **Repeatable**: `true`
+ * - **Repeatable**: `false`
  * - **Documentation**: https://prismic.io/docs/custom-types
  *
  * @typeParam Lang - Language API ID of the document.
  */
 export type ProductDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithUID<
+  prismic.PrismicDocumentWithoutUID<
     Simplify<ProductDocumentData>,
     "product",
+    Lang
+  >;
+
+type ProductcustomDocumentDataSlicesSlice =
+  | AlternateGridSlice
+  | HeroSlice
+  | CustomerLogosSlice
+  | ShopifyProductSlice
+  | NewsletterSlice
+  | ProductsByCollectionSlice
+  | ContactFormSlice
+  | CollectionsGridSlice;
+
+/**
+ * Content for ProductCustom documents
+ */
+interface ProductcustomDocumentData {
+  /**
+   * Slice Zone field in *ProductCustom*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: productcustom.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<ProductcustomDocumentDataSlicesSlice>
+  /**
+   * Meta Description field in *ProductCustom*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: productcustom.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *ProductCustom*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: productcustom.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+
+  /**
+   * Meta Title field in *ProductCustom*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: productcustom.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_title: prismic.KeyTextField;
+}
+
+/**
+ * ProductCustom document from Prismic
+ *
+ * - **API ID**: `productcustom`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ProductcustomDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<ProductcustomDocumentData>,
+    "productcustom",
     Lang
   >;
 
@@ -644,6 +719,100 @@ export type ShopifyProductDocument<Lang extends string = string> =
     Lang
   >;
 
+type SingleCategoryDocumentDataSlicesSlice =
+  | CustomerLogosSlice
+  | SingleCollectionSlice
+  | CollectionsGridSlice
+  | NewsletterSlice
+  | ShopifyProductSlice
+  | ProductsByCollectionSlice;
+
+/**
+ * Content for Single Category documents
+ */
+interface SingleCategoryDocumentData {
+  /**
+   * Title field in *Single Category*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: single_category.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Body field in *Single Category*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: single_category.body
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Slice Zone field in *Single Category*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: single_category.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<SingleCategoryDocumentDataSlicesSlice>
+  /**
+   * Meta Description field in *Single Category*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: single_category.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Single Category*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: single_category.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+
+  /**
+   * Meta Title field in *Single Category*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: single_category.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_title: prismic.KeyTextField;
+}
+
+/**
+ * Single Category document from Prismic
+ *
+ * - **API ID**: `single_category`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type SingleCategoryDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<SingleCategoryDocumentData>,
+    "single_category",
+    Lang
+  >;
+
 export type AllDocumentTypes =
   | CartDocument
   | CategoriesDocument
@@ -652,8 +821,10 @@ export type AllDocumentTypes =
   | EventsDocument
   | HomepageDocument
   | ProductDocument
+  | ProductcustomDocument
   | ProductsDocument
-  | ShopifyProductDocument;
+  | ShopifyProductDocument
+  | SingleCategoryDocument;
 
 /**
  * Primary content in *AlternateGrid → Primary*
@@ -1689,12 +1860,18 @@ declare module "@prismicio/client" {
       ProductDocument,
       ProductDocumentData,
       ProductDocumentDataSlicesSlice,
+      ProductcustomDocument,
+      ProductcustomDocumentData,
+      ProductcustomDocumentDataSlicesSlice,
       ProductsDocument,
       ProductsDocumentData,
       ProductsDocumentDataSlicesSlice,
       ShopifyProductDocument,
       ShopifyProductDocumentData,
       ShopifyProductDocumentDataSlicesSlice,
+      SingleCategoryDocument,
+      SingleCategoryDocumentData,
+      SingleCategoryDocumentDataSlicesSlice,
       AllDocumentTypes,
       AlternateGridSlice,
       AlternateGridSliceDefaultPrimary,

@@ -3,8 +3,9 @@ import { components } from "~/slices";
 
 const prismic = usePrismic();
 const route = useRoute();
-const { data: page } = useAsyncData(`[product-uid-${route.params.uid}]`, () =>
-  prismic.client.getByUID("product", route.params.uid as string)
+const { data: page } = useAsyncData(
+  `[productcustom-uid-${route.params.uid}]`,
+  () => prismic.client.getByUID("productcustom", route.params.uid as string)
 );
 
 useHead({

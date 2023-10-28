@@ -71,3 +71,25 @@ query getProductByHandle($handle: String) {
     tags
   }
 }
+
+query getProductRecommendations($id: ID!){
+  productRecommendations(productId:$id){
+    id
+    images(first:1){
+      edges{ 
+        node{
+          src
+        }
+      }
+    }
+    title
+    description
+    handle
+    priceRange{
+      maxVariantPrice{
+        amount
+        currencyCode
+      }
+    }
+  }
+}

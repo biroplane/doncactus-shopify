@@ -1,29 +1,44 @@
 {
-  "id": "product",
-  "label": "Product",
+  "id": "productcustom",
+  "label": "ProductCustom",
   "format": "page",
-  "repeatable": false,
+  "repeatable": true,
   "status": true,
   "json": {
     "Main": {
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "call_to_action": {
+            "alternate_grid": {
               "type": "SharedSlice"
             },
             "hero": {
               "type": "SharedSlice"
             },
-            "products_by_collection": {
+            "customer_logos": {
+              "type": "SharedSlice"
+            },
+            "shopify_product": {
               "type": "SharedSlice"
             },
             "newsletter": {
               "type": "SharedSlice"
             },
+            "products_by_collection": {
+              "type": "SharedSlice"
+            },
             "contact_form": {
+              "type": "SharedSlice"
+            },
+            "collections_grid": {
               "type": "SharedSlice"
             }
           }

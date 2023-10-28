@@ -18,7 +18,7 @@ const addToChart = async (id: string) => {
     <div
       class="w-full overflow-hidden bg-gray-200 rounded-t-lg aspect-square xl:aspect-h-8 xl:aspect-w-7"
     >
-      <NuxtLink :to="`products/${product.slug}`">
+      <NuxtLink :to="`/products/${product.handle}`">
         <img
           :src="product.images[0].src"
           class="object-cover object-center w-full h-full group-hover:opacity-75"
@@ -50,7 +50,7 @@ const addToChart = async (id: string) => {
 </template>
 
 <style scoped>
-article {
+/* article {
   img {
     view-transition-name: article-thumb;
   }
@@ -66,5 +66,5 @@ article {
   .price {
     view-transition-name: price;
   }
-}
+} */
 </style>

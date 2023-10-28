@@ -2,7 +2,9 @@ export const useShopStore = defineStore("shop", () => {
   const shop = ref();
   const place = ref();
 
-  const reviews = computed(() => place.value.result?.reviews || []);
+  const reviews = computed(
+    () => place.value.result?.reviews.filter((r: any) => r.rating > 3) || []
+  );
   const address = computed(() => place.value.result?.formatted_address);
   const phone = computed(
     () => place.value.result?.international_phone_number || ""

@@ -1,21 +1,60 @@
+import type { Ref } from "vue";
 export const useProductStore = defineStore("products", () => {
+  const product: Ref<any> = ref({} as any);
   const products = ref([] as any);
   const collections = ref([] as any);
+  const collection = ref({});
   const load = async (first = 3) => {
     try {
       const _prods = await $fetch("/api/products", {
         query: { first },
       });
       products.value = _prods.products.edges;
-      console.log("Products loaded", _prods.products.edges);
     } catch (error) {
       console.log("Errore api ", error);
     }
   };
+  const one = async (handle: string) => {
+    try {
+      const _prod = await $fetch(`/api/products/${handle}`);
+      product.value = (_prod as any).data.product as any;
+      console.log("ONE", _prod);
+      return product.value;
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
+  const loadRecommended = async (id: string) => {
+    try {
+      const data = await $fetch("/api/products/recommended", {
+        params: { id },
+      });
+      return data.recommended;
+    } catch (error) {
+      console.log("Error loading recommended", error);
+    }
+  };
   const loadCollections = async (first = 3) => {
+    console.log("Loading collections ", first);
     const data = await $fetch("/api/collections", { query: { first } });
+    console.log("collections ", data.collections.edges);
     collections.value = data.collections.edges;
     return collections.value;
   };
-  return { products, collections, load, loadCollections };
+  const getCollectionByHandle = async (handle: string, first = 20) => {
+    const { data } = await $fetch(`/api/collections/${handle}`);
+    console.log("first", first, data.collection);
+    return data.collection;
+  };
+  return {
+    products,
+    product,
+    collections,
+    collection,
+    load,
+    one,
+    loadCollections,
+    loadRecommended,
+    getCollectionByHandle,
+  };
 });
