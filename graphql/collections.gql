@@ -28,7 +28,7 @@ query getCollections($first: Int!, $query:String){
   }
 }
 
-query getCollectionByHandle($handle:String!){
+query getCollectionByHandle($handle:String!, $first:Int){
   collection(handle:$handle){
     id
   title
@@ -39,7 +39,7 @@ query getCollectionByHandle($handle:String!){
     id
     src
   }
-  products(first:5){
+  products(first:$first){
     edges{
       node{
         id

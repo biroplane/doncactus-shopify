@@ -24,6 +24,5 @@ useHead({
       :slices="page?.data.slices ?? []"
       :components="components"
     />
-    <pre>{{ page }}</pre>
   </div>
 </template>

@@ -42,9 +42,16 @@ export const useProductStore = defineStore("products", () => {
     return collections.value;
   };
   const getCollectionByHandle = async (handle: string, first = 20) => {
-    const { data } = await $fetch(`/api/collections/${handle}`);
-    console.log("first", first, data.collection);
-    return data.collection;
+    // const { data } = await $fetch(`/api/collections/${handle}`, {
+    //   params: { first },
+    // });
+    try {
+      console.log("first", first, handle);
+      const data = await GqlGetCollectionByHandle({ handle, first });
+      return data;
+    } catch (error) {
+      console.log("Errore GQL", error);
+    }
   };
   return {
     products,

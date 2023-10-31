@@ -30,8 +30,7 @@ interface CartDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<CartDocumentDataSlicesSlice>
-  /**
+  slices: prismic.SliceZone<CartDocumentDataSlicesSlice> /**
    * Meta Description field in *Cart*
    *
    * - **Field Type**: Text
@@ -99,8 +98,7 @@ interface CategoriesDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<CategoriesDocumentDataSlicesSlice>
-  /**
+  slices: prismic.SliceZone<CategoriesDocumentDataSlicesSlice> /**
    * Meta Description field in *Categories*
    *
    * - **Field Type**: Text
@@ -167,8 +165,7 @@ interface CategoryDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<CategoryDocumentDataSlicesSlice>
-  /**
+  slices: prismic.SliceZone<CategoryDocumentDataSlicesSlice> /**
    * Meta Description field in *Category*
    *
    * - **Field Type**: Text
@@ -244,8 +241,7 @@ interface CheckoutDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<CheckoutDocumentDataSlicesSlice>
-  /**
+  slices: prismic.SliceZone<CheckoutDocumentDataSlicesSlice> /**
    * Meta Description field in *Checkout*
    *
    * - **Field Type**: Text
@@ -314,8 +310,7 @@ interface EventsDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<EventsDocumentDataSlicesSlice>
-  /**
+  slices: prismic.SliceZone<EventsDocumentDataSlicesSlice> /**
    * Meta Description field in *Events*
    *
    * - **Field Type**: Text
@@ -384,8 +379,7 @@ interface HomepageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<HomepageDocumentDataSlicesSlice>
-  /**
+  slices: prismic.SliceZone<HomepageDocumentDataSlicesSlice> /**
    * Meta Description field in *homepage*
    *
    * - **Field Type**: Text
@@ -435,6 +429,137 @@ export type HomepageDocument<Lang extends string = string> =
     Lang
   >;
 
+type LandingDocumentDataSlicesSlice =
+  | AlternateGridSlice
+  | HeroSlice
+  | CallToActionSlice
+  | CustomerLogosSlice
+  | ProductsByCollectionSlice
+  | NewsletterSlice
+  | SingleCollectionSlice
+  | ContactFormSlice
+  | ShopifyProductSlice
+  | CollectionsGridSlice
+  | GoogleReviewsSlice;
+
+/**
+ * Content for Landing documents
+ */
+interface LandingDocumentData {
+  /**
+   * Title field in *Landing*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: landing.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Collection Handle field in *Landing*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: landing.collection_handle
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  collection_handle: prismic.KeyTextField;
+
+  /**
+   * Image field in *Landing*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: landing.image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Background Color field in *Landing*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: landing.background_color
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#color
+   */
+  background_color: prismic.ColorField;
+
+  /**
+   * Highlight Color field in *Landing*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: landing.highlight_color
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#color
+   */
+  highlight_color: prismic.ColorField;
+
+  /**
+   * Slice Zone field in *Landing*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: landing.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<LandingDocumentDataSlicesSlice> /**
+   * Meta Description field in *Landing*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: landing.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Landing*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: landing.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+
+  /**
+   * Meta Title field in *Landing*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: landing.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_title: prismic.KeyTextField;
+}
+
+/**
+ * Landing document from Prismic
+ *
+ * - **API ID**: `landing`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type LandingDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<LandingDocumentData>,
+    "landing",
+    Lang
+  >;
+
 type ProductDocumentDataSlicesSlice =
   | CallToActionSlice
   | HeroSlice
@@ -455,8 +580,7 @@ interface ProductDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<ProductDocumentDataSlicesSlice>
-  /**
+  slices: prismic.SliceZone<ProductDocumentDataSlicesSlice> /**
    * Meta Description field in *Product*
    *
    * - **Field Type**: Text
@@ -529,8 +653,7 @@ interface ProductcustomDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<ProductcustomDocumentDataSlicesSlice>
-  /**
+  slices: prismic.SliceZone<ProductcustomDocumentDataSlicesSlice> /**
    * Meta Description field in *ProductCustom*
    *
    * - **Field Type**: Text
@@ -581,6 +704,8 @@ export type ProductcustomDocument<Lang extends string = string> =
   >;
 
 type ProductsDocumentDataSlicesSlice =
+  | CollectionsGridSlice
+  | SingleCollectionSlice
   | CustomerLogosSlice
   | HeroSlice
   | AlternateGridSlice
@@ -612,8 +737,7 @@ interface ProductsDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<ProductsDocumentDataSlicesSlice>
-  /**
+  slices: prismic.SliceZone<ProductsDocumentDataSlicesSlice> /**
    * Meta Description field in *Products*
    *
    * - **Field Type**: Text
@@ -762,8 +886,7 @@ interface SingleCategoryDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<SingleCategoryDocumentDataSlicesSlice>
-  /**
+  slices: prismic.SliceZone<SingleCategoryDocumentDataSlicesSlice> /**
    * Meta Description field in *Single Category*
    *
    * - **Field Type**: Text
@@ -820,6 +943,7 @@ export type AllDocumentTypes =
   | CheckoutDocument
   | EventsDocument
   | HomepageDocument
+  | LandingDocument
   | ProductDocument
   | ProductcustomDocument
   | ProductsDocument
@@ -1167,6 +1291,31 @@ export type CallToActionSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *CollectionsGrid → Primary*
+ */
+export interface CollectionsGridSliceDefaultPrimary {
+  /**
+   * Title field in *CollectionsGrid → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: collections_grid.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Body field in *CollectionsGrid → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: collections_grid.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+}
+
+/**
  * Default variation for CollectionsGrid Slice
  *
  * - **API ID**: `default`
@@ -1175,7 +1324,7 @@ export type CallToActionSlice = prismic.SharedSlice<
  */
 export type CollectionsGridSliceDefault = prismic.SharedSliceVariation<
   "default",
-  Record<string, never>,
+  Simplify<CollectionsGridSliceDefaultPrimary>,
   never
 >;
 
@@ -1325,9 +1474,84 @@ export type CustomerLogosSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *CustomerLogos → Primary*
+ */
+export interface CustomerLogosSliceNoBordersPrimary {
+  /**
+   * eyebrowHeadline field in *CustomerLogos → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: customer_logos.primary.eyebrowHeadline
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  eyebrowHeadline: prismic.RichTextField;
+
+  /**
+   * callToActionLabel field in *CustomerLogos → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: customer_logos.primary.callToActionLabel
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  callToActionLabel: prismic.KeyTextField;
+
+  /**
+   * callToActionLink field in *CustomerLogos → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: customer_logos.primary.callToActionLink
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  callToActionLink: prismic.LinkField;
+}
+
+/**
+ * Primary content in *CustomerLogos → Items*
+ */
+export interface CustomerLogosSliceNoBordersItem {
+  /**
+   * image field in *CustomerLogos → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: customer_logos.items[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * link field in *CustomerLogos → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: customer_logos.items[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+}
+
+/**
+ * No Borders variation for CustomerLogos Slice
+ *
+ * - **API ID**: `noBorders`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CustomerLogosSliceNoBorders = prismic.SharedSliceVariation<
+  "noBorders",
+  Simplify<CustomerLogosSliceNoBordersPrimary>,
+  Simplify<CustomerLogosSliceNoBordersItem>
+>;
+
+/**
  * Slice variation for *CustomerLogos*
  */
-type CustomerLogosSliceVariation = CustomerLogosSliceDefault;
+type CustomerLogosSliceVariation =
+  | CustomerLogosSliceDefault
+  | CustomerLogosSliceNoBorders;
 
 /**
  * CustomerLogos Shared Slice
@@ -1857,6 +2081,9 @@ declare module "@prismicio/client" {
       HomepageDocument,
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,
+      LandingDocument,
+      LandingDocumentData,
+      LandingDocumentDataSlicesSlice,
       ProductDocument,
       ProductDocumentData,
       ProductDocumentDataSlicesSlice,
@@ -1888,6 +2115,7 @@ declare module "@prismicio/client" {
       CallToActionSliceDefault,
       CallToActionSliceAlignLeft,
       CollectionsGridSlice,
+      CollectionsGridSliceDefaultPrimary,
       CollectionsGridSliceVariation,
       CollectionsGridSliceDefault,
       ContactFormSlice,
@@ -1897,8 +2125,11 @@ declare module "@prismicio/client" {
       CustomerLogosSlice,
       CustomerLogosSliceDefaultPrimary,
       CustomerLogosSliceDefaultItem,
+      CustomerLogosSliceNoBordersPrimary,
+      CustomerLogosSliceNoBordersItem,
       CustomerLogosSliceVariation,
       CustomerLogosSliceDefault,
+      CustomerLogosSliceNoBorders,
       GoogleReviewsSlice,
       GoogleReviewsSliceDefaultPrimary,
       GoogleReviewsSliceVariation,

@@ -5,6 +5,7 @@ const ps = useProductStore();
 const route = useRoute();
 await ps.one(route.params.handle.toString());
 const recommended = ref(await ps.loadRecommended(ps.product.id));
+const shortRecommended = computed(() => recommended.value?.splice(0, 5));
 // import { components } from "~/slices";
 
 // const prismic = usePrismic();
@@ -29,19 +30,20 @@ const recommended = ref(await ps.loadRecommended(ps.product.id));
       <div class="w-full">
         <img :src="ps.product.images.edges[0].node.src" alt="" />
       </div>
-      <div
-        class="relative z-10 flex items-baseline justify-between h-20 mx-6 -mt-12 overflow-hidden rounded shadow-xl bg-gradient-to-b from-primary-300 to-primary-100"
-      >
-        <h2 class="px-6 text-2xl">{{ ps.product.title }}</h2>
-        <p
-          class="h-full aspect-[4/3] bg-primary-500 flex items-center justify-center font-barlow font-bold text-2xl"
+      <div class="flex items-baseline justify-between min-h-24">
+        <div class="px-6">
+          <h2 class="text-2xl">{{ ps.product.title }}</h2>
+          <button>Aggiungi al carrello</button>
+        </div>
+        <div
+          class="h-full py-2 px-4 aspect-[4/3] bg-primary-500 flex items-center justify-center font-barlow font-bold text-2xl"
         >
           {{ formatMoney(ps.product.priceRange.maxVariantPrice.amount) }}
-        </p>
+        </div>
       </div>
       <div class="p-6">{{ ps.product.description }}</div>
       <div class="p-6">
-        <h4>Variants</h4>
+        <!-- <h4>Variants</h4> -->
         <ul>
           <li
             v-for="variant in ps.product.variants.edges"
@@ -55,7 +57,7 @@ const recommended = ref(await ps.loadRecommended(ps.product.id));
       <div class="p-6 mx-6 border-t border-primary-500">
         <ul class="grid gap-4 py-12 mt-6 border-t md:grid-cols-3">
           <li
-            v-for="recommend in recommended"
+            v-for="recommend in shortRecommended"
             :key="recommend.id"
             class="shadow-xl"
           >
@@ -63,10 +65,8 @@ const recommended = ref(await ps.loadRecommended(ps.product.id));
               :to="`/products/${recommend.handle}`"
               class="hover:underline"
             >
-              <div class="flex">
-                <div
-                  class="h-16 overflow-hidden aspect-square bg-primary-500 rounded-l-md"
-                >
+              <div class="flex h-24">
+                <div class="h-full overflow-hidden bg-primary-500 rounded-l-md">
                   <img
                     :src="(recommend.images.edges[0].node as any).src"
                     alt=""
@@ -75,10 +75,16 @@ const recommended = ref(await ps.loadRecommended(ps.product.id));
                 </div>
 
                 <div
-                  class="w-full px-4 py-1 bg-white text-primary-700 rounded-r-md"
+                  class="w-full px-4 py-1 bg-white text-primary-700 rounded-r-md flex flex-col justify-center"
                 >
                   <h5 class="font-bold">{{ recommend.title }}</h5>
-                  <p>{{ recommend.description }}</p>
+                  <p class="">
+                    {{
+                      formatMoney(
+                        (recommend.priceRange.maxVariantPrice as any).amount
+                      )
+                    }}
+                  </p>
                 </div>
               </div>
             </NuxtLink>

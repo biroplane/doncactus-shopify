@@ -1,5 +1,13 @@
 <script setup lang="ts">
+import { onClickOutside } from "@vueuse/core";
+import { useNavStore } from "~/stores/navigation";
+
+const navStore = useNavStore();
 const drawer = ref(false);
+const drawerBox = ref();
+onClickOutside(drawerBox, () => {
+  drawer.value = false;
+});
 </script>
 <template>
   <div class="">
@@ -12,6 +20,7 @@ const drawer = ref(false);
     <transition name="slide">
       <div
         v-if="drawer"
+        ref="drawerBox"
         class="fixed top-0 right-0 w-full h-screen p-4 shadow-xl bg-sand-200"
       >
         <div class="flex flex-col h-full">
@@ -22,8 +31,15 @@ const drawer = ref(false);
             </button>
           </div>
           <ul class="flex-grow h-full mt-12 ml-4">
-            <li>Categorie</li>
-            <li>Prodotti</li>
+            <li
+              v-for="nav in navStore.menu"
+              :key="nav.label"
+              @click="drawer = false"
+            >
+              <NuxtLink :to="nav.route" active-class="font-bold">{{
+                nav.label
+              }}</NuxtLink>
+            </li>
           </ul>
           <div
             class="flex py-3 border-t account border-primary-600 text-primary-600"

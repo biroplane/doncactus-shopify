@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Content, isFilled } from "@prismicio/client";
+import { isFilled, type Content } from "@prismicio/client";
 
 defineProps(
   getSliceComponentProps<Content.CustomerLogosSlice>([
@@ -15,20 +15,29 @@ defineProps(
   <section
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
-    class="es-bounded es-customer-logos"
+    class="bg-[#f4f0ec]"
   >
-    <div class="es-bounded__content es-customer-logos__content">
+    <div
+      class="container md:px-6 lg:px-48 py-16 w-full flex flex-col items-center gap-12"
+    >
       <div
         v-if="isFilled.richText(slice.primary.eyebrowHeadline)"
-        class="es-customer-logos__heading"
+        class="font-boysand text-3xl text-primary"
       >
         <PrismicRichText :field="slice.primary.eyebrowHeadline" />
       </div>
-      <ul v-if="slice.items.length > 0" class="es-customer-logos__logos">
+      <ul
+        v-if="slice.items.length > 0"
+        class="grid grid-cols-1 md:flex items-center gap-12 overflow-x-auto p-4"
+      >
         <li
-          v-for="item in slice.items"
-          :key="item.image.url"
-          class="es-customer-logos__logo"
+          v-for="(item, i) in slice.items"
+          :key="i"
+          :class="
+            slice.variation == 'noBorders'
+              ? ''
+              : 'card aspect-square flex items-center justify-center outline outline-sand-600 bg-white flex-shrink-0 flex-grow-0 md:flex-basis-[35%]'
+          "
         >
           <PrismicLink :field="item.link">
             <PrismicImage
@@ -41,17 +50,18 @@ defineProps(
         </li>
       </ul>
       <PrismicLink
+        v-if="isFilled.link(slice.primary.callToActionLink)"
         :field="slice.primary.callToActionLink"
         class="es-customer-logos__button"
       >
-        {{ slice.primary.callToActionLabel || "Learn more..." }}
+        {{ slice.primary.callToActionLabel }}
       </PrismicLink>
     </div>
   </section>
 </template>
 
 <style>
-.es-bounded {
+/* .es-bounded {
   margin: 0px;
   min-width: 0px;
   position: relative;
@@ -122,5 +132,5 @@ defineProps(
 .es-customer-logos__button {
   justify-self: center;
   text-decoration: underline;
-}
+} */
 </style>

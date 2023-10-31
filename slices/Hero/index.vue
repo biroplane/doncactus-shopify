@@ -16,7 +16,7 @@ defineProps(
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
   >
-    <div class="grid grid-cols-2 overflow-hidden">
+    <div class="md:grid md:grid-cols-2 overflow-hidden">
       <div
         v-if="isFilled.image(slice.primary.image)"
         class="w-full h-[50vh] lg:h-[70vh]"
@@ -36,7 +36,7 @@ defineProps(
           </p>
           <div
             v-if="isFilled.richText(slice.primary.title)"
-            class="mb-4 text-4xl font-bold lg:text-7xl text-primary-400"
+            class="mb-4 text-3xl md:text-4xl font-bold lg:text-7xl text-primary-400"
           >
             <PrismicRichText :field="slice.primary.title" />
           </div>
@@ -46,7 +46,7 @@ defineProps(
           >
             <PrismicRichText :field="slice.primary.description" />
           </div>
-          <div class="flex mt-12 text-center">
+          <div class="flex mt-6 md:mt-12 text-center">
             <PrismicLink
               v-if="isFilled.link(slice.primary.callToActionLink)"
               class="btn cta"

@@ -24,24 +24,31 @@ const listCollection = computed(() => prouctStore.collections.slice(3));
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
   >
-    <h2>{{ slice.primary.title }}</h2>
-
     <div
-      class="container grid grid-cols-2 grid-rows-2 gap-2 mx-auto my-12 aspect-video"
+      class="container grid gap-2 mx-auto my-12 md:grid-cols-2 md:grid-rows-2 aspect-video"
     >
+      <h2
+        class="pr-12 text-3xl font-bold text-primary-700 md:text-5xl lg:text-7xl font-boysand"
+      >
+        {{ slice.primary.title || "Le collezioni 🌵" }}
+      </h2>
       <div
         v-for="grid in gridCollection"
         :key="grid.node.id"
-        class="w-full first:row-span-2 fancy-hover card"
+        class="w-full fancy-hover card"
       >
-        <NuxtLink :to="`/collections/${grid.node.handle}`" class="relative">
+        <NuxtLink
+          v-if="grid.node.image"
+          :to="`/collections/${grid.node.handle}`"
+          class="relative"
+        >
           <img
             v-if="grid.node.image?.src"
             :src="grid.node.image?.src"
             class="object-cover w-full h-full"
           />
           <div class="absolute text-lg md:text-2xl bottom-4 left-4 max-w-[75%]">
-            <p class="inline-block p-2 bg-sand-50 font-barlow">
+            <p class="inline-block p-2 highlight bg-sand-50 font-barlow">
               {{ grid.node.title }}
             </p>
           </div>
@@ -52,22 +59,28 @@ const listCollection = computed(() => prouctStore.collections.slice(3));
       <div class="border border-lime-500"></div>
       <div class="border border-indigo-500"></div> -->
     </div>
-    <div class="container grid grid-flow-row-dense grid-cols-3 gap-4">
+    <div
+      class="container grid grid-flow-row-dense grid-cols-2 gap-4 md:grid-cols-3"
+    >
       <div v-for="card in listCollection" :key="card.id" class="card">
         <NuxtLink :to="`/collections/${card.node.handle}`">
           <div class="flex flex-col gap-8">
-            <div class="h-48 overflow-hidden">
+            <div class="h-32 overflow-hidden md:h-48">
               <img
+                v-if="card.node.image?.src"
                 :src="card.node.image.src"
                 class="object-cover w-full h-full"
                 alt=""
               />
             </div>
             <div class="">
-              <h4 class="text-2xl font-medium font-barlow">
+              <h4 class="font-medium md:text-2xl font-barlow">
                 {{ card.node.title }}
               </h4>
-              <p class="text-sm" v-html="card.node.descriptionHtml"></p>
+              <p
+                class="text-xs md:text-sm"
+                v-html="card.node.descriptionHtml"
+              ></p>
             </div>
           </div>
         </NuxtLink>

@@ -15,21 +15,33 @@ const props = defineProps(
 const productStore = useProductStore();
 const prods = await productStore.getCollectionByHandle(
   props.slice.primary.collection_handle as string,
-  3
+  20
 );
+console.log("Prods", prods);
 </script>
 
 <template>
   <section
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
-    class="container py-12"
+    class="container py-12 flex flex-col gap-8"
   >
-    Ciao
     <h1 class="text-5xl font-boysand text-light-green-500">
       {{ slice.primary.title }}
     </h1>
-    <DcProductsList :products="prods?.products.edges" />
-    <!-- <pre>{{ slice.primary }}</pre> -->
+    <p><PrismicRichText :field="slice.primary.body"></PrismicRichText></p>
+    <div class="grid grid-cols-4 gap-8">
+      <ProductItem
+        v-for="pr in prods?.collection?.products.edges"
+        :key="pr.node.handle"
+        :images="pr.node.images.edges"
+        :title="pr.node.title"
+        :price="pr.node.priceRange.maxVariantPrice.amount"
+        :handle="pr.node.handle"
+        :variation="pr.node.variants.edges"
+      />
+    </div>
+    <!-- <DcProductsList :products="prods?.collection?.products.edges" />
+    <pre>{{ prods?.collection?.products }}</pre> -->
   </section>
 </template>
