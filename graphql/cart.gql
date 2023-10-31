@@ -23,6 +23,7 @@ query getCart($cartId: ID!) {
     lines(first: 100) {
       edges {
         node {
+          
           quantity
           estimatedCost {
             subtotalAmount {

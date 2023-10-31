@@ -3,6 +3,7 @@ export const useCartStore = defineStore("cartstore", () => {
    * Cart id, checkoutUrl, estimatedCost,lines
    */
   const cart: Ref<any> = ref({});
+  const cartTotal = computed(() => cart.value.cost && cart.value.cost);
   const CART_ID = "shopify:doncactus:cart";
 
   const initializeCart = async () => {
@@ -95,6 +96,7 @@ export const useCartStore = defineStore("cartstore", () => {
   return {
     cart,
     initializeCart,
+    cartTotal,
     addToCart,
   };
 });

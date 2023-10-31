@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   nitro: {
     preset: "netlify",
   },
-  css: ["~~/assets/css/app.pcss"],
+  css: ["~~/assets/css/app.pcss", "~~/assets/css/tailwind.pcss"],
   modules: [
     "@nuxtjs/tailwindcss",
     "nuxt-graphql-client",
@@ -16,6 +16,11 @@ export default defineNuxtConfig({
   experimental: {
     viewTransition: true,
     // ...
+  },
+  app: {
+    head: {
+      link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
+    },
   },
   pinia: {
     autoImports: [
@@ -51,10 +56,11 @@ export default defineNuxtConfig({
           type: "homepage",
           path: "/",
         },
-        { type: "product", path: "/products/:uid" },
+        { type: "productcustom", path: "/products/single/:uid" },
         { type: "products", path: "/products" },
-        { type: "category", path: "/category/:uid" },
-        { type: "categories", path: "/category" },
+        { type: "category", path: "/collections/:uid" },
+        { type: "categories", path: "/collections" },
+        { type: "landing", path: "/landing/:uid" },
       ],
     },
   },

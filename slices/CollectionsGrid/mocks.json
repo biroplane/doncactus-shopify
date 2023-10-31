@@ -2,7 +2,24 @@
 	{
 		"__TYPE__": "SharedSliceContent",
 		"variation": "default",
-		"primary": {},
+		"primary": {
+			"title": {
+				"__TYPE__": "FieldContent",
+				"value": "gulf",
+				"type": "Text"
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Reprehenderit aliquip et veniam. Nostrud elit dolore duis non nisi eiusmod eu sit nulla do excepteur quis exercitation officia. Proident commodo ullamco labore nostrud do duis."
+						}
+					}
+				]
+			}
+		},
 		"items": []
 	}
 ]

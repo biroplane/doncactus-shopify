@@ -2,9 +2,8 @@
 import { components } from "~/slices";
 
 const prismic = usePrismic();
-const route = useRoute();
-const { data: page } = useAsyncData(`[category-uid-${route.params.uid}]`, () =>
-  prismic.client.getByUID("category", route.params.uid as string)
+const { data: page } = useAsyncData("[single_category]", () =>
+  prismic.client.getSingle("single_category")
 );
 
 useHead({

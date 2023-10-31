@@ -37,8 +37,8 @@ const addTonNewsletter = () => {
         </p>
         <label for="email" class="flex w-full">
           <input
+            id="email"
             v-model="email"
-            name="email"
             type="email"
             class="w-full p-2 border border-r-0 rounded rounded-r-none focus:outline-none border-primary-600"
             placeholder="mario.rossi@esempio.com"

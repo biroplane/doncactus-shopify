@@ -14,21 +14,21 @@ const addToChart = async (id: string) => {
 </script>
 
 <template>
-  <article to="#" class="group">
+  <NuxtLink :to="`/products/${product.node.handle}`" class="group">
     <div
       class="w-full overflow-hidden bg-gray-200 rounded-lg aspect-square xl:aspect-h-8 xl:aspect-w-7"
     >
       <img
-        :src="product.images[0].src"
+        :src="product.node.images.edges[0].node.src"
         alt="Tall slender porcelain bottle with natural clay textured body and cork stopper."
         class="object-cover object-center w-full h-full group-hover:opacity-75"
       />
     </div>
     <div class="flex w-full">
       <div class="flex-grow">
-        <h3 class="mt-4 text-sm text-gray-700">{{ product.title }}</h3>
+        <h3 class="mt-4 text-sm text-gray-700">{{ product.node.title }}</h3>
         <p class="mt-1 text-lg font-medium text-gray-900">
-          {{ formatMoney(product.variants[0].price) }}
+          {{ formatMoney(product.node.variants.edges[0].node.priceV2.amount) }}
         </p>
       </div>
 
@@ -41,11 +41,11 @@ const addToChart = async (id: string) => {
         </button>
       </div>
     </div>
-  </article>
+  </NuxtLink>
 </template>
 
 <style scoped>
-article {
+/* article {
   img {
     view-transition-name: article-thumb;
   }
@@ -61,5 +61,5 @@ article {
   .price {
     view-transition-name: price;
   }
-}
+} */
 </style>

@@ -47,6 +47,6 @@ body {
 }
 html,
 body {
-  @apply h-screen;
+  @apply h-screen w-screen overflow-x-hidden;
 }
 </style>

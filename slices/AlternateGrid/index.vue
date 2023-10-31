@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Content, isFilled } from "@prismicio/client";
+import { isFilled, type Content } from "@prismicio/client";
 
 defineProps(
   getSliceComponentProps<Content.AlternateGridSlice>([
@@ -15,9 +15,60 @@ defineProps(
   <section
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
-    class="es-bounded es-alternate-grid"
+    class=""
   >
-    <div
+    <div class="grid lg:grid-cols-2 gap-12 @container items-center">
+      <div
+        class="@xs:aspect-square @lg:aspect-auto @lg:h-full @lg:max-h-[40vh]"
+        :class="
+          slice.variation === 'imageRight' ? '-order-first' : 'order-first'
+        "
+      >
+        <PrismicImage
+          v-if="isFilled.image(slice.primary.image)"
+          :field="slice.primary.image"
+          class="object-cover w-full h-full"
+        />
+      </div>
+      <div class="px-8">
+        <div class="my-6">
+          <div
+            v-if="isFilled.keyText(slice.primary.eyebrowHeadline)"
+            class="text-brown"
+          >
+            {{ slice.primary.eyebrowHeadline }}
+          </div>
+          <PrismicRichText
+            v-if="isFilled.richText(slice.primary.title)"
+            :field="slice.primary.title"
+            class="text-2xl font-bold"
+          />
+          <PrismicRichText
+            v-if="isFilled.richText(slice.primary.description)"
+            :field="slice.primary.description"
+            class="max-w-md text-lg"
+          />
+        </div>
+        <div
+          v-if="slice.items && slice.items.length"
+          class="grid gap-4 lg:grid-cols-2"
+        >
+          <div v-for="(item, i) in slice.items" :key="i">
+            <PrismicRichText
+              v-if="isFilled.richText(item.title)"
+              :field="item.title"
+              class="text-lg font-bold md:text-xl"
+            />
+            <PrismicRichText
+              v-if="isFilled.richText(item.description)"
+              :field="item.description"
+              class="text-sm md:text-base text-neutral-500"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div
       :class="[
         'es-alternate-grid__content',
         isFilled.image(slice.primary.image)
@@ -76,12 +127,12 @@ defineProps(
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </section>
 </template>
 
 <style>
-.es-bounded {
+/* .es-bounded {
   margin: 0px;
   min-width: 0px;
   position: relative;
@@ -227,5 +278,5 @@ defineProps(
 
 .es-alternate-grid__item__description * {
   margin: 0;
-}
+} */
 </style>

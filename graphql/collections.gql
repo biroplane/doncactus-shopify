@@ -28,7 +28,7 @@ query getCollections($first: Int!, $query:String){
   }
 }
 
-query getCollectionByHandle($handle:String!){
+query getCollectionByHandle($handle:String!, $first:Int){
   collection(handle:$handle){
     id
   title
@@ -39,11 +39,39 @@ query getCollectionByHandle($handle:String!){
     id
     src
   }
-  products(first:5){
+  products(first:$first){
     edges{
       node{
         id
+        images(first:1){
+          edges{ 
+            node{
+              src
+            }
+          }
+        }
         title
+        description
+        handle
+        priceRange{
+          maxVariantPrice{
+            amount
+            currencyCode
+          }
+        }
+        variants(first: 4) {
+          edges {
+            node {
+              id
+              title
+              priceV2 {
+                amount
+                currencyCode
+              }
+            }
+          }
+        }
+        tags
       }
     }
   }
