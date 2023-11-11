@@ -19,7 +19,6 @@ useHead({
 
 <template>
   <div class="">
-    <AppHero />
     <SliceZone
       wrapper="main"
       :slices="page?.data.slices ?? []"

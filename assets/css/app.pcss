@@ -8,7 +8,14 @@
 
 html,
 body {
-  @apply w-full h-screen;
+  @apply w-full;
+}
+
+input,
+textarea,
+button,
+select {
+  @apply focus:outline-none;
 }
 
 .float {
@@ -25,8 +32,7 @@ h6 {
 }
 
 .cta {
-  position: relative;
-  @apply relative bg-primary-300 px-8 py-2 text-light-green-700 rounded-sm mt-4 inline-block;
+  @apply relative bg-primary-300 px-8 py-2 text-light-green-700 rounded-sm inline-block;
 
   &:after {
     position: absolute;
@@ -41,6 +47,9 @@ h6 {
       opacity: 1;
     }
   }
+}
+button:disabled {
+  @apply filter grayscale cursor-not-allowed;
 }
 
 @keyframes move {

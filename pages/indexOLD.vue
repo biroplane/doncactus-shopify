@@ -45,7 +45,7 @@ const addToChart = (prod: any) => {
           class="bg-sand-500"
         >
           <template #image>
-            <img
+            <NuxtImg
               :src="product.node.images.edges[0].node.src"
               class="object-cover object-center w-full aspect-square"
             />

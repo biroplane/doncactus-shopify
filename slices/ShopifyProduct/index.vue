@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import * as prismic from "@prismicio/client";
+import { useProductStore } from "~/stores/products";
 
 // The array passed to `getSliceComponentProps` is purely optional.
 // Consider it as a visual hint for you when templating your slice.
-defineProps(
+const props = defineProps(
   getSliceComponentProps<prismic.Content.ShopifyProductSlice>([
     "slice",
     "index",
@@ -11,6 +12,9 @@ defineProps(
     "context",
   ])
 );
+
+const productStore = useProductStore();
+await productStore.load(props.slice.primary.items_number || 12);
 </script>
 
 <template>
@@ -24,12 +28,21 @@ defineProps(
       {{ slice.primary.title }}
     </h4>
 
-    <div class="flex flex-col items-stretch gap-12 md:flex-row">
-      <PrismicProductItem
-        v-for="(product, p) in slice.items"
+    <div
+      class="grid items-stretch gap-4 md:gap-12 md:grid-cols-3 lg:grid-cols-4"
+    >
+      <ProductItem
+        v-for="(product, p) in productStore.products"
         :key="p"
-        :product="product.product as any"
-      ></PrismicProductItem>
+        :handle="product.handle"
+        :title="product.title"
+        :images="product.images.nodes as any"
+        :price="(product.variants.nodes[0] as any).priceV2.amount as number"
+        :variation-id="product.variants.nodes[0].id"
+      ></ProductItem>
+      <NuxtLink to="/products" class="text-center btn cta col-span-full"
+        >Visualizza gli altri prodotti</NuxtLink
+      >
     </div>
   </section>
 </template>

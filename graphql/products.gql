@@ -1,64 +1,30 @@
-query Products ($first: Int!, $query:String){
-  products(first:$first,query:$query){
-    edges{
-      node{
-        id
-        images(first:1){
-          edges{ 
-            node{
-              src
-            }
-          }
-        }
-        title
-        description
-        handle
-        priceRange{
-          maxVariantPrice{
-            amount
-            currencyCode
-          }
-        }
-        variants(first: 4) {
-          edges {
-            node {
-              id
-              title
-              priceV2 {
-                amount
-                currencyCode
-              }
-            }
-          }
-        }
-        tags
-      }
-    }
-  }
-}
 
-query getProductByHandle($handle: String) {
-  product(handle:$handle) {
-    id
-    images(first:1){
-      edges{ 
-        node{
+query Products($first: Int!, $query: String) {
+  products(first: $first, query: $query) {
+    pageInfo{
+      hasNextPage
+    }
+    nodes {
+      id
+      
+      
+      images(first: 10) {
+        nodes {
           src
         }
       }
-    }
-    title
-    description
-    handle
-    priceRange{
-      maxVariantPrice{
-        amount
-        currencyCode
+      
+      title
+      description
+      handle
+      priceRange {
+        maxVariantPrice {
+          amount
+          currencyCode
+        }
       }
-    }
-    variants(first: 4) {
-      edges {
-        node {
+      variants(first: 4) {
+        nodes {
           id
           title
           priceV2 {
@@ -67,26 +33,71 @@ query getProductByHandle($handle: String) {
           }
         }
       }
+      tags
     }
-    tags
   }
 }
 
-query getProductRecommendations($id: ID!){
-  productRecommendations(productId:$id){
+query getProductByHandle($handle: String) {
+  product(handle: $handle) {
     id
-    images(first:1){
-      edges{ 
-        node{
-          src
-        }
+    seo {
+        title
+        description
+      }
+    images(first: 5) {
+      nodes {
+        src
       }
     }
     title
     description
     handle
-    priceRange{
-      maxVariantPrice{
+    priceRange {
+      maxVariantPrice {
+        amount
+        currencyCode
+      }
+    }
+    metafields(identifiers:[{namespace: "descriptors", key: "care_guide"},{namespace: "descriptors", key: "customization"},{namespace: "custom", key: "packaging"}]) {
+  
+        value
+        key
+        description
+      }
+    collections(first: 5) {
+      nodes {
+        title
+        handle
+      }
+    }
+    variants(first: 5) {
+      nodes {
+        id
+        title
+        priceV2 {
+          amount
+          currencyCode
+        }
+      }
+    }
+    tags
+  }
+}
+
+query getProductRecommendations($id: ID!) {
+  productRecommendations(productId: $id) {
+    id
+    images(first: 1) {
+      nodes {
+        src
+      }
+    }
+    title
+    description
+    handle
+    priceRange {
+      maxVariantPrice {
         amount
         currencyCode
       }

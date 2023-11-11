@@ -30,35 +30,28 @@ console.log("Handle", data);
   >
     <div v-if="data" class="w-full">
       <div class="h-[35vh] relative">
-        <img
+        <NuxtImg
           :src="(data.collection?.image as any).src"
           alt=""
-          class="w-full h-full object-cover object-center"
+          class="object-cover object-center w-full h-full"
         />
-        <div class="absolute bottom-4 left-4 max-w-xs">
+        <div class="absolute max-w-xs bottom-4 left-4">
           <h2 class="text-3xl filter drop-shadow-sm">
             {{ data.collection?.title }}
           </h2>
           <p class="text-xs">{{ data.collection?.description }}</p>
         </div>
       </div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mt-12 container">
+      <div class="container grid gap-4 mt-12 md:grid-cols-2 lg:grid-cols-4">
         <ProductItem
-          v-for="product in data.collection?.products.edges"
-          :key="product.node.id"
-          :title="product.node.title"
-          :images="product.node.images.edges"
-          :handle="product.node.handle"
-          :price="parseFloat(product.node.priceRange.maxVariantPrice.amount)"
-          :variation="product.node.variants.edges"
+          v-for="product in data.collection?.products.nodes"
+          :key="product.id"
+          :title="product.title"
+          :images="product.images.nodes"
+          :handle="product.handle"
+          :price="parseFloat(product.priceRange.maxVariantPrice.amount)"
+          :variation-id="product.variants.nodes[0].id"
         />
-        <!-- <img
-          v-for="product in data.collection?.products.edges"
-          :key="product.node.id"
-          :src="product.node.images.edges[0].node.src"
-          alt=""
-          class="break-inside-avoid"
-        /> -->
       </div>
     </div>
   </section>

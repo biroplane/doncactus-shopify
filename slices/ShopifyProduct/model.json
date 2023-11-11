@@ -15,21 +15,19 @@
         "title": {
           "type": "Text",
           "config": {
-            "label": "title",
+            "label": "Title",
+            "placeholder": ""
+          }
+        },
+        "items_number": {
+          "type": "Number",
+          "config": {
+            "label": "Numero di elementi",
             "placeholder": ""
           }
         }
       },
-      "items": {
-        "product": {
-          "type": "IntegrationFields",
-          "config": {
-            "catalog": "doncactus--don_cactus",
-            "label": "title",
-            "placeholder": "Title"
-          }
-        }
-      }
+      "items": {}
     }
   ]
 }

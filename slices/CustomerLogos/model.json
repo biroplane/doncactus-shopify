@@ -35,6 +35,15 @@
             "placeholder": "",
             "select": null
           }
+        },
+        "small": {
+          "type": "Boolean",
+          "config": {
+            "label": "Small",
+            "default_value": false,
+            "placeholder_true": "true",
+            "placeholder_false": "false"
+          }
         }
       },
       "items": {
@@ -86,6 +95,15 @@
             "label": "callToActionLink",
             "placeholder": "",
             "select": null
+          }
+        },
+        "small": {
+          "type": "Boolean",
+          "config": {
+            "label": "Small",
+            "default_value": false,
+            "placeholder_true": "true",
+            "placeholder_false": "false"
           }
         }
       },

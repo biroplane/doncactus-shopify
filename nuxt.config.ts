@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     "@nuxtjs/prismic",
     "nuxt-icon",
     "@dargmuesli/nuxt-cookie-control",
+    "@nuxt/image",
   ],
   experimental: {
     viewTransition: true,
@@ -22,6 +23,7 @@ export default defineNuxtConfig({
       link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
     },
   },
+
   pinia: {
     autoImports: [
       // automatically imports `defineStore`
@@ -32,6 +34,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
+      GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
+      GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
       "graphql-client": {
         clients: {
           default: {
@@ -52,10 +56,8 @@ export default defineNuxtConfig({
     endpoint: "doncactus",
     clientConfig: {
       routes: [
-        {
-          type: "homepage",
-          path: "/",
-        },
+        { type: "homepage", path: "/" },
+        { type: "static_page", path: "/:uid" },
         { type: "productcustom", path: "/products/single/:uid" },
         { type: "products", path: "/products" },
         { type: "category", path: "/collections/:uid" },

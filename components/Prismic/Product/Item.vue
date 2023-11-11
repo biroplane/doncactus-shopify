@@ -19,7 +19,7 @@ const addToChart = async (id: string) => {
       class="w-full overflow-hidden bg-gray-200 rounded-t-lg aspect-square xl:aspect-h-8 xl:aspect-w-7"
     >
       <NuxtLink :to="`/products/${product.handle}`">
-        <img
+        <NuxtImg
           :src="product.images[0].src"
           class="object-cover object-center w-full h-full group-hover:opacity-75"
         />
