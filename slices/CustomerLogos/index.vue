@@ -18,33 +18,34 @@ defineProps(
     class="bg-[#f4f0ec]"
   >
     <div
-      class="container md:px-6 lg:px-48 py-16 w-full flex flex-col items-center gap-12"
+      class="container flex flex-col items-center w-full gap-12 py-16 md:px-6 lg:px-48"
     >
       <div
         v-if="isFilled.richText(slice.primary.eyebrowHeadline)"
-        class="font-boysand text-3xl text-primary"
+        class="text-3xl font-boysand text-primary"
       >
         <PrismicRichText :field="slice.primary.eyebrowHeadline" />
       </div>
       <ul
         v-if="slice.items.length > 0"
-        class="grid grid-cols-1 md:flex items-center gap-12 overflow-x-auto p-4"
+        class="grid items-center grid-cols-1 gap-12 p-4 overflow-x-auto md:flex"
       >
         <li
           v-for="(item, i) in slice.items"
           :key="i"
-          :class="
+          :class="[
             slice.variation == 'noBorders'
               ? ''
-              : 'card aspect-square flex items-center justify-center outline outline-sand-600 bg-white flex-shrink-0 flex-grow-0 md:flex-basis-[35%]'
-          "
+              : 'card h-96 aspect-square flex items-center justify-center outline outline-sand-600 bg-white flex-shrink-0 flex-grow-0 md:flex-basis-[35%]',
+            {
+              'h-12 transition-transform hover:scale-110': slice.primary.small,
+            },
+          ]"
         >
           <PrismicLink :field="item.link">
             <PrismicImage
               :field="item.image"
-              :height="26"
-              :width="160"
-              class="es-customer-logos__logo__link__image"
+              class="object-cover w-full h-full es-customer-logos__logo__link__image"
             />
           </PrismicLink>
         </li>

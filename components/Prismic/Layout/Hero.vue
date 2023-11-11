@@ -11,7 +11,7 @@ defineProps<{
       class="w-full md:w-1/2 max-h-[32rem] overflow-hidden"
       :class="invert ? 'order-first' : 'order-last'"
     >
-      <PrismicImage :field="image" />
+      <PrismicImage :field="image as prismicTypes.ImageField" />
       <slot name="first"></slot>
     </div>
     <div class="w-full md:w-1/2">

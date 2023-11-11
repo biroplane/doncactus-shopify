@@ -6,5 +6,5 @@ export default defineEventHandler(async (event) => {
     variantId: data.variantId,
   });
 
-  return { msg: "ok", cart: cart.cartLinesAdd?.cart?.lines.edges };
+  return { msg: "ok", cart: cart.cartLinesAdd?.cart?.lines };
 });

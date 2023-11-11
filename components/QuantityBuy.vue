@@ -1,5 +1,10 @@
 <script setup lang="ts">
-const props = defineProps<{ modelValue: number; min?: number; max?: number }>();
+const props = defineProps<{
+  modelValue: number;
+  min?: number;
+  max?: number;
+  border?: boolean;
+}>();
 const emits = defineEmits<{ (e: "update:modelValue", v: number): void }>();
 const _q = computed({
   get: () => props.modelValue,
@@ -18,16 +23,19 @@ const increase = () => {
 </script>
 
 <template>
-  <div class="w-full grid grid-cols-3 items-center">
+  <div
+    class="flex items-center justify-around w-full rounded-md font-barlow"
+    :class="{ border }"
+  >
     <div class="">
       <button @click="decrease">
-        <Icon name="ci:plus" size="24" />
+        <Icon name="ci:minus" size="24" />
       </button>
     </div>
     <div class="text-2xl">{{ _q }}</div>
     <div class="">
       <button @click="increase">
-        <Icon name="ci:minus" size="24" />
+        <Icon name="ci:plus" size="24" />
       </button>
     </div>
   </div>

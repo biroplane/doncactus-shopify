@@ -21,9 +21,48 @@ query getCart($cartId: ID!) {
       }
     }
     lines(first: 100) {
-      edges {
-        node {
-          
+      nodes {
+        id
+        quantity
+        estimatedCost {
+          totalAmount {
+            amount
+            currencyCode
+          }
+        }
+        merchandise {
+          ... on ProductVariant {
+            id
+            title
+            product {
+              id
+              title
+              images(first: 1) {
+                nodes {
+                  src
+                }
+              }
+            }
+            priceV2 {
+              amount
+              currencyCode
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation addToCart($cartId: ID!, $variantId: ID!) {
+  cartLinesAdd(
+    cartId: $cartId
+    lines: [{ quantity: 1, merchandiseId: $variantId }]
+  ) {
+    cart {
+      lines(first: 100) {
+        nodes {
+          id
           quantity
           estimatedCost {
             subtotalAmount {
@@ -53,16 +92,11 @@ query getCart($cartId: ID!) {
     }
   }
 }
-
-mutation addToCart($cartId: ID!, $variantId: ID!) {
-  cartLinesAdd(
-    cartId: $cartId,
-    lines: [{ quantity: 1, merchandiseId: $variantId }]
-  ) {
+mutation cartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
+  cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
     cart {
       lines(first: 100) {
-      edges {
-        node {
+        nodes {
           quantity
           estimatedCost {
             subtotalAmount {
@@ -76,6 +110,7 @@ mutation addToCart($cartId: ID!, $variantId: ID!) {
           }
           merchandise {
             ... on ProductVariant {
+              id
               title
               product {
                 title
@@ -89,6 +124,22 @@ mutation addToCart($cartId: ID!, $variantId: ID!) {
         }
       }
     }
+    userErrors{
+      field
+      message
+    }
+
+  }
+}
+
+mutation cartLinesUpdate($cartId: ID!, $lines:[CartLineUpdateInput!]!){
+  cartLinesUpdate(cartId: $cartId, lines:$lines){
+    cart{
+      id
+    }
+    userErrors{
+      field
+      message
     }
   }
 }

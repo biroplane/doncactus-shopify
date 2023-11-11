@@ -9,7 +9,12 @@ export const useProductStore = defineStore("products", () => {
       const _prods = await $fetch("/api/products", {
         query: { first },
       });
-      products.value = _prods.products.edges;
+      console.log(
+        "%cProdotti caricati",
+        "font-size:2rem",
+        _prods.products.nodes
+      );
+      products.value = _prods.products.nodes;
     } catch (error) {
       console.log("Errore api ", error);
     }
@@ -37,11 +42,11 @@ export const useProductStore = defineStore("products", () => {
   const loadCollections = async (first = 3) => {
     console.log("Loading collections ", first);
     const data = await $fetch("/api/collections", { query: { first } });
-    console.log("collections ", data.collections.edges);
-    collections.value = data.collections.edges;
+    console.log("collections ", data.collections.nodes);
+    collections.value = data.collections.nodes;
     return collections.value;
   };
-  const getCollectionByHandle = async (handle: string, first = 20) => {
+  const getCollectionByHandle = async (handle: string, first = 100) => {
     // const { data } = await $fetch(`/api/collections/${handle}`, {
     //   params: { first },
     // });

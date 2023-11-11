@@ -1,22 +1,21 @@
 <script setup lang="ts">
 import { useCartStore } from "~/stores/cart";
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
     images?: any[] | null;
     title: string;
     handle: string;
     price: number;
-    variation?: any;
+    variationId: any;
     showBuy?: boolean;
   }>(),
   {
     images: null,
-    variation: null,
     showBuy: false,
   }
 );
-const emits = defineEmits<{ (e: "onAdd", v: any): void }>();
+defineEmits<{ (e: "onAdd", v: any): void }>();
 // const quantity = ref(1);
 
 const cs = useCartStore();
@@ -25,49 +24,71 @@ const addToCart = async (v: any) => {
   console.log("Add to cart", v);
   try {
     isLoading.value = true;
-    await new Promise((resolve) =>
-      setTimeout(async () => {
-        await cs.addToCart(v);
-        emits("onAdd", props.variation);
-        resolve("Ciao");
-        console.log("Fatto");
-      }, 2000)
-    );
+
+    await cs.addToCart(v);
+
+    await cs.loadCart();
   } catch (error) {
-    console.log("Error", error);
+    console.log("Errore add to cart", error);
   } finally {
     isLoading.value = false;
   }
 };
 </script>
 <template>
-  <div
-    class="w-full shadow-xl hover:scale-105 transition-all group overflow-hidden"
+  <div class="overflow-hidden border rounded-lg shadow-lg">
+    <NuxtLink :to="`/products/${handle}`" class="">
+      <div class="group">
+        <NuxtImg
+          v-if="images?.length"
+          :src="images[0].src"
+          class="object-cover w-full h-full transition-transform duration-500 scale-100 rounded-t-lg group-hover:scale-110 group-hover:-translate-y-4"
+        />
+      </div>
+      <div class="p-4 font-barlow">
+        <h4 class="font-medium">{{ title }}</h4>
+        <p class="text-xl text-brown-700">{{ formatMoney(price) }}</p>
+        <!-- <AddToCartButton variant-id="1" /> -->
+      </div>
+    </NuxtLink>
+    <div class="">
+      <button
+        class="w-12 h-full p-1 transition-all duration-1000 rounded-b-md hover:bg-brown-400 hover:text-white hover:w-full"
+        @click.stop.prevent="addToCart(variationId)"
+      >
+        <Icon
+          :name="
+            isLoading ? 'line-md:loading-twotone-loop' : 'ci:shopping-cart-02'
+          "
+          size="18"
+        />
+      </button>
+    </div>
+  </div>
+  <!-- <div
+    class="flex flex-col items-start justify-between w-full overflow-hidden transition-all rounded-md shadow-xl hover:scale-105 group"
   >
     <div class="">
       <NuxtLink
         :to="`/products/${handle}`"
-        class="w-full aspect-9/16 rounded-xl overflow-hidden border border-transparent"
+        class="w-full overflow-hidden border border-transparent rounded-lg aspect-square"
       >
-        <img
+        <NuxtImg
           v-if="images?.length"
-          :src="images[0].node.src"
-          class="w-full h-full object-cover scale-100 group-hover:scale-110 group-hover:-translate-y-4 transition-transform duration-500"
+          :src="images[0].src"
+          class="object-cover w-full h-full transition-transform duration-500 scale-100 rounded-t-lg group-hover:scale-110 group-hover:-translate-y-4"
         />
       </NuxtLink>
     </div>
-    <div class="grid grid-cols-4 items-center justify-between">
-      <h4 class="capitalize font-medium col-span-full py-4 px-4 text-xl">
+    <div class="grid items-center self-end justify-between grid-cols-4">
+      <h4 class="px-4 py-4 text-xl font-medium capitalize col-span-full">
         {{ title }}
       </h4>
-      <div class="col-span-3 px-4 font-barlow font-bold text-xl">
+      <div class="col-span-3 px-4 text-xl font-bold font-barlow">
         {{ formatMoney(price) }}
       </div>
       <div class="bg-primary hover:bg-opacity-50">
-        <button
-          class="w-full h-full p-2"
-          @click="addToCart(variation[0].node.id)"
-        >
+        <button class="w-full h-full p-2" @click="addToCart(variationId)">
           <Icon
             :name="
               isLoading ? 'line-md:loading-twotone-loop' : 'ci:shopping-cart-02'
@@ -77,5 +98,5 @@ const addToCart = async (v: any) => {
         </button>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>

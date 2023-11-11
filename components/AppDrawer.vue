@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { onClickOutside } from "@vueuse/core";
-import { useNavStore } from "~/stores/navigation";
 
-const navStore = useNavStore();
 const drawer = ref(false);
 const drawerBox = ref();
 onClickOutside(drawerBox, () => {
@@ -21,7 +19,7 @@ onClickOutside(drawerBox, () => {
       <div
         v-if="drawer"
         ref="drawerBox"
-        class="fixed top-0 right-0 w-full h-screen p-4 shadow-xl bg-sand-200"
+        class="fixed top-0 right-0 z-50 w-full h-screen p-4 shadow-xl bg-sand-200"
       >
         <div class="flex flex-col h-full">
           <div class="flex">
@@ -30,7 +28,7 @@ onClickOutside(drawerBox, () => {
               <Icon name="ci:close-md" size="24"></Icon>
             </button>
           </div>
-          <ul class="flex-grow h-full mt-12 ml-4">
+          <!-- <ul class="flex-grow h-full mt-12 ml-4">
             <li
               v-for="nav in navStore.menu"
               :key="nav.label"
@@ -40,7 +38,8 @@ onClickOutside(drawerBox, () => {
                 nav.label
               }}</NuxtLink>
             </li>
-          </ul>
+          </ul> -->
+          <MainMenu vertical />
           <div
             class="flex py-3 border-t account border-primary-600 text-primary-600"
           >
@@ -63,7 +62,7 @@ onClickOutside(drawerBox, () => {
 }
 @keyframes slide {
   0% {
-    transform: translateX(100%);
+    transform: translateX(-100%);
     opacity: 0.5;
   }
   100% {

@@ -18,7 +18,7 @@ const addToChart = async (id: string) => {
     <div
       class="w-full overflow-hidden bg-gray-200 rounded-lg aspect-square xl:aspect-h-8 xl:aspect-w-7"
     >
-      <img
+      <NuxtImg
         :src="product.node.images.edges[0].node.src"
         alt="Tall slender porcelain bottle with natural clay textured body and cork stopper."
         class="object-cover object-center w-full h-full group-hover:opacity-75"

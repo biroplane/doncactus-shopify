@@ -7,7 +7,7 @@ const shopStore = useShopStore();
 <template>
   <NuxtLink to="/">
     <div class="h-12 aspect-square">
-      <img
+      <NuxtImg
         :src="shopStore.shop.brand.logo.image.url"
         class="object-contain w-full h-full"
         :height="shopStore.shop.brand.logo.image.height"

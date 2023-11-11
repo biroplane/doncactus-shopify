@@ -5,8 +5,13 @@
 		"primary": {
 			"title": {
 				"__TYPE__": "FieldContent",
-				"value": "solar",
+				"value": "once",
 				"type": "Text"
+			},
+			"items_number": {
+				"__TYPE__": "FieldContent",
+				"value": "64",
+				"type": "Number"
 			}
 		},
 		"items": [

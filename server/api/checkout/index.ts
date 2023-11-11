@@ -13,25 +13,6 @@ export default defineEventHandler(async (event) => {
         countryCode: CountryCode.IT,
       },
       lineItems: [...body.lineItems],
-      // customAttributes: [
-      //   {
-      //     key: "",
-      //     value: "",
-      //   },
-      // ],
-      // email: "",
-      // lineItems: [
-      //   {
-      //     customAttributes: [
-      //       {
-      //         key: "",
-      //         value: "",
-      //       },
-      //     ],
-      //     quantity: 1,
-      //     variantId: "",
-      //   },
-      // ],
       note: "",
       shippingAddress: {
         address1: "Via Piscina nuova",
@@ -46,8 +27,9 @@ export default defineEventHandler(async (event) => {
         zip: "70038",
       },
     };
-    const checkout = await GqlCheckoutCreate({ input });
-    return { msg: "OK", checkout };
+    // const checkout = await GqlCheckoutCreate({ input });
+    console.log("INPUT CHECKOUT", input);
+    return { msg: "OK" /* checkout */ };
     //   return checkout;
   } catch (error) {
     console.log("Error ", error);

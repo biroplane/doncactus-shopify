@@ -4,7 +4,10 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type CartDocumentDataSlicesSlice = NewsletterSlice | HeroSlice;
+type CartDocumentDataSlicesSlice =
+  | CustomizationSlice
+  | NewsletterSlice
+  | HeroSlice;
 
 /**
  * Content for Cart documents
@@ -20,6 +23,28 @@ interface CartDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   title: prismic.KeyTextField;
+
+  /**
+   * Body field in *Cart*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cart.body
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Image field in *Cart*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cart.image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
 
   /**
    * Slice Zone field in *Cart*
@@ -215,23 +240,17 @@ export type CategoryDocument<Lang extends string = string> =
     Lang
   >;
 
-type CheckoutDocumentDataSlicesSlice = NewsletterSlice | CustomerLogosSlice;
+type CheckoutDocumentDataSlicesSlice =
+  | CustomizationSlice
+  | AlternateGridSlice
+  | CartSlice
+  | NewsletterSlice
+  | CustomerLogosSlice;
 
 /**
  * Content for Checkout documents
  */
 interface CheckoutDocumentData {
-  /**
-   * title field in *Checkout*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: checkout.title
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  title: prismic.KeyTextField;
-
   /**
    * Slice Zone field in *Checkout*
    *
@@ -288,6 +307,88 @@ export type CheckoutDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<
     Simplify<CheckoutDocumentData>,
     "checkout",
+    Lang
+  >;
+
+type ContactsDocumentDataSlicesSlice =
+  | HeroSlice
+  | CustomerLogosSlice
+  | ShopifyProductSlice
+  | NewsletterSlice
+  | GoogleReviewsSlice
+  | ContactFormSlice;
+
+/**
+ * Content for Contacts documents
+ */
+interface ContactsDocumentData {
+  /**
+   * Title field in *Contacts*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contacts.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Slice Zone field in *Contacts*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contacts.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<ContactsDocumentDataSlicesSlice> /**
+   * Meta Description field in *Contacts*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: contacts.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Contacts*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contacts.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+
+  /**
+   * Meta Title field in *Contacts*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: contacts.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_title: prismic.KeyTextField;
+}
+
+/**
+ * Contacts document from Prismic
+ *
+ * - **API ID**: `contacts`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ContactsDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<ContactsDocumentData>,
+    "contacts",
     Lang
   >;
 
@@ -357,6 +458,7 @@ export type EventsDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<EventsDocumentData>, "events", Lang>;
 
 type HomepageDocumentDataSlicesSlice =
+  | JumbotronSlice
   | GoogleReviewsSlice
   | ContactFormSlice
   | NewsletterSlice
@@ -367,11 +469,11 @@ type HomepageDocumentDataSlicesSlice =
   | HeroSlice;
 
 /**
- * Content for homepage documents
+ * Content for Homepage documents
  */
 interface HomepageDocumentData {
   /**
-   * Slice Zone field in *homepage*
+   * Slice Zone field in *Homepage*
    *
    * - **Field Type**: Slice Zone
    * - **Placeholder**: *None*
@@ -380,7 +482,7 @@ interface HomepageDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
   slices: prismic.SliceZone<HomepageDocumentDataSlicesSlice> /**
-   * Meta Description field in *homepage*
+   * Meta Description field in *Homepage*
    *
    * - **Field Type**: Text
    * - **Placeholder**: A brief summary of the page
@@ -391,7 +493,7 @@ interface HomepageDocumentData {
   meta_description: prismic.KeyTextField;
 
   /**
-   * Meta Image field in *homepage*
+   * Meta Image field in *Homepage*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -402,7 +504,7 @@ interface HomepageDocumentData {
   meta_image: prismic.ImageField<never>;
 
   /**
-   * Meta Title field in *homepage*
+   * Meta Title field in *Homepage*
    *
    * - **Field Type**: Text
    * - **Placeholder**: A title of the page used for social media and search engines
@@ -414,7 +516,7 @@ interface HomepageDocumentData {
 }
 
 /**
- * homepage document from Prismic
+ * Homepage document from Prismic
  *
  * - **API ID**: `homepage`
  * - **Repeatable**: `false`
@@ -557,6 +659,144 @@ export type LandingDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<
     Simplify<LandingDocumentData>,
     "landing",
+    Lang
+  >;
+
+/**
+ * Item in *Navigation → Menu items*
+ */
+export interface NavigationDocumentDataMenuItemsItem {
+  /**
+   * Link field in *Navigation → Menu items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation.menu_items[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+
+  /**
+   * Label field in *Navigation → Menu items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation.menu_items[].label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label: prismic.KeyTextField;
+}
+
+/**
+ * Content for Navigation documents
+ */
+interface NavigationDocumentData {
+  /**
+   * Title field in *Navigation*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Menu items field in *Navigation*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation.menu_items[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  menu_items: prismic.GroupField<Simplify<NavigationDocumentDataMenuItemsItem>>;
+}
+
+/**
+ * Navigation document from Prismic
+ *
+ * - **API ID**: `navigation`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type NavigationDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<NavigationDocumentData>,
+    "navigation",
+    Lang
+  >;
+
+type PackagingDocumentDataSlicesSlice =
+  | HeroSlice
+  | CustomerLogosSlice
+  | CollectionsGridSlice
+  | ShopifyProductSlice
+  | NewsletterSlice;
+
+/**
+ * Content for Packaging documents
+ */
+interface PackagingDocumentData {
+  /**
+   * Slice Zone field in *Packaging*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: packaging.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<PackagingDocumentDataSlicesSlice> /**
+   * Meta Description field in *Packaging*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: packaging.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Packaging*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: packaging.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+
+  /**
+   * Meta Title field in *Packaging*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: packaging.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_title: prismic.KeyTextField;
+}
+
+/**
+ * Packaging document from Prismic
+ *
+ * - **API ID**: `packaging`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type PackagingDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<PackagingDocumentData>,
+    "packaging",
     Lang
   >;
 
@@ -936,19 +1176,115 @@ export type SingleCategoryDocument<Lang extends string = string> =
     Lang
   >;
 
+type StaticPageDocumentDataSlicesSlice =
+  | HeroSlice
+  | CustomerLogosSlice
+  | NewsletterSlice
+  | GoogleReviewsSlice
+  | ContactFormSlice;
+
+/**
+ * Content for Static Page documents
+ */
+interface StaticPageDocumentData {
+  /**
+   * Title field in *Static Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: static_page.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Body field in *Static Page*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: static_page.body
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Slice Zone field in *Static Page*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: static_page.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<StaticPageDocumentDataSlicesSlice> /**
+   * Meta Description field in *Static Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: static_page.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Static Page*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: static_page.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+
+  /**
+   * Meta Title field in *Static Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: static_page.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_title: prismic.KeyTextField;
+}
+
+/**
+ * Static Page document from Prismic
+ *
+ * - **API ID**: `static_page`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type StaticPageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<StaticPageDocumentData>,
+    "static_page",
+    Lang
+  >;
+
 export type AllDocumentTypes =
   | CartDocument
   | CategoriesDocument
   | CategoryDocument
   | CheckoutDocument
+  | ContactsDocument
   | EventsDocument
   | HomepageDocument
   | LandingDocument
+  | NavigationDocument
+  | PackagingDocument
   | ProductDocument
   | ProductcustomDocument
   | ProductsDocument
   | ShopifyProductDocument
-  | SingleCategoryDocument;
+  | SingleCategoryDocument
+  | StaticPageDocument;
 
 /**
  * Primary content in *AlternateGrid → Primary*
@@ -1291,6 +1627,78 @@ export type CallToActionSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *Cart → Primary*
+ */
+export interface CartSliceDefaultPrimary {
+  /**
+   * Image field in *Cart → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cart.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Title field in *Cart → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cart.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Body field in *Cart → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cart.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Eyebrow field in *Cart → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cart.primary.eyebrow
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  eyebrow: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for Cart Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CartSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<CartSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Cart*
+ */
+type CartSliceVariation = CartSliceDefault;
+
+/**
+ * Cart Shared Slice
+ *
+ * - **API ID**: `cart`
+ * - **Description**: Cart
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CartSlice = prismic.SharedSlice<"cart", CartSliceVariation>;
+
+/**
  * Primary content in *CollectionsGrid → Primary*
  */
 export interface CollectionsGridSliceDefaultPrimary {
@@ -1433,6 +1841,17 @@ export interface CustomerLogosSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   callToActionLink: prismic.LinkField;
+
+  /**
+   * Small field in *CustomerLogos → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: customer_logos.primary.small
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  small: prismic.BooleanField;
 }
 
 /**
@@ -1506,6 +1925,17 @@ export interface CustomerLogosSliceNoBordersPrimary {
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   callToActionLink: prismic.LinkField;
+
+  /**
+   * Small field in *CustomerLogos → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: customer_logos.primary.small
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  small: prismic.BooleanField;
 }
 
 /**
@@ -1563,6 +1993,101 @@ type CustomerLogosSliceVariation =
 export type CustomerLogosSlice = prismic.SharedSlice<
   "customer_logos",
   CustomerLogosSliceVariation
+>;
+
+/**
+ * Primary content in *Customization → Primary*
+ */
+export interface CustomizationSliceDefaultPrimary {
+  /**
+   * Title field in *Customization → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: customization.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Body field in *Customization → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: customization.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+}
+
+/**
+ * Default variation for Customization Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CustomizationSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<CustomizationSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *Customization → Primary*
+ */
+export interface CustomizationSliceDarkPrimary {
+  /**
+   * Title field in *Customization → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: customization.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Body field in *Customization → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: customization.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+}
+
+/**
+ * Dark variation for Customization Slice
+ *
+ * - **API ID**: `dark`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CustomizationSliceDark = prismic.SharedSliceVariation<
+  "dark",
+  Simplify<CustomizationSliceDarkPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Customization*
+ */
+type CustomizationSliceVariation =
+  | CustomizationSliceDefault
+  | CustomizationSliceDark;
+
+/**
+ * Customization Shared Slice
+ *
+ * - **API ID**: `customization`
+ * - **Description**: Customization
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CustomizationSlice = prismic.SharedSlice<
+  "customization",
+  CustomizationSliceVariation
 >;
 
 /**
@@ -1801,6 +2326,91 @@ type HeroSliceVariation = HeroSliceDefault | HeroSliceImageRight;
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
 /**
+ * Primary content in *Jumbotron → Primary*
+ */
+export interface JumbotronSliceDefaultPrimary {
+  /**
+   * Image field in *Jumbotron → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: jumbotron.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Title field in *Jumbotron → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: jumbotron.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Eyebrow field in *Jumbotron → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: jumbotron.primary.eyebrow
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  eyebrow: prismic.KeyTextField;
+
+  /**
+   * Cta Link field in *Jumbotron → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: jumbotron.primary.cta_link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  cta_link: prismic.LinkField;
+
+  /**
+   * Cta Label field in *Jumbotron → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: jumbotron.primary.cta_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  cta_label: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for Jumbotron Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type JumbotronSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<JumbotronSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Jumbotron*
+ */
+type JumbotronSliceVariation = JumbotronSliceDefault;
+
+/**
+ * Jumbotron Shared Slice
+ *
+ * - **API ID**: `jumbotron`
+ * - **Description**: Jumbotron
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type JumbotronSlice = prismic.SharedSlice<
+  "jumbotron",
+  JumbotronSliceVariation
+>;
+
+/**
  * Default variation for Newsletter Slice
  *
  * - **API ID**: `default`
@@ -1923,7 +2533,7 @@ export type ProductsByCollectionSlice = prismic.SharedSlice<
  */
 export interface ShopifyProductSliceDefaultPrimary {
   /**
-   * title field in *ShopifyProduct → Primary*
+   * Title field in *ShopifyProduct → Primary*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -1931,21 +2541,16 @@ export interface ShopifyProductSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   title: prismic.KeyTextField;
-}
 
-/**
- * Primary content in *ShopifyProduct → Items*
- */
-export interface ShopifyProductSliceDefaultItem {
   /**
-   * title field in *ShopifyProduct → Items*
+   * Numero di elementi field in *ShopifyProduct → Primary*
    *
-   * - **Field Type**: Integration Fields (Catalog: `doncactus--don_cactus`)
-   * - **Placeholder**: Title
-   * - **API ID Path**: shopify_product.items[].product
-   * - **Documentation**: https://prismic.io/docs/field#integration
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: shopify_product.primary.items_number
+   * - **Documentation**: https://prismic.io/docs/field#number
    */
-  product: prismic.IntegrationField;
+  items_number: prismic.NumberField;
 }
 
 /**
@@ -1958,7 +2563,7 @@ export interface ShopifyProductSliceDefaultItem {
 export type ShopifyProductSliceDefault = prismic.SharedSliceVariation<
   "default",
   Simplify<ShopifyProductSliceDefaultPrimary>,
-  Simplify<ShopifyProductSliceDefaultItem>
+  never
 >;
 
 /**
@@ -2075,6 +2680,9 @@ declare module "@prismicio/client" {
       CheckoutDocument,
       CheckoutDocumentData,
       CheckoutDocumentDataSlicesSlice,
+      ContactsDocument,
+      ContactsDocumentData,
+      ContactsDocumentDataSlicesSlice,
       EventsDocument,
       EventsDocumentData,
       EventsDocumentDataSlicesSlice,
@@ -2084,6 +2692,12 @@ declare module "@prismicio/client" {
       LandingDocument,
       LandingDocumentData,
       LandingDocumentDataSlicesSlice,
+      NavigationDocument,
+      NavigationDocumentData,
+      NavigationDocumentDataMenuItemsItem,
+      PackagingDocument,
+      PackagingDocumentData,
+      PackagingDocumentDataSlicesSlice,
       ProductDocument,
       ProductDocumentData,
       ProductDocumentDataSlicesSlice,
@@ -2099,6 +2713,9 @@ declare module "@prismicio/client" {
       SingleCategoryDocument,
       SingleCategoryDocumentData,
       SingleCategoryDocumentDataSlicesSlice,
+      StaticPageDocument,
+      StaticPageDocumentData,
+      StaticPageDocumentDataSlicesSlice,
       AllDocumentTypes,
       AlternateGridSlice,
       AlternateGridSliceDefaultPrimary,
@@ -2114,6 +2731,10 @@ declare module "@prismicio/client" {
       CallToActionSliceVariation,
       CallToActionSliceDefault,
       CallToActionSliceAlignLeft,
+      CartSlice,
+      CartSliceDefaultPrimary,
+      CartSliceVariation,
+      CartSliceDefault,
       CollectionsGridSlice,
       CollectionsGridSliceDefaultPrimary,
       CollectionsGridSliceVariation,
@@ -2130,6 +2751,12 @@ declare module "@prismicio/client" {
       CustomerLogosSliceVariation,
       CustomerLogosSliceDefault,
       CustomerLogosSliceNoBorders,
+      CustomizationSlice,
+      CustomizationSliceDefaultPrimary,
+      CustomizationSliceDarkPrimary,
+      CustomizationSliceVariation,
+      CustomizationSliceDefault,
+      CustomizationSliceDark,
       GoogleReviewsSlice,
       GoogleReviewsSliceDefaultPrimary,
       GoogleReviewsSliceVariation,
@@ -2140,6 +2767,10 @@ declare module "@prismicio/client" {
       HeroSliceVariation,
       HeroSliceDefault,
       HeroSliceImageRight,
+      JumbotronSlice,
+      JumbotronSliceDefaultPrimary,
+      JumbotronSliceVariation,
+      JumbotronSliceDefault,
       NewsletterSlice,
       NewsletterSliceVariation,
       NewsletterSliceDefault,
@@ -2150,7 +2781,6 @@ declare module "@prismicio/client" {
       ProductsByCollectionSliceDefault,
       ShopifyProductSlice,
       ShopifyProductSliceDefaultPrimary,
-      ShopifyProductSliceDefaultItem,
       ShopifyProductSliceVariation,
       ShopifyProductSliceDefault,
       SingleCollectionSlice,

@@ -6,18 +6,20 @@
   "status": true,
   "json": {
     "Main": {
-      "title": {
-        "type": "Text",
-        "config": {
-          "label": "title",
-          "placeholder": ""
-        }
-      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "customization": {
+              "type": "SharedSlice"
+            },
+            "alternate_grid": {
+              "type": "SharedSlice"
+            },
+            "cart": {
+              "type": "SharedSlice"
+            },
             "newsletter": {
               "type": "SharedSlice"
             },

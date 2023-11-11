@@ -4,8 +4,8 @@
 query getCollections($first: Int!, $query:String){
 
   collections(first:$first,query:$query){
-    edges{
-      node{
+
+      nodes{
         id
         title
         description
@@ -15,16 +15,17 @@ query getCollections($first: Int!, $query:String){
           id
           src
         }
-  products(first:5){
-    edges{
-      node{
-        id
-        title
+        products(first:5){
+
+            nodes{
+              id
+              title
+              handle
+            }
+
+        }
       }
-    }
-  }
-      }
-    }
+    
   }
 }
 
@@ -40,15 +41,15 @@ query getCollectionByHandle($handle:String!, $first:Int){
     src
   }
   products(first:$first){
-    edges{
-      node{
+
+      nodes{
         id
         images(first:1){
-          edges{ 
-            node{
+
+            nodes{
               src
             }
-          }
+          
         }
         title
         description
@@ -59,9 +60,9 @@ query getCollectionByHandle($handle:String!, $first:Int){
             currencyCode
           }
         }
-        variants(first: 4) {
-          edges {
-            node {
+        variants(first: 5) {
+
+            nodes {
               id
               title
               priceV2 {
@@ -69,11 +70,11 @@ query getCollectionByHandle($handle:String!, $first:Int){
                 currencyCode
               }
             }
-          }
+
         }
         tags
       }
-    }
+    
   }
 
   }
