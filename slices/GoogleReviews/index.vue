@@ -41,7 +41,7 @@ if (ss.place.status !== "OK") {
         </p>
         <ClientOnly>
           <div
-            class="flex gap-8 py-2 mt-12 overflow-y-auto flex-nowrap no-scrollbar"
+            class="grid gap-8 py-2 mt-12 overflow-y-auto md:flex md:flex-nowrap no-scrollbar"
           >
             <div
               v-for="(review, r) in ss.reviews"
