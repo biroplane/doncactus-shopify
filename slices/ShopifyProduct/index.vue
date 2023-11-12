@@ -13,8 +13,23 @@ const props = defineProps(
   ])
 );
 
+const perPage = props.slice.primary.items_number || 12;
+
 const productStore = useProductStore();
-await productStore.load(props.slice.primary.items_number || 12);
+await productStore.load(perPage);
+
+const loadNext = async () => {
+  try {
+    const prods = await productStore.load(
+      perPage,
+      "",
+      productStore.productPagination.endCursor
+    );
+    console.log("Pagination works", prods?.nodes);
+  } catch (error) {
+    console.log("Pagination error");
+  }
+};
 </script>
 
 <template>
@@ -40,9 +55,13 @@ await productStore.load(props.slice.primary.items_number || 12);
         :price="(product.variants.nodes[0] as any).priceV2.amount as number"
         :variation-id="product.variants.nodes[0].id"
       ></ProductItem>
-      <NuxtLink to="/products" class="text-center btn cta col-span-full"
-        >Visualizza gli altri prodotti</NuxtLink
+      <button
+        v-if="productStore.productPagination.hasNextPage"
+        class="text-center btn cta col-span-full"
+        @click.prevent="loadNext"
       >
+        Visualizza gli altri prodotti
+      </button>
     </div>
   </section>
 </template>

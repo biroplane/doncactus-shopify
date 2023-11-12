@@ -36,7 +36,7 @@ console.log("Prods", prods);
         :key="pr.handle"
         :images="pr.images.nodes"
         :title="pr.title"
-        :price="pr.priceRange.maxVariantPrice.amount"
+        :price="pr.priceRange.maxVariantPrice.amount as number"
         :handle="pr.handle"
         :variation-id="pr.variants.nodes[0].id"
       />

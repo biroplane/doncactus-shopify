@@ -27,12 +27,13 @@ useHead({
     },
   ],
 });
+const activeImage = ref(0);
 // const qty = ref(1);
 </script>
 
 <template>
   <div class="container py-12">
-    <div class="grid gap-8 md:grid-cols-2">
+    <div class="grid w-full gap-8 md:grid-cols-2">
       <div
         class="flex items-center justify-between w-full md:hidden font-barlow"
       >
@@ -44,13 +45,35 @@ useHead({
         </div>
         <button class="text-white shadow-lg btn cta bg-brown">Aggiungi</button>
       </div>
-      <div class="w-full card aspect-square md:aspect-9/16 lg:aspect-square">
-        <NuxtImg
-          v-if="ps.product.images?.nodes[0].src"
-          :src="ps.product.images.nodes[0].src"
-          alt=""
-          class="object-cover object-center w-full h-full"
-        />
+      <div
+        v-if="ps.product.images?.nodes.length > 1"
+        class="flex flex-col gap-6 lg:flex-row"
+      >
+        <ul
+          class="flex flex-row flex-wrap justify-center order-last gap-6 lg:flex-col md:flex-nowrap lg:order-first"
+        >
+          <li
+            v-for="(image, i) in ps.product.images?.nodes"
+            :key="image.src"
+            class="flex-grow w-24 overflow-hidden transition-colors rounded-md shadow-sm cursor-pointer md:h-12 hover:bg-primary-100 aspect-square md:aspect-auto"
+            :class="{ hidden: i === activeImage }"
+            @click="activeImage = i"
+          >
+            <NuxtImg
+              :src="image.src"
+              loading="lazy"
+              class="object-cover w-full h-full"
+            ></NuxtImg>
+          </li>
+        </ul>
+        <div class="w-full h-full">
+          <NuxtImg
+            v-if="ps.product.images?.nodes[activeImage].src"
+            :src="ps.product.images.nodes[activeImage].src"
+            alt=""
+            class="object-cover object-center w-full h-full"
+          />
+        </div>
       </div>
       <div class="font-barlow">
         <div class="hidden md:block">

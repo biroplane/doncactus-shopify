@@ -7,10 +7,14 @@ export const components = defineSliceZoneComponents({
   alternate_grid: defineAsyncComponent(
     () => import("./AlternateGrid/index.vue")
   ),
+  body_text: defineAsyncComponent(() => import("./BodyText/index.vue")),
   call_to_action: defineAsyncComponent(
     () => import("./CallToAction/index.vue")
   ),
   cart: defineAsyncComponent(() => import("./Cart/index.vue")),
+  collection_stripe: defineAsyncComponent(
+    () => import("./CollectionStripe/index.vue")
+  ),
   collections_grid: defineAsyncComponent(
     () => import("./CollectionsGrid/index.vue")
   ),

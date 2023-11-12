@@ -17,7 +17,7 @@ const ss = useShopStore();
         </span>
       </div>
       <div class="">
-        <SocialLinks />
+        <SocialLinks horizontal />
         <!-- class="flex-row flex-wrap px-6 mt-6 lg:flex-col lg:basis-full lg:px-0" -->
       </div>
     </div>

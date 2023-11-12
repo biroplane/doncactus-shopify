@@ -49,7 +49,7 @@ console.log("Handle", data);
           :title="product.title"
           :images="product.images.nodes"
           :handle="product.handle"
-          :price="parseFloat(product.priceRange.maxVariantPrice.amount)"
+          :price="product.priceRange.maxVariantPrice.amount as number"
           :variation-id="product.variants.nodes[0].id"
         />
       </div>

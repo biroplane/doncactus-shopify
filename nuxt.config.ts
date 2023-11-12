@@ -11,8 +11,8 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@nuxtjs/prismic",
     "nuxt-icon",
-    "@dargmuesli/nuxt-cookie-control",
     "@nuxt/image",
+    "@zadigetvoltaire/nuxt-gtm",
   ],
   experimental: {
     viewTransition: true,
@@ -21,6 +21,14 @@ export default defineNuxtConfig({
   app: {
     head: {
       link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
+      // script: [
+      //   {
+      //     src: "https://consent.cookiebot.com/uc.js",
+      //     "data-cbid": process.env.COOKIBOT_ID,
+      //     "data-blockingmode": "auto",
+      //     id: "Cookiebot",
+      //   },
+      // ],
     },
   },
 
@@ -36,6 +44,9 @@ export default defineNuxtConfig({
     public: {
       GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
       GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
+      gtm: {
+        id: process.env.GOOGLE_TAG_MANAGER,
+      },
       "graphql-client": {
         clients: {
           default: {

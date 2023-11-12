@@ -19,6 +19,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "shopify_product": {
+              "type": "SharedSlice"
+            },
             "collections_grid": {
               "type": "SharedSlice"
             },

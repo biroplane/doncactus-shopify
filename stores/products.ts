@@ -2,19 +2,22 @@ import type { Ref } from "vue";
 export const useProductStore = defineStore("products", () => {
   const product: Ref<any> = ref({} as any);
   const products = ref([] as any);
+  const productPagination = ref({} as any);
   const collections = ref([] as any);
   const collection = ref({});
-  const load = async (first = 3) => {
+
+  const load = async (first = 3, query = "", after = undefined) => {
     try {
-      const _prods = await $fetch("/api/products", {
-        query: { first },
-      });
-      console.log(
-        "%cProdotti caricati",
-        "font-size:2rem",
-        _prods.products.nodes
-      );
-      products.value = _prods.products.nodes;
+      const _prods = await GqlProducts({ first, query, after });
+      // const _prods = await $fetch("/api/products", {
+      //   query: { first },
+      // });
+      console.log("%cProdotti caricati", "font-size:2rem", _prods.products);
+      products.value = after
+        ? products.value.concat(_prods.products.nodes)
+        : _prods.products.nodes;
+      productPagination.value = _prods.products.pageInfo;
+      return _prods.products;
     } catch (error) {
       console.log("Errore api ", error);
     }
@@ -68,5 +71,6 @@ export const useProductStore = defineStore("products", () => {
     loadCollections,
     loadRecommended,
     getCollectionByHandle,
+    productPagination,
   };
 });

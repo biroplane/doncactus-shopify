@@ -1,13 +1,14 @@
 
-query Products($first: Int!, $query: String) {
-  products(first: $first, query: $query) {
+query Products($first: Int!, $query: String, $after:String) {
+  products(first: $first, query: $query, after:$after) {
     pageInfo{
       hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
     }
     nodes {
-      id
-      
-      
+      id     
       images(first: 10) {
         nodes {
           src

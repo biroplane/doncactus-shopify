@@ -9,11 +9,11 @@ const { data: page } = useAsyncData(
 );
 
 useHead({
-  title: page.value?.data.meta_title,
+  title: page.value?.data.title || page.value?.data.meta_title,
   meta: [
     {
       name: "description",
-      content: page.value?.data.meta_description,
+      content: page.value?.data.title || page.value?.data.meta_description,
     },
   ],
 });

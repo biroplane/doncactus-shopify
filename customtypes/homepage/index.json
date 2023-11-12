@@ -11,6 +11,15 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "customization": {
+              "type": "SharedSlice"
+            },
+            "single_collection": {
+              "type": "SharedSlice"
+            },
+            "collection_stripe": {
+              "type": "SharedSlice"
+            },
             "jumbotron": {
               "type": "SharedSlice"
             },

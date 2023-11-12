@@ -14,12 +14,12 @@
     "slicemachine": "start-slicemachine"
   },
   "devDependencies": {
-    "@dargmuesli/nuxt-cookie-control": "^6.4.5",
     "@nuxtjs/prismic": "^3.1.0",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@slicemachine/adapter-nuxt": "^0.3.23",
     "@types/google.maps": "^3.54.7",
     "@types/node": "^20",
+    "@zadigetvoltaire/nuxt-gtm": "^0.0.13",
     "nuxt": "^3.7.4",
     "nuxt-icon": "^0.5.0",
     "slice-machine-ui": "^1.19.1"
