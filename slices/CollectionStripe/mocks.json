@@ -1,0 +1,97 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"title": {
+				"__TYPE__": "FieldContent",
+				"value": "pocket",
+				"type": "Text"
+			},
+			"bg_color": {
+				"__TYPE__": "FieldContent",
+				"value": "#359ef3",
+				"type": "Color"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": [
+					[
+						"title",
+						{
+							"__TYPE__": "StructuredTextContent",
+							"value": [
+								{
+									"type": "paragraph",
+									"content": {
+										"text": "Ut voluptate irure excepteur nulla fugiat consectetur. Elit ut consectetur laborum aute culpa enim. Culpa amet nostrud incididunt ipsum occaecat."
+									}
+								}
+							]
+						}
+					],
+					[
+						"body",
+						{
+							"__TYPE__": "StructuredTextContent",
+							"value": [
+								{
+									"type": "paragraph",
+									"content": {
+										"text": "Eu velit ut laborum duis cillum sit enim nostrud quis exercitation aute velit commodo."
+									}
+								}
+							]
+						}
+					],
+					[
+						"image",
+						{
+							"origin": {
+								"id": "main",
+								"url": "https://images.unsplash.com/photo-1448932223592-d1fc686e76ea",
+								"width": 3500,
+								"height": 2338
+							},
+							"url": "https://images.unsplash.com/photo-1448932223592-d1fc686e76ea",
+							"width": 3500,
+							"height": 2338,
+							"edit": {
+								"zoom": 1,
+								"crop": {
+									"x": 0,
+									"y": 0
+								},
+								"background": "transparent"
+							},
+							"credits": null,
+							"alt": null,
+							"__TYPE__": "ImageContent",
+							"thumbnails": {}
+						}
+					],
+					[
+						"cta_label",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "goes",
+							"type": "Text"
+						}
+					],
+					[
+						"cta_link",
+						{
+							"__TYPE__": "LinkContent",
+							"value": {
+								"__TYPE__": "ExternalLink",
+								"url": "https://prismic.io"
+							}
+						}
+					]
+				]
+			}
+		]
+	}
+]

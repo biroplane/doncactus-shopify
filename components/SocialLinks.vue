@@ -30,7 +30,7 @@ const socials = [
 ];
 </script>
 <template>
-  <div class="w-full">
+  <div class="w-full @container mt-12 md:mt-0">
     <ul class="grid gap-4 @[280px]:grid-cols-2 @lg:grid-cols-4 @xs:grid-cols-4">
       <li v-for="social in socials" :key="social.link">
         <a class="flex items-baseline gap-2" :href="social.link">

@@ -458,6 +458,9 @@ export type EventsDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<EventsDocumentData>, "events", Lang>;
 
 type HomepageDocumentDataSlicesSlice =
+  | CustomizationSlice
+  | SingleCollectionSlice
+  | CollectionStripeSlice
   | JumbotronSlice
   | GoogleReviewsSlice
   | ContactFormSlice
@@ -730,76 +733,6 @@ export type NavigationDocument<Lang extends string = string> =
     Lang
   >;
 
-type PackagingDocumentDataSlicesSlice =
-  | HeroSlice
-  | CustomerLogosSlice
-  | CollectionsGridSlice
-  | ShopifyProductSlice
-  | NewsletterSlice;
-
-/**
- * Content for Packaging documents
- */
-interface PackagingDocumentData {
-  /**
-   * Slice Zone field in *Packaging*
-   *
-   * - **Field Type**: Slice Zone
-   * - **Placeholder**: *None*
-   * - **API ID Path**: packaging.slices[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#slices
-   */
-  slices: prismic.SliceZone<PackagingDocumentDataSlicesSlice> /**
-   * Meta Description field in *Packaging*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: A brief summary of the page
-   * - **API ID Path**: packaging.meta_description
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */;
-  meta_description: prismic.KeyTextField;
-
-  /**
-   * Meta Image field in *Packaging*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: packaging.meta_image
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  meta_image: prismic.ImageField<never>;
-
-  /**
-   * Meta Title field in *Packaging*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: A title of the page used for social media and search engines
-   * - **API ID Path**: packaging.meta_title
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  meta_title: prismic.KeyTextField;
-}
-
-/**
- * Packaging document from Prismic
- *
- * - **API ID**: `packaging`
- * - **Repeatable**: `false`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type PackagingDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
-    Simplify<PackagingDocumentData>,
-    "packaging",
-    Lang
-  >;
-
 type ProductDocumentDataSlicesSlice =
   | CallToActionSlice
   | HeroSlice
@@ -944,6 +877,7 @@ export type ProductcustomDocument<Lang extends string = string> =
   >;
 
 type ProductsDocumentDataSlicesSlice =
+  | ShopifyProductSlice
   | CollectionsGridSlice
   | SingleCollectionSlice
   | CustomerLogosSlice
@@ -1177,6 +1111,7 @@ export type SingleCategoryDocument<Lang extends string = string> =
   >;
 
 type StaticPageDocumentDataSlicesSlice =
+  | BodyTextSlice
   | HeroSlice
   | CustomerLogosSlice
   | NewsletterSlice
@@ -1278,7 +1213,6 @@ export type AllDocumentTypes =
   | HomepageDocument
   | LandingDocument
   | NavigationDocument
-  | PackagingDocument
   | ProductDocument
   | ProductcustomDocument
   | ProductsDocument
@@ -1469,6 +1403,71 @@ type AlternateGridSliceVariation =
 export type AlternateGridSlice = prismic.SharedSlice<
   "alternate_grid",
   AlternateGridSliceVariation
+>;
+
+/**
+ * Primary content in *BodyText → Primary*
+ */
+export interface BodyTextSliceDefaultPrimary {
+  /**
+   * Title field in *BodyText → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: body_text.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Body field in *BodyText → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: body_text.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Image field in *BodyText → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: body_text.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for BodyText Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type BodyTextSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<BodyTextSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *BodyText*
+ */
+type BodyTextSliceVariation = BodyTextSliceDefault;
+
+/**
+ * BodyText Shared Slice
+ *
+ * - **API ID**: `body_text`
+ * - **Description**: BodyText
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type BodyTextSlice = prismic.SharedSlice<
+  "body_text",
+  BodyTextSliceVariation
 >;
 
 /**
@@ -1697,6 +1696,116 @@ type CartSliceVariation = CartSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type CartSlice = prismic.SharedSlice<"cart", CartSliceVariation>;
+
+/**
+ * Primary content in *CollectionStripe → Primary*
+ */
+export interface CollectionStripeSliceDefaultPrimary {
+  /**
+   * Title field in *CollectionStripe → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: collection_stripe.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Bg color field in *CollectionStripe → Primary*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: collection_stripe.primary.bg_color
+   * - **Documentation**: https://prismic.io/docs/field#color
+   */
+  bg_color: prismic.ColorField;
+}
+
+/**
+ * Primary content in *CollectionStripe → Items*
+ */
+export interface CollectionStripeSliceDefaultItem {
+  /**
+   * Title field in *CollectionStripe → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: collection_stripe.items[].title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *CollectionStripe → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: collection_stripe.items[].body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Image field in *CollectionStripe → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: collection_stripe.items[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Cta Label field in *CollectionStripe → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: collection_stripe.items[].cta_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  cta_label: prismic.KeyTextField;
+
+  /**
+   * Cta Link field in *CollectionStripe → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: collection_stripe.items[].cta_link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  cta_link: prismic.LinkField;
+}
+
+/**
+ * Default variation for CollectionStripe Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CollectionStripeSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<CollectionStripeSliceDefaultPrimary>,
+  Simplify<CollectionStripeSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *CollectionStripe*
+ */
+type CollectionStripeSliceVariation = CollectionStripeSliceDefault;
+
+/**
+ * CollectionStripe Shared Slice
+ *
+ * - **API ID**: `collection_stripe`
+ * - **Description**: CollectionStripe
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CollectionStripeSlice = prismic.SharedSlice<
+  "collection_stripe",
+  CollectionStripeSliceVariation
+>;
 
 /**
  * Primary content in *CollectionsGrid → Primary*
@@ -2695,9 +2804,6 @@ declare module "@prismicio/client" {
       NavigationDocument,
       NavigationDocumentData,
       NavigationDocumentDataMenuItemsItem,
-      PackagingDocument,
-      PackagingDocumentData,
-      PackagingDocumentDataSlicesSlice,
       ProductDocument,
       ProductDocumentData,
       ProductDocumentDataSlicesSlice,
@@ -2725,6 +2831,10 @@ declare module "@prismicio/client" {
       AlternateGridSliceVariation,
       AlternateGridSliceDefault,
       AlternateGridSliceImageRight,
+      BodyTextSlice,
+      BodyTextSliceDefaultPrimary,
+      BodyTextSliceVariation,
+      BodyTextSliceDefault,
       CallToActionSlice,
       CallToActionSliceDefaultPrimary,
       CallToActionSliceAlignLeftPrimary,
@@ -2735,6 +2845,11 @@ declare module "@prismicio/client" {
       CartSliceDefaultPrimary,
       CartSliceVariation,
       CartSliceDefault,
+      CollectionStripeSlice,
+      CollectionStripeSliceDefaultPrimary,
+      CollectionStripeSliceDefaultItem,
+      CollectionStripeSliceVariation,
+      CollectionStripeSliceDefault,
       CollectionsGridSlice,
       CollectionsGridSliceDefaultPrimary,
       CollectionsGridSliceVariation,

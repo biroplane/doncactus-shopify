@@ -24,17 +24,6 @@ defineProps({
       >
         <slot></slot>
       </div>
-      <!-- <div
-        class="col-start-1 col-end-8 row-start-1 row-end-4 rounded-lg shadow-xl md:col-end-6 md:row-end-6 md:z-10 custom-bg"
-        :style="{ backgroundImage: `url(${image})` }"
-        :class="[odd ? 'odd' : 'even']"
-      ></div>
-      <div
-        class="z-10 col-start-2 col-end-10 row-start-3 row-end-7 p-4 border bg-light-green-100 md:col-start-5 md:col-end-10 md:z-0 md:row-end-7 md:pl-32 md:pr-4 md:py-6 rounded-xl"
-        :class="[!odd ? 'odd' : 'even']"
-      >
-        <slot></slot>
-      </div> -->
     </div>
   </div>
 </template>
