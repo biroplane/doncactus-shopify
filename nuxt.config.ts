@@ -18,6 +18,17 @@ export default defineNuxtConfig({
     viewTransition: true,
     // ...
   },
+  image: {
+    dir: "assets/img",
+    provider: "prismic",
+    prismic: {},
+    screens: {
+      mobile: 600,
+      tablet: 800,
+      desktop: 1200,
+    },
+  },
+
   app: {
     head: {
       link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
@@ -45,8 +56,9 @@ export default defineNuxtConfig({
       GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
       GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
       gtm: {
-        id: process.env.GOOGLE_TAG_MANAGER,
+        id: process.env.GOOGLE_TAG_MANAGER as string,
       },
+
       "graphql-client": {
         clients: {
           default: {

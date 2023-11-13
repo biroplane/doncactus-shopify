@@ -27,7 +27,11 @@ defineProps(
         <div
           class="absolute w-32 duration-1000 -right-8 md:-right-16 top-10 lg:-left-16 float"
         >
-          <NuxtImg src="/cactus_4.png" class="object-contain w-full h-full" />
+          <img
+            src="/cactus_4.png"
+            class="object-contain w-full h-full"
+            loading="lazy"
+          />
         </div>
         <h1 class="mb-4 text-5xl font-bold text-white font-boysand lg:text-4xl">
           {{ slice.primary.title }}
