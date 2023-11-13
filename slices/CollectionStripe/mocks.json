@@ -10,8 +10,8 @@
 			},
 			"bg_color": {
 				"__TYPE__": "FieldContent",
-				"value": "#359ef3",
-				"type": "Color"
+				"type": "Color",
+				"value": "#48512E"
 			}
 		},
 		"items": [
@@ -26,8 +26,10 @@
 								{
 									"type": "paragraph",
 									"content": {
-										"text": "Ut voluptate irure excepteur nulla fugiat consectetur. Elit ut consectetur laborum aute culpa enim. Culpa amet nostrud incididunt ipsum occaecat."
-									}
+										"text": "Nulla fugiat consectetur",
+										"spans": []
+									},
+									"direction": "ltr"
 								}
 							]
 						}
@@ -88,6 +90,132 @@
 								"__TYPE__": "ExternalLink",
 								"url": "https://prismic.io"
 							}
+						}
+					]
+				]
+			},
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": [
+					[
+						"title",
+						{
+							"__TYPE__": "StructuredTextContent",
+							"value": [
+								{
+									"type": "paragraph",
+									"content": {
+										"text": "Test",
+										"spans": []
+									},
+									"direction": "ltr"
+								}
+							]
+						}
+					],
+					[
+						"body",
+						{
+							"__TYPE__": "StructuredTextContent",
+							"value": [
+								{
+									"type": "paragraph",
+									"content": {
+										"text": "Eu velit ut laborum duis cillum sit enim nostrud quis exercitation aute velit commodo.",
+										"spans": []
+									},
+									"direction": "ltr"
+								}
+							]
+						}
+					],
+					[
+						"image",
+						{
+							"url": "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwyfHxmcnVpdHxlbnwwfHx8fDE2OTk4MjYxNjV8MA&ixlib=rb-4.0.3&q=85",
+							"origin": {
+								"id": "nAOZCYcLND8",
+								"url": "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwyfHxmcnVpdHxlbnwwfHx8fDE2OTk4MjYxNjV8MA&ixlib=rb-4.0.3&q=85",
+								"width": 2749,
+								"height": 4124
+							},
+							"width": 2749,
+							"height": 4124,
+							"edit": {
+								"background": "transparent",
+								"zoom": 1,
+								"crop": {
+									"x": 0,
+									"y": 0
+								}
+							},
+							"credits": null,
+							"alt": null,
+							"__TYPE__": "ImageContent",
+							"thumbnails": {}
+						}
+					]
+				]
+			},
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": [
+					[
+						"title",
+						{
+							"__TYPE__": "StructuredTextContent",
+							"value": [
+								{
+									"type": "paragraph",
+									"content": {
+										"text": "Another title",
+										"spans": []
+									},
+									"direction": "ltr"
+								}
+							]
+						}
+					],
+					[
+						"body",
+						{
+							"__TYPE__": "StructuredTextContent",
+							"value": [
+								{
+									"type": "paragraph",
+									"content": {
+										"text": "Ciao a tutti",
+										"spans": []
+									},
+									"direction": "ltr"
+								}
+							]
+						}
+					],
+					[
+						"image",
+						{
+							"url": "https://images.unsplash.com/photo-1696446701648-f1d03681eb19?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MXwxfHNlYXJjaHwxfHxmcnVpdHxlbnwwfHx8fDE2OTk4MjYxNjV8MA&ixlib=rb-4.0.3&q=85",
+							"origin": {
+								"id": "KMF8kU1BYMo",
+								"url": "https://images.unsplash.com/photo-1696446701648-f1d03681eb19?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MXwxfHNlYXJjaHwxfHxmcnVpdHxlbnwwfHx8fDE2OTk4MjYxNjV8MA&ixlib=rb-4.0.3&q=85",
+								"width": 6048,
+								"height": 4024
+							},
+							"width": 6048,
+							"height": 4024,
+							"edit": {
+								"background": "transparent",
+								"zoom": 1,
+								"crop": {
+									"x": 0,
+									"y": 0
+								}
+							},
+							"credits": null,
+							"alt": null,
+							"__TYPE__": "ImageContent",
+							"thumbnails": {}
 						}
 					]
 				]

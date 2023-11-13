@@ -1111,6 +1111,9 @@ export type SingleCategoryDocument<Lang extends string = string> =
   >;
 
 type StaticPageDocumentDataSlicesSlice =
+  | JumbotronSlice
+  | CollectionStripeSlice
+  | CustomizationSlice
   | BodyTextSlice
   | HeroSlice
   | CustomerLogosSlice
