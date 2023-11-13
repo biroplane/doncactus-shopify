@@ -51,6 +51,12 @@ const addTonNewsletter = () => {
             ✉️
           </button>
         </label>
+        <p class="max-w-lg text-xs text-center text-neutral-100">
+          Compilando questo modulo acconsenti al trattamento dei dati come da
+          <NuxtLink to="/privacy" class="underline text-primary-600"
+            >Privacy Policy</NuxtLink
+          >
+        </p>
       </form>
     </section>
   </div>

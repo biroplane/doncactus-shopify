@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import * as prismic from "@prismicio/client";
-
+import axios from "axios";
 // The array passed to `getSliceComponentProps` is purely optional.
 // Consider it as a visual hint for you when templating your slice.
 defineProps(
@@ -12,6 +12,7 @@ defineProps(
   ])
 );
 const isSending = ref(false);
+const messageSend = ref();
 const form = reactive({
   name: "",
   surname: "",
@@ -20,21 +21,56 @@ const form = reactive({
   reason: "",
   message: "",
 });
-const send = () => {
+const send = async (event: Event) => {
+  event.preventDefault();
+
+  // const myForm = event.target as HTMLFormElement;
   try {
-    console.log("Ready to send", form);
     isSending.value = true;
-    setTimeout(() => {
-      console.log("DONE!", form);
-      isSending.value = false;
-      Object.keys(form).forEach((key: any) => {
-        console.log(`Key ${key} `);
-        form[key as keyof typeof form] = "";
-      });
-    }, 5000);
+    const formData: string = Object.entries(form)
+      .map(
+        ([key, value]) =>
+          `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+      )
+      .join("&");
+    console.log("FormData", formData);
+    const formPost = await axios({
+      url: "/",
+      method: "POST",
+      data: formData,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    });
+    console.log("Form submited", formPost.status);
+    messageSend.value = true;
   } catch (error) {
-    console.log("error sending", error);
+    console.log("Errore FORM", error);
+    messageSend.value = false;
+  } finally {
+    isSending.value = false;
   }
+  // fetch("/", {
+  //   method: "POST",
+  //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  //   body: new URLSearchParams(formData).toString(),
+  // })
+  //   .then(() => console.log("Form successfully submitted"))
+  //   .catch((error) => alert(error));
+  // try {
+  //   console.log("Ready to send", form);
+  //   isSending.value = true;
+  //   setTimeout(() => {
+  //     console.log("DONE!", form);
+  //     isSending.value = false;
+  //     Object.keys(form).forEach((key: any) => {
+  //       console.log(`Key ${key} `);
+  //       form[key as keyof typeof form] = "";
+  //     });
+  //   }, 5000);
+  // } catch (error) {
+  //   console.log("error sending", error);
+  // }
 };
 </script>
 
@@ -63,8 +99,29 @@ const send = () => {
         <!-- class="flex-row flex-wrap lg:flex-col lg:basis-full lg:px-0" -->
       </div>
       <div class="p-6 lg:p-12 lg:w-2/3">
-        <form @submit.prevent="send">
-          <fieldset>
+        <form netlify method="post" name="contact-form" @submit.prevent="send">
+          <input type="hidden" name="form-name" value="contact-form" />
+          <div v-if="messageSend" class="flex items-center gap-8">
+            <Icon name="ci:chat-check" size="96" class="text-green-400"></Icon>
+            <div class="">
+              <h4 class="text-3xl font-bold">La tua richiesta è arrivata!</h4>
+              <p>Controlla la tua mail nelle prossime ore! 💚</p>
+            </div>
+          </div>
+          <div v-if="messageSend === false" class="flex items-center gap-8">
+            <Icon name="ci:chat-check" size="96" class="text-red-400"></Icon>
+            <div class="">
+              <h4 class="text-3xl font-bold">Oh no! 😵</h4>
+              <p>
+                La tua richiesta non è andata a buon fine.<br />
+                Riprova tra qualche minuto
+              </p>
+            </div>
+          </div>
+          <fieldset
+            :disabled="messageSend"
+            :class="{ 'opacity-20': messageSend }"
+          >
             <legend>Informazioni di contatto</legend>
             <p class="mb-4 -mt-4 text-sm text-neutral-400">
               i campi contrassegnati con <strong>*</strong> sono obbligatori
@@ -73,33 +130,32 @@ const send = () => {
               <input
                 v-model="form.name"
                 type="text"
-                placeholder="Nome"
+                placeholder="Nome *"
                 required
               />
               <input
                 v-model="form.surname"
                 type="text"
-                placeholder="Cognome"
+                placeholder="Cognome *"
                 required
               />
               <input
                 v-model="form.email"
                 type="email"
-                placeholder="Email"
+                placeholder="Email *"
                 required
               />
               <input
                 v-model="form.phone"
                 type="tel"
-                placeholder="Telefono"
+                placeholder="Telefono *"
                 required
               />
             </div>
-          </fieldset>
-          <fieldset>
-            <legend>Di cosa hai bisogno?</legend>
 
-            <select v-model="form.reason">
+            <legend class="mt-6">Di cosa hai bisogno? *</legend>
+
+            <select v-model="form.reason" required>
               <option
                 v-for="val in ['informazioni', 'preventivi']"
                 :key="val"
@@ -109,25 +165,24 @@ const send = () => {
                 {{ val }}
               </option>
             </select>
-          </fieldset>
-          <fieldset>
-            <legend>Il tuo messaggio</legend>
+
+            <legend class="mt-6">Il tuo messaggio</legend>
 
             <textarea v-model="form.message"></textarea>
+            <div class="flex justify-end">
+              <button
+                class="self-end px-12 py-2 mt-6 text-white rounded bg-primary-600 hover:bg-primary-700"
+              >
+                Invia
+                <Icon
+                  :name="
+                    isSending ? 'line-md:loading-twotone-loop' : 'prime:send'
+                  "
+                  size="24"
+                ></Icon>
+              </button>
+            </div>
           </fieldset>
-          <div class="flex justify-end">
-            <button
-              class="self-end px-12 py-2 mt-6 text-white rounded bg-primary-600 hover:bg-primary-700"
-            >
-              Invia
-              <Icon
-                :name="
-                  isSending ? 'line-md:loading-twotone-loop' : 'prime:send'
-                "
-                size="24"
-              ></Icon>
-            </button>
-          </div>
         </form>
       </div>
     </div>

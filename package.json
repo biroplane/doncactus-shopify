@@ -14,10 +14,12 @@
     "slicemachine": "start-slicemachine"
   },
   "devDependencies": {
+    "@mailchimp/mailchimp_marketing": "^3.0.80",
     "@nuxtjs/prismic": "^3.1.0",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@slicemachine/adapter-nuxt": "^0.3.23",
     "@types/google.maps": "^3.54.7",
+    "@types/mailchimp__mailchimp_marketing": "^3.0.17",
     "@types/node": "^20",
     "@zadigetvoltaire/nuxt-gtm": "^0.0.13",
     "nuxt": "^3.7.4",

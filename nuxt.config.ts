@@ -55,6 +55,9 @@ export default defineNuxtConfig({
     public: {
       GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
       GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
+      MAILCHIMP_API_KEY: process.env.MAILCHIMP_API_KEY,
+      MAILCHIMP_AUDIENCE_ID: process.env.MAILCHIMP_AUDIENCE_ID,
+      MAILCHIMP_API_URL: process.env.MAILCHIMP_API_URL,
       gtm: {
         id: process.env.GOOGLE_TAG_MANAGER as string,
       },
