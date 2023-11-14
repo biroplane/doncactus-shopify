@@ -1,0 +1,25 @@
+mutation customerCreate($input: CustomerCreateInput!) {
+  customerCreate(input: $input) {
+    customerUserErrors {
+      code
+      field
+      message
+    }
+    customer {
+      id
+    }
+  }
+}
+
+mutation customerActivate($id: ID!, $input: CustomerActivateInput!) {
+  customerActivate(id: $id, input: $input) {
+    customerUserErrors {
+      code
+      field
+      message
+    }
+    customer {
+      id
+    }
+  }
+}

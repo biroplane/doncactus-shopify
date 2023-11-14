@@ -20,8 +20,6 @@ export default defineNuxtConfig({
   },
   image: {
     dir: "assets/img",
-    provider: "prismic",
-    prismic: {},
     screens: {
       mobile: 600,
       tablet: 800,
