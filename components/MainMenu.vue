@@ -6,6 +6,7 @@ defineProps({
     default: false,
   },
 });
+defineEmits(["close"]);
 
 const { data: navigation } = useAsyncData("navigation", () =>
   prismic.client.getSingle("navigation")
@@ -26,6 +27,7 @@ const { data: navigation } = useAsyncData("navigation", () =>
         :field="nav.link"
         class="h-full px-2 py-4 transition-all hover:border-primary-700 hover:border-b-2"
         active-class="border-b-2 border-primary"
+        @click="$emit('close', false)"
       >
         {{ nav.label }}
       </PrismicLink>

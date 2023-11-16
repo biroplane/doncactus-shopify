@@ -458,6 +458,8 @@ export type EventsDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<EventsDocumentData>, "events", Lang>;
 
 type HomepageDocumentDataSlicesSlice =
+  | CollectionsGridSlice
+  | WarningSlice
   | CustomizationSlice
   | SingleCollectionSlice
   | CollectionStripeSlice
@@ -1111,6 +1113,9 @@ export type SingleCategoryDocument<Lang extends string = string> =
   >;
 
 type StaticPageDocumentDataSlicesSlice =
+  | AlternateGridSlice
+  | WarningSlice
+  | CartSlice
   | JumbotronSlice
   | CollectionStripeSlice
   | CustomizationSlice
@@ -2770,6 +2775,81 @@ export type SingleCollectionSlice = prismic.SharedSlice<
   SingleCollectionSliceVariation
 >;
 
+/**
+ * Primary content in *Warning → Primary*
+ */
+export interface WarningSliceDefaultPrimary {
+  /**
+   * Title field in *Warning → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: warning.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Body field in *Warning → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: warning.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Image field in *Warning → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: warning.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Color field in *Warning → Primary*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: warning.primary.color
+   * - **Documentation**: https://prismic.io/docs/field#color
+   */
+  color: prismic.ColorField;
+}
+
+/**
+ * Default variation for Warning Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type WarningSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<WarningSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Warning*
+ */
+type WarningSliceVariation = WarningSliceDefault;
+
+/**
+ * Warning Shared Slice
+ *
+ * - **API ID**: `warning`
+ * - **Description**: Warning
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type WarningSlice = prismic.SharedSlice<
+  "warning",
+  WarningSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -2905,6 +2985,10 @@ declare module "@prismicio/client" {
       SingleCollectionSliceDefaultPrimary,
       SingleCollectionSliceVariation,
       SingleCollectionSliceDefault,
+      WarningSlice,
+      WarningSliceDefaultPrimary,
+      WarningSliceVariation,
+      WarningSliceDefault,
     };
   }
 }

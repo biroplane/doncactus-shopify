@@ -72,7 +72,7 @@ onClickOutside(cartList, () => {
               </p>
             </div>
             <div v-if="cartStore.cart.lines?.nodes.length" class="mt-12">
-              <NuxtLink to="/checkout" class="underline">
+              <NuxtLink to="/carrello" class="underline">
                 Vai al Checkout <Icon name="ci:chevron-right" size="16" />
               </NuxtLink>
             </div>

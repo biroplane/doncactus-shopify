@@ -17,9 +17,12 @@ defineProps(
   <section
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
-    class="max-w-3xl mx-auto"
+    class="max-w-3xl px-6 py-24 mx-auto"
   >
     <h1 class="my-6 text-4xl font-bold">{{ slice.primary.title }}</h1>
-    <PrismicRichText :field="slice.primary.body"></PrismicRichText>
+    <PrismicRichText
+      :field="slice.primary.body"
+      class="leading-8"
+    ></PrismicRichText>
   </section>
 </template>

@@ -53,6 +53,7 @@ query getProductByHandle($handle: String) {
     }
     title
     description
+    descriptionHtml
     handle
     priceRange {
       maxVariantPrice {

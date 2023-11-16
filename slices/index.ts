@@ -40,4 +40,5 @@ export const components = defineSliceZoneComponents({
   single_collection: defineAsyncComponent(
     () => import("./SingleCollection/index.vue")
   ),
+  warning: defineAsyncComponent(() => import("./Warning/index.vue")),
 });

@@ -78,6 +78,7 @@ export default defineNuxtConfig({
 
   prismic: {
     endpoint: "doncactus",
+    preview: false,
     clientConfig: {
       routes: [
         { type: "homepage", path: "/" },

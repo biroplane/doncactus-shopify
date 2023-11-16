@@ -33,6 +33,15 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "alternate_grid": {
+              "type": "SharedSlice"
+            },
+            "warning": {
+              "type": "SharedSlice"
+            },
+            "cart": {
+              "type": "SharedSlice"
+            },
             "jumbotron": {
               "type": "SharedSlice"
             },
