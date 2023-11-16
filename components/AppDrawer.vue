@@ -6,6 +6,10 @@ const drawerBox = ref();
 onClickOutside(drawerBox, () => {
   drawer.value = false;
 });
+const close = (evt: any) => {
+  console.log("EVENT CLOSE ", evt);
+  drawer.value = evt;
+};
 </script>
 <template>
   <div class="">
@@ -39,15 +43,16 @@ onClickOutside(drawerBox, () => {
               }}</NuxtLink>
             </li>
           </ul> -->
-          <MainMenu vertical />
-          <div
+          <MainMenu vertical @close="close" />
+          <NuxtLink
+            to="/carrello"
             class="flex py-3 border-t account border-primary-600 text-primary-600"
           >
             <div class="flex-grow">Checkout</div>
             <div class="">
               <Icon name="ci:shopping-cart-02" size="24"></Icon>
             </div>
-          </div>
+          </NuxtLink>
         </div>
       </div>
     </transition>

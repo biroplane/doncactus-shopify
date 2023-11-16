@@ -29,10 +29,16 @@ console.log("Handle", data);
     :data-slice-variation="slice.variation"
   >
     <div v-if="data" class="w-full">
-      <div class="h-[35vh] relative">
-        <NuxtImg
+      <div class="h-[35vh] relative overflow-hidden">
+        <img
+          v-if="data.collection?.image"
           :src="(data.collection?.image as any).src"
           alt=""
+          class="object-cover object-center w-full h-full"
+        />
+        <PrismicImage
+          v-else-if="prismic.isFilled.image(slice.primary.image)"
+          :field="slice.primary.image"
           class="object-cover object-center w-full h-full"
         />
         <div class="absolute max-w-xs bottom-4 left-4">
@@ -42,7 +48,9 @@ console.log("Handle", data);
           <p class="text-xs">{{ data.collection?.description }}</p>
         </div>
       </div>
-      <div class="container grid gap-4 mt-12 md:grid-cols-2 lg:grid-cols-4">
+      <div
+        class="container grid gap-4 pb-12 mt-12 md:grid-cols-2 lg:grid-cols-4"
+      >
         <ProductItem
           v-for="product in data.collection?.products.nodes"
           :key="product.id"

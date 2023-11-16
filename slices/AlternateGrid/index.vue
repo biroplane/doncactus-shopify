@@ -41,7 +41,7 @@ defineProps(
           <PrismicRichText
             v-if="isFilled.richText(slice.primary.title)"
             :field="slice.primary.title"
-            class="text-2xl font-bold"
+            class="text-4xl font-bold text-olive"
           />
           <PrismicRichText
             v-if="isFilled.richText(slice.primary.description)"

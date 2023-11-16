@@ -28,7 +28,7 @@ const addTonNewsletter = () => {
         class="container flex flex-col items-center max-w-lg gap-4"
         @submit.prevent="addTonNewsletter"
       >
-        <h4 class="text-3xl font-bold text-fallow-100">
+        <h4 class="text-3xl font-bold text-center text-fallow-100">
           Resta in contatto con noi
         </h4>
         <p class="max-w-lg text-center text-neutral-100">

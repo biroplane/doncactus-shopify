@@ -21,12 +21,12 @@ const socials = [
     icon: "cib:google",
     alt: "Facebook",
   },
-  {
-    link: "https://www.facebook.com",
-    name: "TikTok",
-    icon: "cib:tiktok",
-    alt: "Facebook",
-  },
+  // {
+  //   link: "https://www.facebook.com",
+  //   name: "TikTok",
+  //   icon: "cib:tiktok",
+  //   alt: "Facebook",
+  // },
 ];
 </script>
 <template>
