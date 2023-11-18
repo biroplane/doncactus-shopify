@@ -43,7 +43,7 @@ const addToCart = async (v: any) => {
       <NuxtLink :to="`/products/${handle}`" class="">
         <NuxtImg
           v-if="images?.length"
-          :src="images[0].src"
+          :src="images[0].thumbnail"
           class="object-cover w-full h-full transition-transform duration-500 scale-100 rounded-t-lg shadow-lg group-hover:scale-110 group-hover:-translate-y-4"
         />
       </NuxtLink>
@@ -69,38 +69,4 @@ const addToCart = async (v: any) => {
       </div>
     </div>
   </div>
-  <!-- <div
-    class="flex flex-col items-start justify-between w-full overflow-hidden transition-all rounded-md shadow-xl hover:scale-105 group"
-  >
-    <div class="">
-      <NuxtLink
-        :to="`/products/${handle}`"
-        class="w-full overflow-hidden border border-transparent rounded-lg aspect-square"
-      >
-        <NuxtImg
-          v-if="images?.length"
-          :src="images[0].src"
-          class="object-cover w-full h-full transition-transform duration-500 scale-100 rounded-t-lg group-hover:scale-110 group-hover:-translate-y-4"
-        />
-      </NuxtLink>
-    </div>
-    <div class="grid items-center self-end justify-between grid-cols-4">
-      <h4 class="px-4 py-4 text-xl font-medium capitalize col-span-full">
-        {{ title }}
-      </h4>
-      <div class="col-span-3 px-4 text-xl font-bold font-barlow">
-        {{ formatMoney(price) }}
-      </div>
-      <div class="bg-primary hover:bg-opacity-50">
-        <button class="w-full h-full p-2" @click="addToCart(variationId)">
-          <Icon
-            :name="
-              isLoading ? 'line-md:loading-twotone-loop' : 'ci:shopping-cart-02'
-            "
-            size="24"
-          />
-        </button>
-      </div>
-    </div>
-  </div> -->
 </template>

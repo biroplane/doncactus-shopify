@@ -40,6 +40,8 @@ query getCart($cartId: ID!) {
               images(first: 1) {
                 nodes {
                   src
+                  thumbnail: url(transform:{maxWidth:360})
+
                 }
               }
             }

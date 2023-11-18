@@ -26,12 +26,12 @@ onClickOutside(cartList, () => {
     <div class="flex items-center justify-between w-full gap-8">
       <div
         ref="cartList"
-        class="flex items-center justify-center h-full md:hidden aspect-square"
+        class="flex items-center justify-center h-full lg:hidden aspect-square"
       >
         <AppDrawer />
       </div>
       <Logo />
-      <div class="hidden w-full h-full md:flex"><MainMenu /></div>
+      <div class="hidden w-full h-full lg:flex"><MainMenu /></div>
       <div class="relative">
         <button
           class="relative p-4 bg-white rounded-full shadow-sm"
@@ -83,21 +83,6 @@ onClickOutside(cartList, () => {
           </div>
         </Transition>
       </div>
-      <!-- <div class=""><Logo /></div>
-      <div class="hidden w-full md:flex"><MainMenu /></div>
-      <div class="items-center justify-center flex-none hidden md:flex">
-        <NuxtLink to="/cart"
-          >🛒 ({{ cartStore.cart?.lines?.edges?.length }})</NuxtLink
-        >
-      </div>
-      <div
-        class="flex items-center justify-center h-full md:hidden aspect-square"
-      >
-        <button class="flex items-center justify-center w-8 aspect-square">
-          <Icon name="ci:hamburger-md" size="32" class="text-primary-600" />
-        </button> 
-        <AppDrawer />
-      </div> -->
     </div>
   </div>
 </template>

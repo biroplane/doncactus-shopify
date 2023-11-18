@@ -33,6 +33,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "google_map": {
+              "type": "SharedSlice"
+            },
             "alternate_grid": {
               "type": "SharedSlice"
             },

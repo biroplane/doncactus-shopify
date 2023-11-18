@@ -32,7 +32,7 @@ h6 {
 }
 
 .cta {
-  @apply relative bg-primary-300 px-8 py-2 text-light-green-700 rounded-sm inline-block;
+  @apply relative bg-primary-300 px-8 py-2 text-primary-700 rounded-sm inline-block;
 
   &:after {
     position: absolute;
@@ -97,4 +97,15 @@ img.transitioned {
 
 #prismic-toolbar-v2 {
   visibility: hidden;
+}
+.page-enter-active,
+.page-leave-active {
+  transition: all 1s;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+  transform: translateX(50px);
 }

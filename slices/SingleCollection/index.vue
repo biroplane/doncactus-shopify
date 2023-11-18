@@ -29,7 +29,7 @@ console.log("Handle", data);
     :data-slice-variation="slice.variation"
   >
     <div v-if="data" class="w-full">
-      <div class="h-[35vh] relative overflow-hidden">
+      <div v-motion-slide-right class="h-[35vh] relative overflow-hidden">
         <img
           v-if="data.collection?.image"
           :src="(data.collection?.image as any).src"
@@ -41,24 +41,34 @@ console.log("Handle", data);
           :field="slice.primary.image"
           class="object-cover object-center w-full h-full"
         />
-        <div class="absolute max-w-xs bottom-4 left-4">
-          <h2 class="text-3xl filter drop-shadow-sm">
+        <div class="absolute max-w-md bottom-4 left-4">
+          <h2
+            v-motion-slide-left
+            class="inline-block px-4 py-2 text-3xl font-bold bg-white"
+          >
             {{ data.collection?.title }}
           </h2>
-          <p class="text-xs">{{ data.collection?.description }}</p>
+          <p class="px-4 py-2 text-xs bg-white">
+            {{ data.collection?.description }}
+          </p>
         </div>
       </div>
       <div
-        class="container grid gap-4 pb-12 mt-12 md:grid-cols-2 lg:grid-cols-4"
+        class="container grid grid-cols-2 gap-4 pb-12 mt-12 md:grid-cols-3 lg:grid-cols-4"
       >
         <ProductItem
-          v-for="product in data.collection?.products.nodes"
+          v-for="(product, p) in data.collection?.products.nodes"
           :key="product.id"
+          v-motion
           :title="product.title"
           :images="product.images.nodes"
           :handle="product.handle"
           :price="product.priceRange.maxVariantPrice.amount as number"
           :variation-id="product.variants.nodes[0].id"
+          :initial="{ opacity: 0, y: 50 }"
+          :enter="{ opacity: 1, y: 0 }"
+          :leave="{ opacity: 0, y: 50 }"
+          :delay="50 * p"
         />
       </div>
     </div>

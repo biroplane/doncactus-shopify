@@ -21,28 +21,21 @@ defineProps(
     >
       <div
         v-if="isFilled.richText(slice.primary.eyebrowHeadline)"
-        class="text-3xl font-boysand text-primary"
+        class="text-3xl text-center font-boysand text-primary-600"
       >
         <PrismicRichText :field="slice.primary.eyebrowHeadline" />
       </div>
       <ul
         v-if="slice.items.length > 0"
-        class="grid items-center gap-12 p-4 overflow-x-auto md:flex"
-        :class="[!slice.primary.small ? 'grid-cols-1' : 'grid-cols-3']"
+        class="flex justify-around w-full gap-4"
       >
         <li
           v-for="(item, i) in slice.items"
           :key="i"
-          :class="[
-            slice.variation == 'noBorders'
-              ? ''
-              : 'card md:h-96 aspect-square flex items-center justify-center outline outline-sand-600 bg-white flex-shrink-0 flex-grow-0 md:flex-basis-[35%]',
-            {
-              'h-12 transition-transform hover:scale-110': slice.primary.small,
-            },
-          ]"
+          :class="{ 'h-16 md:h-24': slice.primary.small }"
+          :style="{ width: `calc(16rem * ${100 / slice.items.length})` }"
         >
-          <PrismicLink :field="item.link">
+          <PrismicLink :field="item.link" class="w-full h-full">
             <PrismicImage
               :field="item.image"
               class="w-full h-full"
@@ -51,9 +44,11 @@ defineProps(
           </PrismicLink>
         </li>
       </ul>
+
       <PrismicLink
         v-if="isFilled.link(slice.primary.callToActionLink)"
         :field="slice.primary.callToActionLink"
+        class="btn cta"
       >
         {{ slice.primary.callToActionLabel }}
       </PrismicLink>

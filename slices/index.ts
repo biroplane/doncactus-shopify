@@ -25,6 +25,7 @@ export const components = defineSliceZoneComponents({
   customization: defineAsyncComponent(
     () => import("./Customization/index.vue")
   ),
+  google_map: defineAsyncComponent(() => import("./GoogleMap/index.vue")),
   google_reviews: defineAsyncComponent(
     () => import("./GoogleReviews/index.vue")
   ),
@@ -34,6 +35,7 @@ export const components = defineSliceZoneComponents({
   products_by_collection: defineAsyncComponent(
     () => import("./ProductsByCollection/index.vue")
   ),
+  search: defineAsyncComponent(() => import("./Search/index.vue")),
   shopify_product: defineAsyncComponent(
     () => import("./ShopifyProduct/index.vue")
   ),

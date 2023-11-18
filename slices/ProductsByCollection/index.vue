@@ -13,10 +13,13 @@ const props = defineProps(
   ])
 );
 const productStore = useProductStore();
-const prods = await productStore.getCollectionByHandle(
-  props.slice.primary.collection_handle as string,
-  20
-);
+let prods: any;
+onMounted(async () => {
+  prods = await productStore.getCollectionByHandle(
+    props.slice.primary.collection_handle as string,
+    20
+  );
+});
 console.log("Prods", prods);
 </script>
 
@@ -26,7 +29,7 @@ console.log("Prods", prods);
     :data-slice-variation="slice.variation"
     class="container flex flex-col gap-8 py-12"
   >
-    <h1 class="text-5xl font-boysand text-light-green-500">
+    <h1 class="text-5xl font-boysand text-primary-500">
       {{ slice.primary.title }}
     </h1>
     <p><PrismicRichText :field="slice.primary.body"></PrismicRichText></p>
@@ -34,6 +37,7 @@ console.log("Prods", prods);
       <ProductItem
         v-for="pr in prods?.collection?.products.nodes"
         :key="pr.handle"
+        v-motion-roll-visible-right
         :images="pr.images.nodes"
         :title="pr.title"
         :price="pr.priceRange.maxVariantPrice.amount as number"
@@ -41,7 +45,5 @@ console.log("Prods", prods);
         :variation-id="pr.variants.nodes[0].id"
       />
     </div>
-    <!-- <DcProductsList :products="prods?.collection?.products.edges" />
-    <pre>{{ prods?.collection?.products }}</pre> -->
   </section>
 </template>

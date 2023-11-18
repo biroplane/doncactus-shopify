@@ -19,7 +19,7 @@ defineProps(
   >
     <div class="grid lg:grid-cols-2 gap-12 @container items-center">
       <div
-        class="@xs:aspect-square @lg:aspect-auto @lg:h-full @lg:max-h-[40vh]"
+        class="@xs:aspect-square @lg:aspect-video @lg:h-full @lg:max-h-[40vh]"
         :class="
           slice.variation === 'imageRight' ? '-order-first' : 'order-first'
         "

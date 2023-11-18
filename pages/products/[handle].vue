@@ -123,7 +123,7 @@ const activeImage = ref(0);
             <div class="flex h-24">
               <div class="h-full overflow-hidden bg-primary-500 rounded-l-md">
                 <NuxtImg
-                  :src="(recommend.images.nodes[0] as any).src"
+                  :src="(recommend.images.nodes[0] as any).thumbnail"
                   alt=""
                   class="object-cover w-full h-full"
                 />
