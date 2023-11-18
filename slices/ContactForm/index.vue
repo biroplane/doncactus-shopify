@@ -27,22 +27,27 @@ const send = async (event: Event) => {
   // const myForm = event.target as HTMLFormElement;
   try {
     isSending.value = true;
-    const formData: string = Object.entries(form)
-      .map(
-        ([key, value]) =>
-          `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
-      )
-      .join("&");
-    console.log("FormData", formData);
-    const formPost = await axios({
-      url: "/",
+    const formData = await axios({
+      url: "https://usebasin.com/f/0d8424e7bf30",
       method: "POST",
-      data: formData,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
+      data: form,
     });
-    console.log("Form submited", formPost.status);
+    // const formData: string = Object.entries(form)
+    //   .map(
+    //     ([key, value]) =>
+    //       `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+    //   )
+    //   .join("&");
+    // console.log("FormData", formData);
+    // const formPost = await axios({
+    //   url: "/",
+    //   method: "POST",
+    //   data: formData,
+    //   headers: {
+    //     "Content-Type": "application/x-www-form-urlencoded",
+    //   },
+    // });
+    console.log("Form submited", formData);
     messageSend.value = true;
   } catch (error) {
     console.log("Errore FORM", error);
