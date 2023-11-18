@@ -32,6 +32,9 @@ onClickOutside(cartList, () => {
       </div>
       <Logo />
       <div class="hidden w-full h-full lg:flex"><MainMenu /></div>
+      <div class="hidden lg:block">
+        <Search />
+      </div>
       <div class="relative">
         <button
           class="relative p-4 bg-white rounded-full shadow-sm"

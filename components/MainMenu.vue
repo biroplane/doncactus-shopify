@@ -25,8 +25,8 @@ const { data: navigation } = useAsyncData("navigation", () =>
     <li v-for="(nav, n) in navigation.data.menu_items" :key="n" class="">
       <PrismicLink
         :field="nav.link"
-        class="h-full px-2 py-4 transition-all hover:border-primary-700 hover:border-b-2"
-        active-class="border-b-2 border-primary"
+        class="h-full px-2 py-4 transition-all hover:border-primary-700 hover:border-b text-primary-700"
+        active-class="border-b-2 border-primary text-neutral-900"
         @click="$emit('close', false)"
       >
         {{ nav.label }}
