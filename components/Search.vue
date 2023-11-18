@@ -14,7 +14,7 @@ onClickOutside(searchBar, () => (isOpen.value = false));
 <template>
   <div ref="searchBar" class="relative transition-all">
     <div
-      class="flex gap-2 py-1 rounded-md px-4 transition-all duration-1000 items-center justify-center border border-primary"
+      class="flex gap-2 py-1 rounded-md px-4 transition-all duration-1000 items-center justify-center border border-primary focus-within:shadow-lg"
     >
       <button class="p-1" @click="isOpen = !isOpen">
         <Icon
@@ -26,8 +26,7 @@ onClickOutside(searchBar, () => (isOpen.value = false));
       <input
         type="search"
         name="search"
-        class="bg-transparent py-1 text-primary w-full"
-        autofocus
+        class="bg-transparent py-1 text-primary w-full focus:outline-none"
         autocomplete="off"
         @input="fetchSearchResult"
       />
