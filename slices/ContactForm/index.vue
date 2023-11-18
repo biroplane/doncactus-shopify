@@ -32,21 +32,7 @@ const send = async (event: Event) => {
       method: "POST",
       data: form,
     });
-    // const formData: string = Object.entries(form)
-    //   .map(
-    //     ([key, value]) =>
-    //       `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
-    //   )
-    //   .join("&");
-    // console.log("FormData", formData);
-    // const formPost = await axios({
-    //   url: "/",
-    //   method: "POST",
-    //   data: formData,
-    //   headers: {
-    //     "Content-Type": "application/x-www-form-urlencoded",
-    //   },
-    // });
+
     console.log("Form submited", formData);
     messageSend.value = true;
   } catch (error) {
@@ -55,27 +41,6 @@ const send = async (event: Event) => {
   } finally {
     isSending.value = false;
   }
-  // fetch("/", {
-  //   method: "POST",
-  //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
-  //   body: new URLSearchParams(formData).toString(),
-  // })
-  //   .then(() => console.log("Form successfully submitted"))
-  //   .catch((error) => alert(error));
-  // try {
-  //   console.log("Ready to send", form);
-  //   isSending.value = true;
-  //   setTimeout(() => {
-  //     console.log("DONE!", form);
-  //     isSending.value = false;
-  //     Object.keys(form).forEach((key: any) => {
-  //       console.log(`Key ${key} `);
-  //       form[key as keyof typeof form] = "";
-  //     });
-  //   }, 5000);
-  // } catch (error) {
-  //   console.log("error sending", error);
-  // }
 };
 </script>
 
