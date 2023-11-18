@@ -49,6 +49,7 @@ const loadNext = async () => {
       <ProductItem
         v-for="(product, p) in productStore.products"
         :key="p"
+        v-motion-roll-visible-right
         :handle="product.handle"
         :title="product.title"
         :images="product.images.nodes as any"

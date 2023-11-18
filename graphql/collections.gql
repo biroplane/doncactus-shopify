@@ -48,6 +48,8 @@ query getCollectionByHandle($handle:String!, $first:Int){
 
             nodes{
               src
+              thumbnail: url(transform:{maxWidth:360})
+
             }
           
         }

@@ -12,11 +12,12 @@ const ss = useShopStore();
         <span>
           <h5 class="text-lg font-bold">Don Cactus</h5>
           <p class="text-sm">Amore a prima spina</p>
-          <div class="mt-8 text-sm">
-            PASQUALE IVANO PALERMO
+          <div class="mt-8 text-sm leading-7">
+            di PASQUALE IVANO PALERMO
             <address class="">{{ ss.address }}</address>
             <div class="">P.iva 08027470726</div>
             <div class="">Sdi X2PH38J</div>
+            <div class="">Rea BA-652508</div>
           </div>
         </span>
       </div>

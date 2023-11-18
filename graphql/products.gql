@@ -9,9 +9,10 @@ query Products($first: Int!, $query: String, $after:String) {
     }
     nodes {
       id     
-      images(first: 10) {
+      images(first: 5) {
         nodes {
           src
+          thumbnail: url(transform:{maxWidth:360})
         }
       }
       
@@ -46,9 +47,11 @@ query getProductByHandle($handle: String) {
         title
         description
       }
-    images(first: 5) {
+    images(first: 10) {
       nodes {
         src
+        thumbnail: url(transform:{maxWidth:360})
+
       }
     }
     title
@@ -93,6 +96,8 @@ query getProductRecommendations($id: ID!) {
     images(first: 1) {
       nodes {
         src
+        thumbnail: url(transform:{maxWidth:240})
+
       }
     }
     title

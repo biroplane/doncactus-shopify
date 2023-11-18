@@ -13,7 +13,9 @@ defineProps(
 );
 
 const prouctStore = useProductStore();
-await prouctStore.loadCollections(8);
+onMounted(async () => {
+  await prouctStore.loadCollections(8);
+});
 
 const gridCollection = computed(() => prouctStore.collections.slice(0, 3));
 const listCollection = computed(() => prouctStore.collections.slice(3));
@@ -41,14 +43,16 @@ const listCollection = computed(() => prouctStore.collections.slice(3));
         <NuxtLink
           v-if="grid.image"
           :to="`/collections/${grid.handle}`"
-          class="relative"
+          class="relative w-full"
         >
           <NuxtImg
             v-if="grid.image?.src"
             :src="grid.image?.src"
             class="object-cover w-full h-full"
           />
-          <div class="absolute text-lg md:text-2xl bottom-4 left-4 max-w-[75%]">
+          <div
+            class="absolute text-lg md:text-2xl bottom-4 left-4 w-screen lg:max-w-[75%]"
+          >
             <p class="inline-block p-2 highlight bg-sand-50 font-barlow">
               {{ grid.title }}
             </p>

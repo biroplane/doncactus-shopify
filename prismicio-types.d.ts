@@ -1112,7 +1112,86 @@ export type SingleCategoryDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Item in *Social Links → Items*
+ */
+export interface SocialLinksDocumentDataItemsItem {
+  /**
+   * Label field in *Social Links → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: social_links.items[].label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * Link field in *Social Links → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: social_links.items[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+
+  /**
+   * Icon field in *Social Links → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: social_links.items[].icon
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+}
+
+/**
+ * Content for Social Links documents
+ */
+interface SocialLinksDocumentData {
+  /**
+   * Title field in *Social Links*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: social_links.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Items field in *Social Links*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: social_links.items[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  items: prismic.GroupField<Simplify<SocialLinksDocumentDataItemsItem>>;
+}
+
+/**
+ * Social Links document from Prismic
+ *
+ * - **API ID**: `social_links`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type SocialLinksDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<SocialLinksDocumentData>,
+    "social_links",
+    Lang
+  >;
+
 type StaticPageDocumentDataSlicesSlice =
+  | GoogleMapSlice
   | AlternateGridSlice
   | WarningSlice
   | CartSlice
@@ -1226,6 +1305,7 @@ export type AllDocumentTypes =
   | ProductsDocument
   | ShopifyProductDocument
   | SingleCategoryDocument
+  | SocialLinksDocument
   | StaticPageDocument;
 
 /**
@@ -2208,6 +2288,116 @@ export type CustomizationSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *GoogleMap → Primary*
+ */
+export interface GoogleMapSliceDefaultPrimary {
+  /**
+   * Title field in *GoogleMap → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: google_map.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Body field in *GoogleMap → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: google_map.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Location field in *GoogleMap → Primary*
+   *
+   * - **Field Type**: GeoPoint
+   * - **Placeholder**: *None*
+   * - **API ID Path**: google_map.primary.location
+   * - **Documentation**: https://prismic.io/docs/field#geopoint
+   */
+  location: prismic.GeoPointField;
+}
+
+/**
+ * Primary content in *GoogleMap → Items*
+ */
+export interface GoogleMapSliceDefaultItem {
+  /**
+   * title field in *GoogleMap → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: google_map.items[].title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Body field in *GoogleMap → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: google_map.items[].body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Cta Label field in *GoogleMap → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: google_map.items[].cta_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  cta_label: prismic.KeyTextField;
+
+  /**
+   * Cta Link field in *GoogleMap → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: google_map.items[].cta_link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  cta_link: prismic.LinkField;
+}
+
+/**
+ * Default variation for GoogleMap Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type GoogleMapSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<GoogleMapSliceDefaultPrimary>,
+  Simplify<GoogleMapSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *GoogleMap*
+ */
+type GoogleMapSliceVariation = GoogleMapSliceDefault;
+
+/**
+ * GoogleMap Shared Slice
+ *
+ * - **API ID**: `google_map`
+ * - **Description**: GoogleMap
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type GoogleMapSlice = prismic.SharedSlice<
+  "google_map",
+  GoogleMapSliceVariation
+>;
+
+/**
  * Primary content in *GoogleReviews → Primary*
  */
 export interface GoogleReviewsSliceDefaultPrimary {
@@ -2646,6 +2836,33 @@ export type ProductsByCollectionSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Default variation for Search Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SearchSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  never
+>;
+
+/**
+ * Slice variation for *Search*
+ */
+type SearchSliceVariation = SearchSliceDefault;
+
+/**
+ * Search Shared Slice
+ *
+ * - **API ID**: `search`
+ * - **Description**: Search
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SearchSlice = prismic.SharedSlice<"search", SearchSliceVariation>;
+
+/**
  * Primary content in *ShopifyProduct → Primary*
  */
 export interface ShopifyProductSliceDefaultPrimary {
@@ -2902,6 +3119,9 @@ declare module "@prismicio/client" {
       SingleCategoryDocument,
       SingleCategoryDocumentData,
       SingleCategoryDocumentDataSlicesSlice,
+      SocialLinksDocument,
+      SocialLinksDocumentData,
+      SocialLinksDocumentDataItemsItem,
       StaticPageDocument,
       StaticPageDocumentData,
       StaticPageDocumentDataSlicesSlice,
@@ -2955,6 +3175,11 @@ declare module "@prismicio/client" {
       CustomizationSliceVariation,
       CustomizationSliceDefault,
       CustomizationSliceDark,
+      GoogleMapSlice,
+      GoogleMapSliceDefaultPrimary,
+      GoogleMapSliceDefaultItem,
+      GoogleMapSliceVariation,
+      GoogleMapSliceDefault,
       GoogleReviewsSlice,
       GoogleReviewsSliceDefaultPrimary,
       GoogleReviewsSliceVariation,
@@ -2977,6 +3202,9 @@ declare module "@prismicio/client" {
       ProductsByCollectionSliceDefaultPrimary,
       ProductsByCollectionSliceVariation,
       ProductsByCollectionSliceDefault,
+      SearchSlice,
+      SearchSliceVariation,
+      SearchSliceDefault,
       ShopifyProductSlice,
       ShopifyProductSliceDefaultPrimary,
       ShopifyProductSliceVariation,

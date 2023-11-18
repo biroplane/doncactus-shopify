@@ -13,10 +13,17 @@ export default defineNuxtConfig({
     "nuxt-icon",
     "@nuxt/image",
     "@zadigetvoltaire/nuxt-gtm",
+    "@stefanobartoletti/nuxt-social-share",
+    "@vueuse/motion/nuxt",
+    "@nuxtjs/algolia",
   ],
   experimental: {
     viewTransition: true,
     // ...
+  },
+  algolia: {
+    apiKey: process.env.ALGOLIA_SEARCH_API,
+    applicationId: process.env.ALGOLIA_APP_ID,
   },
   image: {
     dir: "assets/img",
@@ -28,6 +35,7 @@ export default defineNuxtConfig({
   },
 
   app: {
+    pageTransition: { name: "page", mode: "out-in" },
     head: {
       link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
       // script: [
@@ -79,6 +87,7 @@ export default defineNuxtConfig({
   prismic: {
     endpoint: "doncactus",
     preview: false,
+    toolbar: false,
     clientConfig: {
       routes: [
         { type: "homepage", path: "/" },
@@ -90,5 +99,9 @@ export default defineNuxtConfig({
         { type: "landing", path: "/landing/:uid" },
       ],
     },
+  },
+
+  router: {
+    options: { scrollBehaviorType: "smooth" },
   },
 });

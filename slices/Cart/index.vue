@@ -14,9 +14,9 @@ defineProps(
 );
 const cartStore = useCartStore();
 const getCheckout = async () => {
-  const mapped = cartStore.cart.lines.edges.map((line: any) => ({
-    variantId: line.node.merchandise.id,
-    quantity: line.node.quantity,
+  const mapped = cartStore.cart.lines.nodes?.map((line: any) => ({
+    variantId: line.merchandise.id,
+    quantity: line.quantity,
   }));
   console.log("Mapping lines", mapped);
 
@@ -67,7 +67,7 @@ const updateCart = async (qty: Event, item: any) => {
   <section
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
-    class="font-barlow"
+    class="py-24 font-barlow"
   >
     <div class="grid gap-8 md:grid-cols-2">
       <div class="w-full h-full top-24">
@@ -97,8 +97,8 @@ const updateCart = async (qty: Event, item: any) => {
               >
                 <div class="flex-none">
                   <NuxtImg
-                    v-if="item.merchandise.product.images.nodes[0].src"
-                    :src="item.merchandise.product.images.nodes[0].src"
+                    v-if="item.merchandise.product.images.nodes[0].thumbnail"
+                    :src="item.merchandise.product.images.nodes[0].thumbnail"
                     class="object-cover w-24 rounded-md aspect-square"
                     placeholder
                   />
@@ -130,7 +130,9 @@ const updateCart = async (qty: Event, item: any) => {
                 </div>
               </li>
               <li class="flex justify-between py-6 border-t">
-                <div class="">Totale</div>
+                <div class="">
+                  <strong>Totale</strong> <small>(escluso spedizione)</small>
+                </div>
                 <div class="font-bold">
                   {{ formatMoney(cartStore.cart.cost.totalAmount.amount) }}
                 </div>
@@ -149,76 +151,5 @@ const updateCart = async (qty: Event, item: any) => {
         </button>
       </div>
     </div>
-    <!-- <div v-if="cartStore.cart.lines?.edges.length > 0" ref="cartList">
-      <h3 class="py-4 text-xl font-bold">Riepilogo</h3>
-      <table class="table">
-        <thead>
-          <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in cartStore.cart.lines?.edges" :key="item.node.id">
-            <td><input type="checkbox" /></td>
-            <td>{{ item.node.product }}</td>
-            <td>
-              <input
-                type="number"
-                :value="item.node.quantity"
-                class="w-12 p-2 text-center rounded-md bg-sand"
-              />
-            </td>
-            <td>
-              <h6 class="flex-grow">
-                {{ item.node.merchandise.product.title }}
-              </h6>
-            </td>
-            <td>{{ item.node }}</td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td></td>
-          </tr>
-        </tfoot>
-      </table> -->
-    <!-- <ul class="overflow-y-auto max-h-64">
-        <li
-          v-for="item in cartStore.cart.lines?.edges"
-          :key="item.node.id"
-          class="flex items-center justify-between gap-2 py-1"
-        >
-          <input type="checkbox" />
-          <input
-            class="w-12 py-2 text-center rounded-md bg-sand text-neutral-500"
-            :value="item.node.quantity"
-          />
-          x
-          <h6 class="flex-grow">{{ item.node.merchandise.title }}</h6>
-          <p class="font-bold">
-            {{ formatMoney(item.node.estimatedCost.totalAmount.amount) }}
-          </p>
-          
-        </li>
-      </ul> -->
-    <!-- <div class="flex pt-4 border-t">
-        <strong class="flex-grow">Totale</strong>
-        <p class="flex-none">
-          {{ formatMoney(cartStore.cart.cost.totalAmount.amount) }}
-        </p>
-      </div>
-      <div v-if="cartStore.cart.lines?.edges.length" class="mt-12">
-        <NuxtLink to="/checkout" class="underline">
-          Vai al Checkout <Icon name="ci:chevron-right" size="16" />
-        </NuxtLink>
-      </div>
-      <div v-else class="mt-6 text-sm">
-        Sei ancora indeciso?<br />Sfoglia i nostri
-        <NuxtLink to="/products" class="underline">Prodotti</NuxtLink>
-      </div>
-    </div> -->
   </section>
 </template>
