@@ -345,11 +345,13 @@ onMounted(async () => {
       <div class="h-full -order-first md:order-first">
         <div ref="mapElement" class="w-full h-full"></div>
       </div>
-      <div class="px-8 prose">
+      <div class="px-8 prose lg:prose-md">
         <h1 class="text-primary">{{ slice.primary.title }}</h1>
         <PrismicRichText :field="slice.primary.body" />
         <ul>
           <li v-for="(item, i) in slice.items" :key="i" class="">
+            <h4>{{ item.title }}</h4>
+
             <PrismicLink :field="item.cta_link" class="text-primary">
               {{ item.cta_label }}
             </PrismicLink>

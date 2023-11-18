@@ -32,6 +32,9 @@ const close = (evt: any) => {
               <Icon name="ci:close-md" size="24"></Icon>
             </button>
           </div>
+          <div class="py-6">
+            <Search />
+          </div>
           <!-- <ul class="flex-grow h-full mt-12 ml-4">
             <li
               v-for="nav in navStore.menu"
