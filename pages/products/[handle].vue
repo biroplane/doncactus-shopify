@@ -46,7 +46,7 @@ const activeImage = ref(0);
         <button class="text-white shadow-lg btn cta bg-brown">Aggiungi</button>
       </div>
       <div
-        v-if="ps.product.images?.nodes.length > 1"
+        v-if="ps.product.images?.nodes.length > 0"
         class="flex flex-col gap-6 lg:flex-row"
       >
         <ul
@@ -95,6 +95,25 @@ const activeImage = ref(0);
             :disabled="!ps.product.variants.nodes[activeVariant]"
             :variant-id="ps.product.variants.nodes[activeVariant].id"
           />
+        </div>
+        <div class="my-6">
+          <h4>Ti piace questo prodotto? <strong>Condividilo</strong></h4>
+          <div class="flex flex-row gap-2">
+            <SocialShare
+              v-for="network in [
+                'facebook',
+                'twitter',
+                'whatsapp',
+                'telegram',
+                'email',
+              ]"
+              :key="network"
+              :network="network"
+              :styled="false"
+              :label="false"
+              class="p-2 rounded-sm text-primary-500 hover:bg-primary-500 hover:text-white transition-colors"
+            />
+          </div>
         </div>
         <div class="flex flex-col gap-4 mt-12">
           <ProductDetail
