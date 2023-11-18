@@ -27,22 +27,13 @@ const send = async (event: Event) => {
   // const myForm = event.target as HTMLFormElement;
   try {
     isSending.value = true;
-    const formData: string = Object.entries(form)
-      .map(
-        ([key, value]) =>
-          `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
-      )
-      .join("&");
-    console.log("FormData", formData);
-    const formPost = await axios({
-      url: "/",
+    const formData = await axios({
+      url: "https://usebasin.com/f/0d8424e7bf30",
       method: "POST",
-      data: formData,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
+      data: form,
     });
-    console.log("Form submited", formPost.status);
+
+    console.log("Form submited", formData);
     messageSend.value = true;
   } catch (error) {
     console.log("Errore FORM", error);
@@ -50,27 +41,6 @@ const send = async (event: Event) => {
   } finally {
     isSending.value = false;
   }
-  // fetch("/", {
-  //   method: "POST",
-  //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
-  //   body: new URLSearchParams(formData).toString(),
-  // })
-  //   .then(() => console.log("Form successfully submitted"))
-  //   .catch((error) => alert(error));
-  // try {
-  //   console.log("Ready to send", form);
-  //   isSending.value = true;
-  //   setTimeout(() => {
-  //     console.log("DONE!", form);
-  //     isSending.value = false;
-  //     Object.keys(form).forEach((key: any) => {
-  //       console.log(`Key ${key} `);
-  //       form[key as keyof typeof form] = "";
-  //     });
-  //   }, 5000);
-  // } catch (error) {
-  //   console.log("error sending", error);
-  // }
 };
 </script>
 
