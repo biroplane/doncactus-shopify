@@ -19,6 +19,15 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "warning": {
+              "type": "SharedSlice"
+            },
+            "customization": {
+              "type": "SharedSlice"
+            },
+            "body_text": {
+              "type": "SharedSlice"
+            },
             "shopify_product": {
               "type": "SharedSlice"
             },

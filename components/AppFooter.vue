@@ -25,9 +25,12 @@ const ss = useShopStore();
         <SocialLinks horizontal />
         <!-- class="flex-row flex-wrap px-6 mt-6 lg:flex-col lg:basis-full lg:px-0" -->
       </div>
-      <div class="flex gap-4 text-xs">
+      <div class="flex flex-col gap-4 text-xs">
         <NuxtLink to="/cookie" class="underline">Cookie Policy</NuxtLink>
         <NuxtLink to="/privacy" class="underline">Privacy Policy</NuxtLink>
+        <NuxtLink to="/condizioni" class="underline"
+          >Condizioni generali di vendita</NuxtLink
+        >
       </div>
     </div>
   </footer>
