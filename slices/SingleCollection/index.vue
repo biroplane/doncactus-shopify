@@ -18,7 +18,7 @@ const data = await ps.getCollectionByHandle(
   (props.slice.primary.collection_id
     ? props.slice.primary.collection_id
     : route.params.uid) as string,
-  20
+  100
 );
 console.log("Handle", data);
 </script>

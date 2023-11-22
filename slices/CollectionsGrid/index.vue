@@ -38,19 +38,19 @@ const listCollection = computed(() => prouctStore.collections.slice(3));
       <div
         v-for="grid in gridCollection"
         :key="grid.id"
-        class="w-full fancy-hover card"
+        class="w-full fancy-hover card relative"
       >
         <NuxtLink
           v-if="grid.image"
           :to="`/collections/${grid.handle}`"
-          class="relative w-full"
+          class="w-full"
         >
           <NuxtImg
             v-if="grid.image?.src"
             :src="grid.image?.src"
             class="object-cover w-full h-full"
           />
-          <div class="absolute text-lg md:text-2xl bottom-4 left-4 w-screen">
+          <div class="absolute text-lg md:text-2xl bottom-8 left-8 w-screen">
             <p class="inline-block p-2 highlight bg-sand-50 font-barlow">
               {{ grid.title }}
             </p>
