@@ -21,6 +21,19 @@ onMounted(async () => {
   );
 });
 console.log("Prods", prods);
+const perPage = 12;
+const loadNext = async () => {
+  try {
+    const prods = await productStore.load(
+      perPage,
+      "",
+      productStore.productPagination.endCursor
+    );
+    console.log("Pagination works", prods?.nodes);
+  } catch (error) {
+    console.log("Pagination error");
+  }
+};
 </script>
 
 <template>
@@ -44,6 +57,13 @@ console.log("Prods", prods);
         :handle="pr.handle"
         :variation-id="pr.variants.nodes[0].id"
       />
+      <button
+        v-if="productStore.productPagination.hasNextPage"
+        class="text-center btn cta col-span-full"
+        @click.prevent="loadNext"
+      >
+        Visualizza gli altri prodotti
+      </button>
     </div>
   </section>
 </template>

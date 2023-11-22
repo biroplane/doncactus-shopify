@@ -21,7 +21,7 @@ onClickOutside(cartList, () => {
 <template>
   <div
     class="sticky top-0 z-50 flex items-center justify-center w-full h-24 px-4 transition-all duration-1000 bg-white bg-opacity-70 filter backdrop-blur-md"
-    :style="` --tw-bg-opacity:${opacity * 0.4}`"
+    :style="` --tw-bg-opacity:${opacity * 0.7}`"
   >
     <div class="flex items-center justify-between w-full gap-8">
       <div
