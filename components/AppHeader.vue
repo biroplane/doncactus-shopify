@@ -3,13 +3,8 @@ import { onClickOutside } from "@vueuse/core";
 import { useCartStore } from "~/stores/cart";
 const cartStore = useCartStore();
 
-const opacity = ref(1);
 const showCart = ref(false);
-onMounted(() => {
-  window.addEventListener("scroll", () => {
-    opacity.value = window.scrollY > 200 ? 1 : 0;
-  });
-});
+
 const cartList = ref();
 onClickOutside(cartList, () => {
   showCart.value = false;
@@ -20,8 +15,7 @@ onClickOutside(cartList, () => {
 
 <template>
   <div
-    class="sticky top-0 z-50 flex items-center justify-center w-full h-24 px-4 transition-all duration-1000 bg-white bg-opacity-70 filter backdrop-blur-md"
-    :style="` --tw-bg-opacity:${opacity * 0.7}`"
+    class="sticky top-0 z-50 flex items-center justify-center w-full h-24 px-4 transition-all duration-1000 bg-white bg-opacity-70 filter backdrop-blur-lg"
   >
     <div class="flex items-center justify-between w-full gap-8">
       <div

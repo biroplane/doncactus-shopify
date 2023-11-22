@@ -2,7 +2,7 @@
 import { components } from "~/slices";
 
 const prismic = usePrismic();
-const { data: page } = useAsyncData("[products]", () =>
+const { data: page } = useAsyncData("products", () =>
   prismic.client.getSingle("products")
 );
 

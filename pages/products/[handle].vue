@@ -9,11 +9,6 @@ const recommended = ref(await ps.loadRecommended(ps.product.id));
 const shortRecommended = computed(() => recommended.value?.splice(0, 5));
 // import { components } from "~/slices";
 
-// const prismic = usePrismic();
-// const { data: page } = useAsyncData("[product]", () =>
-//   prismic.client.getSingle("product")
-// );
-
 const activeVariant = ref(0);
 const activeMetafields = computed(() =>
   ps.product.metafields.filter((m: any) => m)
@@ -70,10 +65,11 @@ const activeImage = ref(0);
         </ul>
         <div class="w-full h-full">
           <NuxtImg
-            v-if="ps.product.images?.nodes[activeImage].src"
+            v-if="ps.product.images?.nodes[activeImage]?.src"
             :src="ps.product.images.nodes[activeImage].src"
             alt=""
             class="object-cover object-center w-full h-full"
+            loading="lazy"
           />
         </div>
       </div>
@@ -113,7 +109,7 @@ const activeImage = ref(0);
               :network="network"
               :styled="false"
               :label="false"
-              class="p-2 rounded-sm text-primary-500 hover:bg-primary-500 hover:text-white transition-colors"
+              class="p-2 transition-colors rounded-sm text-primary-500 hover:bg-primary-500 hover:text-white"
             />
           </div>
         </div>
