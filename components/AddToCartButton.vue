@@ -27,7 +27,9 @@ const addToCart = async (id: string) => {
     v-bind="$attrs"
     @click="addToCart(variantId)"
   >
-    <span :class="{ invisible: isLoading }" class="">Aggiungi al carrello</span>
+    <span :class="{ invisible: isLoading }" class=""
+      >Aggiungi <span class="hidden md:inline">al carrello</span></span
+    >
     <Icon
       v-show="isLoading"
       name="line-md:loading-twotone-loop"

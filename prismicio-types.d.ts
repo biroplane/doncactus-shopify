@@ -879,6 +879,9 @@ export type ProductcustomDocument<Lang extends string = string> =
   >;
 
 type ProductsDocumentDataSlicesSlice =
+  | WarningSlice
+  | CustomizationSlice
+  | BodyTextSlice
   | ShopifyProductSlice
   | CollectionsGridSlice
   | SingleCollectionSlice
@@ -1191,6 +1194,7 @@ export type SocialLinksDocument<Lang extends string = string> =
   >;
 
 type StaticPageDocumentDataSlicesSlice =
+  | SingleCollectionSlice
   | GoogleMapSlice
   | AlternateGridSlice
   | WarningSlice
@@ -2836,33 +2840,6 @@ export type ProductsByCollectionSlice = prismic.SharedSlice<
 >;
 
 /**
- * Default variation for Search Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type SearchSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Record<string, never>,
-  never
->;
-
-/**
- * Slice variation for *Search*
- */
-type SearchSliceVariation = SearchSliceDefault;
-
-/**
- * Search Shared Slice
- *
- * - **API ID**: `search`
- * - **Description**: Search
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type SearchSlice = prismic.SharedSlice<"search", SearchSliceVariation>;
-
-/**
  * Primary content in *ShopifyProduct → Primary*
  */
 export interface ShopifyProductSliceDefaultPrimary {
@@ -3202,9 +3179,6 @@ declare module "@prismicio/client" {
       ProductsByCollectionSliceDefaultPrimary,
       ProductsByCollectionSliceVariation,
       ProductsByCollectionSliceDefault,
-      SearchSlice,
-      SearchSliceVariation,
-      SearchSliceDefault,
       ShopifyProductSlice,
       ShopifyProductSliceDefaultPrimary,
       ShopifyProductSliceVariation,

@@ -43,7 +43,9 @@ const activeImage = ref(0);
             {{ formatMoney(ps.product.priceRange.maxVariantPrice.amount) }}
           </h4>
         </div>
-        <button class="text-white shadow-lg btn cta bg-brown">Aggiungi</button>
+        <AddToCartButton
+          :variant-id="ps.product.variants.nodes[activeVariant].id"
+        />
       </div>
       <div
         v-if="ps.product.images?.nodes.length > 0"
