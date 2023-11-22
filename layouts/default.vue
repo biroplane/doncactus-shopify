@@ -1,6 +1,8 @@
 <template>
   <div class="">
-    <div class="relative">
+    <div id="topAnchor" class="hidden h-0"></div>
+
+    <div class="">
       <AppHeader />
       <slot></slot>
       <AppFooter />

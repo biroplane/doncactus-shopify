@@ -14,17 +14,9 @@ try {
 } catch (error) {
   console.log("Error while loading", error);
 }
-
-const nuxtApp = useNuxtApp();
-
-nuxtApp.hook("page:finish", () => {
-  setTimeout(() => {
-    window.scrollTo(0, 0);
-  }, 100);
-});
 </script>
 <template>
-  <div class="h-screen">
+  <div class="h-screenz">
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
@@ -35,8 +27,8 @@ nuxtApp.hook("page:finish", () => {
 body {
   @apply font-body bg-light-green-50;
 }
-html,
+/* html,
 body {
   @apply h-screen w-screen overflow-x-hidden;
-}
+} */
 </style>
