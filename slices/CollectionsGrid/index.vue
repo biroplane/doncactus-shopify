@@ -50,9 +50,7 @@ const listCollection = computed(() => prouctStore.collections.slice(3));
             :src="grid.image?.src"
             class="object-cover w-full h-full"
           />
-          <div
-            class="absolute text-lg md:text-2xl bottom-4 left-4 w-screen lg:max-w-[75%]"
-          >
+          <div class="absolute text-lg md:text-2xl bottom-4 left-4 w-screen">
             <p class="inline-block p-2 highlight bg-sand-50 font-barlow">
               {{ grid.title }}
             </p>
