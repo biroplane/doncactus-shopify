@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import * as prismic from "@prismicio/client";
-import axios from "axios";
 // The array passed to `getSliceComponentProps` is purely optional.
 // Consider it as a visual hint for you when templating your slice.
 defineProps(
@@ -27,10 +26,9 @@ const send = async (event: Event) => {
   // const myForm = event.target as HTMLFormElement;
   try {
     isSending.value = true;
-    const formData = await axios({
-      url: "https://usebasin.com/f/0d8424e7bf30",
+    const formData = await $fetch("https://usebasin.com/f/0d8424e7bf30", {
       method: "POST",
-      data: form,
+      body: form,
     });
 
     console.log("Form submited", formData);

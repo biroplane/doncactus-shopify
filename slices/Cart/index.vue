@@ -13,39 +13,11 @@ defineProps(
   ])
 );
 const cartStore = useCartStore();
-const getCheckout = async () => {
-  const mapped = cartStore.cart.lines.nodes?.map((line: any) => ({
-    variantId: line.merchandise.id,
-    quantity: line.quantity,
-  }));
-  console.log("Mapping lines", mapped);
-
-  const checkout = await $fetch("/api/checkout", {
-    method: "POST",
-    body: {
-      pippo: "Ciao",
-      lineItems: mapped,
-      shippingAddress,
-    },
-  });
-  console.log("Checkout ready", checkout, cartStore.cart);
+const getCheckout = () => {
   if (cartStore.cart.checkoutUrl) {
     window.location = cartStore.cart.checkoutUrl;
   }
 };
-
-const shippingAddress = reactive({
-  address1: "Via Piscina nuova",
-  address2: "39",
-  city: "New York",
-  company: "",
-  country: "United States",
-  firstName: "Gaetano",
-  lastName: "Vallarelli",
-  phone: "123",
-  province: "New York",
-  zip: "70038",
-});
 
 const removeFromCart = async (item: any) => {
   console.log("Remove from cart", item);

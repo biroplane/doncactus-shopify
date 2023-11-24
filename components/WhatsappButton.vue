@@ -1,6 +1,6 @@
 <template>
   <a
-    class="absolute flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg bottom-6 right-6 outline outline-2 outline-green-400"
+    class="fixed flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg bottom-6 right-6 outline outline-2 outline-green-400"
     draggable
     href="https://wa.me/393780821432?text=Ciao%20DonCactus"
     target="_blank"

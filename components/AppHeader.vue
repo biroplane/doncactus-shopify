@@ -9,8 +9,6 @@ const cartList = ref();
 onClickOutside(cartList, () => {
   showCart.value = false;
 });
-
-// const { collections } = await $fetch("/api/collections");
 </script>
 
 <template>
@@ -35,8 +33,8 @@ onClickOutside(cartList, () => {
           @click="showCart = !showCart"
         >
           <Icon name="ci:shopping-cart-02" size="24" class="text-primary" />
-          <div v-if="cartStore.cart.lines?.nodes.length > 0" class="badge">
-            {{ cartStore.cart.lines?.nodes.length }}
+          <div v-if="cartStore.totalItems" class="badge">
+            {{ cartStore.totalItems }}
           </div>
         </button>
         <Transition name="slide">
