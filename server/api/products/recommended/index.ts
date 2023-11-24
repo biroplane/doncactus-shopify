@@ -8,7 +8,6 @@ export default defineEventHandler(async (event) => {
     // const { products } = await GqlProducts({ first });
     // return { msg: "ok", products };
 
-    console.log("%cID FROM PARAMS", "color:tomato;", query);
     const products = await GqlGetProductRecommendations({
       id: query.id as string,
     });

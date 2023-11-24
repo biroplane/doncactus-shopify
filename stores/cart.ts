@@ -6,6 +6,12 @@ export const useCartStore = defineStore("cartstore", () => {
    */
   const cart: Ref<any> = ref({});
   const cartTotal = computed(() => cart.value.cost && cart.value.cost);
+  const totalItems = computed(
+    () =>
+      cart.value?.lines?.nodes.reduce((acc: any, curr: any) => {
+        return acc + curr.quantity;
+      }, 0)
+  );
   const CART_ID = "shopify:doncactus:cart";
   const existingCartId: Ref<string | undefined | null> = ref(undefined);
   const initializeCart = async () => {
@@ -28,7 +34,7 @@ export const useCartStore = defineStore("cartstore", () => {
   };
   const newCart = async () => {
     try {
-      const data = await $fetch("/api/cart", { method: "POST" });
+      const data = await GqlCartCreate();
       console.log("Cart created", data.cartCreate?.cart);
       setCart(data.cartCreate?.cart);
     } catch (error) {
@@ -37,10 +43,10 @@ export const useCartStore = defineStore("cartstore", () => {
   };
   const loadCart = async () => {
     try {
-      const { cart: _cart } = await $fetch("/api/cart", {
-        method: "GET",
-        params: { cartId: existingCartId.value },
+      const { cart: _cart } = await GqlGetCart({
+        cartId: existingCartId.value as string,
       });
+
       console.log("%c[Existing cart]", "background-color:teal", _cart);
       if (!_cart) {
         localStorage.removeItem(CART_ID);
@@ -59,10 +65,8 @@ export const useCartStore = defineStore("cartstore", () => {
   };
   const addToCart = async (id: string) => {
     try {
-      const data = await $fetch("/api/cart", {
-        method: "PUT",
-        body: { cartId: cart.value.id, variantId: id },
-      });
+      const data = await GqlAddToCart({ cartId: cart.value.id, variantId: id });
+
       console.log("Added to cart", data);
       await loadCart();
       // cart.value.lines.edges = data.cart;
@@ -104,5 +108,6 @@ export const useCartStore = defineStore("cartstore", () => {
     addToCart,
     removeFromCart,
     updateCart,
+    totalItems,
   };
 });

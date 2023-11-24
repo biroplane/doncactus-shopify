@@ -342,7 +342,7 @@ onMounted(async () => {
     class="py-24"
   >
     <div class="grid w-full min-h-[70vh] md:grid-cols-2 gap-12">
-      <div class="h-full -order-first md:order-first">
+      <div class="min-h-[50vh] md:min-h-max h-full -order-first md:order-first">
         <div ref="mapElement" class="w-full h-full"></div>
       </div>
       <div class="px-8 prose lg:prose-md">
