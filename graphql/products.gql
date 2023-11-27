@@ -12,7 +12,7 @@ query Products($first: Int!, $query: String, $after:String) {
       images(first: 5) {
         nodes {
           src
-          thumbnail: url(transform:{maxWidth:360})
+          thumbnail: url(transform:{maxWidth:960})
         }
       }
       
@@ -50,7 +50,7 @@ query getProductByHandle($handle: String) {
     images(first: 10) {
       nodes {
         src
-        thumbnail: url(transform:{maxWidth:360})
+        thumbnail: url(transform:{maxWidth:960})
 
       }
     }
