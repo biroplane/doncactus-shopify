@@ -26,7 +26,7 @@ const addToCart = async (v: any) => {
     isLoading.value = true;
 
     await cs.addToCart(v);
-    await cs.loadCart(cs.cart.id);
+    await cs.loadCart();
     // console.log("FACEBOOK PIXEL ", window.fbq);
 
     window.fbq("track", "AddToCart", {

@@ -7,6 +7,7 @@ export const useCartStore = defineStore(
      * Cart id, checkoutUrl, estimatedCost,lines
      */
     const cart: Ref<any> = ref({});
+
     const cartTotal = computed(() => cart.value.cost && cart.value.cost);
     const totalItems = computed(
       () =>
@@ -28,7 +29,7 @@ export const useCartStore = defineStore(
           existingCartId.value,
           localStorage.getItem(CART_ID)
         );
-        loadCart(existingCartId.value);
+        await loadCart();
       } else {
         await newCart();
         console.log("IL CARRELLO NON ESISTE");
@@ -44,17 +45,21 @@ export const useCartStore = defineStore(
         console.error("Erro new cart", error);
       }
     };
-    const loadCart = async (cartId: string) => {
+    const loadCart = async () => {
       console.log("CARICO IL CARRELLO", existingCartId.value);
       try {
         const { cart: _cart } = await GqlGetCart({
-          cartId,
+          cartId: existingCartId.value as string,
         });
 
         console.log("%c[Existing cart]", "background-color:teal", _cart);
         if (!_cart) {
           localStorage.removeItem(CART_ID);
           await newCart();
+          console.log(
+            "%c🛒 CANCELLO IL CARRELLO 🛒",
+            "background-color:tomato;font-size:2rem"
+          );
           return;
         }
         cart.value = { ..._cart, id: existingCartId.value };
@@ -64,11 +69,18 @@ export const useCartStore = defineStore(
       }
     };
     const setCart = (_cart: any) => {
-      console.log("%cSET  CART ", "color:tomato;font-size:2rem");
+      console.log("%cSET  CART ", "color:tomato;font-size:2rem", _cart);
       cart.value = _cart;
+      existingCartId.value = _cart.id;
       localStorage.setItem(CART_ID, _cart.id);
     };
     const addToCart = async (id: string) => {
+      console.log(
+        "%cADD TO CART \n[Variant] => %s \n[Cart id] => %s",
+        "color:lightgreen;font-size:1.4rem",
+        id,
+        cart.value.id
+      );
       try {
         await GqlAddToCart({
           cartId: cart.value.id,
@@ -79,7 +91,7 @@ export const useCartStore = defineStore(
         // await loadCart(cart.value.id);
         // cart.value.lines.edges = data.cart;
       } catch (error) {
-        console.log("Error while adding to cart", error, id);
+        console.error("Error while adding to cart", error, id);
       }
     };
     const removeFromCart = async (id: any) => {
@@ -89,7 +101,7 @@ export const useCartStore = defineStore(
           lineIds: [id],
         });
         console.log("Eliminato", data);
-        await loadCart(cart.value.id);
+        await loadCart();
       } catch (error) {
         console.log("Errore di cancellazione dal carrello", error);
       }
@@ -98,7 +110,7 @@ export const useCartStore = defineStore(
       try {
         const data = await GqlCartLinesUpdate({ cartId: cart.value.id, lines });
         console.log("Update del carrello ", data);
-        await loadCart(cart.value.id);
+        await loadCart();
 
         return data;
       } catch (error) {
@@ -120,6 +132,8 @@ export const useCartStore = defineStore(
     };
   },
   {
-    persist: true,
+    persist: {
+      storage: persistedState.localStorage,
+    },
   }
 );
