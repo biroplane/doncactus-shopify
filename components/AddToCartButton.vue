@@ -12,9 +12,10 @@ const addToCart = async (id: string) => {
   try {
     isLoading.value = true;
     await cs.addToCart(id);
-    await cs.loadCart();
+    console.log("Add to cart button", cs.cart.id);
+    await cs.loadCart(cs.cart.id);
   } catch (error) {
-    console.log("Errore add to cart", error);
+    console.error("Errore add to cart", error);
   } finally {
     isLoading.value = false;
   }

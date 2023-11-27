@@ -24,6 +24,13 @@ useHead({
 });
 const activeImage = ref(0);
 // const qty = ref(1);
+
+onMounted(() => {
+  window.fbq("track", "ViewContent", {
+    content_ids: [ps.product.id], // 'REQUIRED': array of product IDs
+    content_type: "product", // RECOMMENDED: Either product or product_group based on the content_ids or contents being passed.
+  });
+});
 </script>
 
 <template>

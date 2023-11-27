@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "nuxt-graphql-client",
     "@pinia/nuxt",
+    "@pinia-plugin-persistedstate/nuxt",
     "@nuxtjs/prismic",
     "nuxt-icon",
     "@nuxt/image",
@@ -16,6 +17,7 @@ export default defineNuxtConfig({
     "@stefanobartoletti/nuxt-social-share",
     "@vueuse/motion/nuxt",
     "@nuxtjs/algolia",
+    "nuxt3-meta-pixel",
   ],
   experimental: {
     viewTransition: true,
@@ -82,6 +84,23 @@ export default defineNuxtConfig({
         },
       },
     },
+  },
+
+  facebook: {
+    track: "PageView",
+    pixelId: process.env.META_PIXEL_ID,
+    autoPageView: true,
+    disabled: false,
+    pixels: [
+      {
+        pixelId: process.env.META_PIXEL_ID,
+        track: "ViewContent",
+      },
+      {
+        pixelId: process.env.META_PIXEL_ID,
+        routes: ["/carrello", "/products"],
+      },
+    ],
   },
 
   prismic: {
