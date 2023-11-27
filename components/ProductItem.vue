@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useCartStore } from "~/stores/cart";
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     images?: any[] | null;
     title: string;
@@ -26,8 +26,13 @@ const addToCart = async (v: any) => {
     isLoading.value = true;
 
     await cs.addToCart(v);
+    await cs.loadCart(cs.cart.id);
+    // console.log("FACEBOOK PIXEL ", window.fbq);
 
-    await cs.loadCart();
+    window.fbq("track", "AddToCart", {
+      content_ids: [v], // 'REQUIRED': array of product IDs
+      content_type: "product", // RECOMMENDED: Either product or product_group based on the content_ids or contents being passed.
+    });
   } catch (error) {
     console.log("Errore add to cart", error);
   } finally {

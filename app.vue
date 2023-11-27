@@ -6,8 +6,10 @@ const cartStore = useCartStore();
 const shopStore = useShopStore();
 try {
   if (typeof window !== "undefined") {
-    const cart = await cartStore.initializeCart();
-    console.log("Cart initialized", cart);
+    if (!cartStore.cart.id) {
+      const cart = await cartStore.initializeCart();
+      console.log("Cart initialized", cart);
+    }
   }
   await shopStore.load();
   await shopStore.loadPlace();
