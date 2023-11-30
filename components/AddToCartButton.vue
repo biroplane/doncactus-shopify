@@ -9,10 +9,12 @@ const cs = useCartStore();
 const isLoading = ref(false);
 const addToCart = async (id: string) => {
   console.log("Adding to cart", id);
+
   try {
     isLoading.value = true;
     await cs.addToCart(id);
     console.log("Add to cart button", cs.cart);
+    cs.drawer = true;
     await cs.loadCart();
   } catch (error) {
     console.error("Errore add to cart", error);
@@ -24,7 +26,7 @@ const addToCart = async (id: string) => {
 
 <template>
   <button
-    class="relative flex items-center justify-center text-white shadow-lg btn cta"
+    class="relative flex items-center justify-center text-white shadow-lg btn cta add_to_cart"
     v-bind="$attrs"
     @click="addToCart(variantId)"
   >

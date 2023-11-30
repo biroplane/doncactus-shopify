@@ -7,7 +7,7 @@ export const useCartStore = defineStore(
      * Cart id, checkoutUrl, estimatedCost,lines
      */
     const cart: Ref<any> = ref({});
-
+    const drawer = ref(false);
     const cartTotal = computed(() => cart.value.cost && cart.value.cost);
     const totalItems = computed(
       () =>
@@ -122,6 +122,7 @@ export const useCartStore = defineStore(
     // }
     return {
       cart,
+      drawer,
       loadCart,
       initializeCart,
       cartTotal,

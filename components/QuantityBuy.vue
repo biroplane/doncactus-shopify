@@ -24,19 +24,24 @@ const increase = () => {
 
 <template>
   <div
-    class="flex items-center justify-around w-full rounded-md font-barlow"
+    class="flex items-center w-full rounded-md font-barlow"
     :class="{ border }"
   >
-    <div class="">
+    <div class="qty_btn">
       <button @click="decrease">
-        <Icon name="ci:minus" size="24" />
+        <Icon name="ci:minus" size="16" />
       </button>
     </div>
-    <div class="text-2xl">{{ _q }}</div>
-    <div class="">
+    <div class="qty_btn">{{ _q }}</div>
+    <div class="qty_btn">
       <button @click="increase">
-        <Icon name="ci:plus" size="24" />
+        <Icon name="ci:plus" size="16" />
       </button>
     </div>
   </div>
 </template>
+<style scoped lang="postcss">
+.qty_btn {
+  @apply w-8 h-8 flex items-center justify-center border first-of-type:rounded-l-md first-of-type:border-r-0 last-of-type:rounded-r-md last-of-type:border-l-0;
+}
+</style>
