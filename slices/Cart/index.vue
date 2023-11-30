@@ -41,15 +41,15 @@ const updateCart = async (qty: Event, item: any) => {
     :data-slice-variation="slice.variation"
     class="py-24 font-barlow"
   >
-    <div class="grid gap-8 md:grid-cols-2">
-      <div class="w-full h-full top-24">
+    <div class="grid gap-8 lg:grid-cols-2">
+      <div class="hidden w-full h-full top-24 lg:block">
         <PrismicImage
           v-if="isFilled.image(slice.primary.image)"
           :field="slice.primary.image"
-          class="object-cover w-full h-full"
+          class="object-cover w-full h-full max-h-screen"
         />
       </div>
-      <div class="px-16 mt-12">
+      <div class="px-16">
         <ClientOnly>
           <div v-if="cartStore.cart.lines?.nodes?.length > 0" ref="cartList">
             <div class="text-brown">{{ slice.primary?.eyebrow || "Ciao" }}</div>
@@ -61,7 +61,9 @@ const updateCart = async (qty: Event, item: any) => {
               :field="slice.primary.body"
               class="text-neutral-500"
             ></PrismicRichText>
-            <ul class="flex flex-col gap-4 py-6 mt-12 border-t">
+            <ul
+              class="flex flex-col max-h-screen gap-4 py-6 mt-12 overflow-y-auto border-t"
+            >
               <li
                 v-for="(item, i) in cartStore.cart.lines?.nodes"
                 :key="i"
@@ -113,7 +115,7 @@ const updateCart = async (qty: Event, item: any) => {
           </div>
         </ClientOnly>
       </div>
-      <div class="mx-4 md:col-start-2 lg:px-16">
+      <div class="mx-4 lg:col-start-2 lg:px-16">
         <!-- <ShippingAddress v-model="shippingAddress" /> -->
         <button
           class="px-8 py-2 text-lg text-white bg-primary-700 min-w-[20rem] rounded-md"

@@ -3,21 +3,19 @@ import { onClickOutside } from "@vueuse/core";
 import { useCartStore } from "~/stores/cart";
 const cartStore = useCartStore();
 
-const showCart = ref(false);
-
+const { drawer } = storeToRefs(cartStore);
 const cartList = ref();
 onClickOutside(cartList, () => {
-  showCart.value = false;
+  drawer.value = false;
 });
 </script>
 
 <template>
   <div
-    class="sticky top-0 z-50 flex items-center justify-center w-full h-24 px-4 transition-all duration-1000 bg-white bg-opacity-70 filter backdrop-blur-lg"
+    class="fixed top-0 z-50 flex items-center justify-center w-full h-24 px-4 transition-all duration-1000 bg-white bg-opacity-90 filter backdrop-blur-lg"
   >
-    <div class="flex items-center justify-between w-full gap-8">
+    <div ref="cartList" class="flex items-center justify-between w-full gap-8">
       <div
-        ref="cartList"
         class="flex items-center justify-center h-full lg:hidden aspect-square"
       >
         <AppDrawer />
@@ -27,59 +25,37 @@ onClickOutside(cartList, () => {
       <div class="hidden lg:block">
         <Search />
       </div>
-      <div class="relative">
-        <button
-          class="relative p-4 bg-white rounded-full shadow-sm"
-          @click="showCart = !showCart"
-        >
+      <div class="">
+        <!-- CARRELLLO -->
+        <button class="relative p-4" @click="drawer = !drawer">
           <Icon name="ci:shopping-cart-02" size="24" class="text-primary" />
           <div v-if="cartStore.totalItems" class="badge">
             {{ cartStore.totalItems }}
           </div>
         </button>
-        <Transition name="slide">
-          <div
-            v-if="showCart && cartStore.cart.lines?.nodes.length > 0"
-            class="absolute bg-sand-100 right-0 p-4 max-w-sm min-w-[25vw] rounded-md shadow-xl"
-          >
-            <h3 class="py-4 text-xl font-bold">Riepilogo</h3>
-            <ul class="overflow-y-auto max-h-64">
-              <li
-                v-for="item in cartStore.cart.lines?.nodes"
-                :key="item.id"
-                class="flex justify-between gap-2 py-1"
-              >
-                <p class="whitespace-nowrap">{{ item.quantity }} x</p>
-                <h6 class="flex-grow">{{ item.merchandise.product.title }}</h6>
-                <p class="font-bold">
-                  {{ formatMoney(item.estimatedCost.totalAmount.amount) }}
-                </p>
-                <!-- <pre>{{ item }}</pre> -->
-              </li>
-            </ul>
-            <div
-              v-if="cartStore.cart.lines?.nodes.length > 0"
-              class="flex pt-4 border-t"
-            >
-              <strong class="flex-grow">Totale</strong>
-              <p class="flex-none">
-                {{ formatMoney(cartStore.cart.cost.totalAmount.amount) }}
-              </p>
-            </div>
-            <div v-if="cartStore.cart.lines?.nodes.length" class="mt-12">
-              <NuxtLink to="/carrello" class="underline">
-                Vai al Checkout <Icon name="ci:chevron-right" size="16" />
-              </NuxtLink>
-            </div>
-            <div v-else class="mt-6 text-sm">
-              Sei ancora indeciso?<br />Sfoglia i nostri
-              <NuxtLink to="/products" class="underline">Prodotti</NuxtLink>
-            </div>
-          </div>
+        <Transition name="slide-left">
+          <Cart />
         </Transition>
       </div>
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.slide-left-enter-active {
+  animation: slide 0.3s forwards cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.slide-left-leave-active {
+  animation: slide 0.3s reverse cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+@keyframes slide {
+  0% {
+    transform: translateX(100%);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+</style>

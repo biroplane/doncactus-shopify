@@ -22,6 +22,7 @@ const cs = useCartStore();
 const isLoading = ref(false);
 const addToCart = async (v: any) => {
   console.log("Add to cart", v);
+  cs.drawer = true;
   try {
     isLoading.value = true;
 
@@ -61,7 +62,7 @@ const addToCart = async (v: any) => {
       </div>
       <div class="">
         <button
-          class="p-4 transition-all duration-100 rounded-md hover:text-brown-700"
+          class="p-4 transition-all duration-100 rounded-md hover:text-brown-700 add_to_cart"
           @click.stop.prevent="addToCart(variationId)"
         >
           <Icon

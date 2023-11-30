@@ -29,8 +29,8 @@ try {
 body {
   @apply font-body bg-light-green-50;
 }
-/* html,
+html,
 body {
-  @apply h-screen w-screen overflow-x-hidden;
-} */
+  @apply w-screen overflow-x-hidden;
+}
 </style>
