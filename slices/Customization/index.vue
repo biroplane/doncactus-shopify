@@ -25,13 +25,13 @@ defineProps(
     ]"
     class="w-full pt-6 pb-12"
   >
-    <ClientOny>
+    <ClientOnly>
       <Vue3Lottie
         animation-link="https://lottie.host/886fbcb9-8581-4fdf-869b-d823e05c978d/FBoHhcLhrh.json"
         :height="100"
         :width="100"
       ></Vue3Lottie>
-    </ClientOny>
+    </ClientOnly>
     <div class="flex justify-between w-full">
       <div
         class="container flex flex-col items-center flex-grow max-w-lg gap-4"

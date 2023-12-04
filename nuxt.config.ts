@@ -13,7 +13,6 @@ export default defineNuxtConfig({
     "@nuxtjs/prismic",
     "nuxt-icon",
     "@nuxt/image",
-    "@zadigetvoltaire/nuxt-gtm",
     "@stefanobartoletti/nuxt-social-share",
     "@vueuse/motion/nuxt",
     "@nuxtjs/algolia",
@@ -40,14 +39,6 @@ export default defineNuxtConfig({
     pageTransition: { name: "page", mode: "out-in" },
     head: {
       link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
-      // script: [
-      //   {
-      //     src: "https://consent.cookiebot.com/uc.js",
-      //     "data-cbid": process.env.COOKIBOT_ID,
-      //     "data-blockingmode": "auto",
-      //     id: "Cookiebot",
-      //   },
-      // ],
     },
   },
 
@@ -63,12 +54,11 @@ export default defineNuxtConfig({
     public: {
       GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
       GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
+      GOOGLE_TAG_MANAGER: process.env.GOOGLE_TAG_MANAGER,
       MAILCHIMP_API_KEY: process.env.MAILCHIMP_API_KEY,
       MAILCHIMP_AUDIENCE_ID: process.env.MAILCHIMP_AUDIENCE_ID,
       MAILCHIMP_API_URL: process.env.MAILCHIMP_API_URL,
-      gtm: {
-        id: process.env.GOOGLE_TAG_MANAGER as string,
-      },
+      META_PIXEL_ID: process.env.META_PIXEL_ID,
 
       "graphql-client": {
         clients: {
@@ -87,20 +77,12 @@ export default defineNuxtConfig({
   },
 
   facebook: {
+    /* module options */
     track: "PageView",
     pixelId: process.env.META_PIXEL_ID,
     autoPageView: true,
     disabled: false,
-    pixels: [
-      {
-        pixelId: process.env.META_PIXEL_ID,
-        track: "ViewContent",
-      },
-      {
-        pixelId: process.env.META_PIXEL_ID,
-        routes: ["/carrello", "/products"],
-      },
-    ],
+    debug: process.env.NODE_ENV === "development",
   },
 
   prismic: {
