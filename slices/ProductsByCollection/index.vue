@@ -55,6 +55,7 @@ const loadNext = async () => {
         :title="pr.title"
         :price="pr.priceRange.maxVariantPrice.amount as number"
         :handle="pr.handle"
+        :inventory="pr.totalInventory"
         :variation-id="pr.variants.nodes[0].id"
       />
       <button

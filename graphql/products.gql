@@ -15,7 +15,7 @@ query Products($first: Int!, $query: String, $after:String) {
           thumbnail: url(transform:{maxWidth:960})
         }
       }
-      
+      totalInventory
       title
       description
       handle
@@ -58,6 +58,8 @@ query getProductByHandle($handle: String) {
     description
     descriptionHtml
     handle
+    totalInventory
+
     priceRange {
       maxVariantPrice {
         amount

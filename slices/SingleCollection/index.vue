@@ -54,7 +54,7 @@ console.log("Handle", data);
         </div>
       </div>
       <div
-        class="container grid grid-cols-2 gap-4 pb-12 mt-12 md:grid-cols-3 lg:grid-cols-4"
+        class="container grid grid-cols-2 gap-4 gap-y-8 md:gap-y-4 pb-12 mt-12 md:grid-cols-3 lg:grid-cols-4"
       >
         <ProductItem
           v-for="(product, p) in data.collection?.products.nodes"
@@ -64,6 +64,7 @@ console.log("Handle", data);
           :images="product.images.nodes"
           :handle="product.handle"
           :price="product.priceRange.maxVariantPrice.amount as number"
+          :inventory="product.totalInventory"
           :variation-id="product.variants.nodes[0].id"
           :initial="{ opacity: 0, y: 50 }"
           :enter="{ opacity: 1, y: 0 }"
