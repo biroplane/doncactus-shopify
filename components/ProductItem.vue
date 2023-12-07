@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { useCartStore } from "~/stores/cart";
-
-const props = withDefaults(
+withDefaults(
   defineProps<{
     images?: any[] | null;
     title: string;
@@ -20,28 +18,28 @@ const props = withDefaults(
 defineEmits<{ (e: "onAdd", v: any): void }>();
 // const quantity = ref(1);
 
-const cs = useCartStore();
-const isLoading = ref(false);
-const addToCart = async (v: any) => {
-  console.log("Add to cart", v);
-  cs.drawer = true;
-  try {
-    isLoading.value = true;
+// const cs = useCartStore();
+// const isLoading = ref(false);
+// const addToCart = async (v: any) => {
+//   console.log("Add to cart", v);
+//   cs.drawer = true;
+//   try {
+//     isLoading.value = true;
 
-    await cs.addToCart(v);
-    await cs.loadCart();
-    // console.log("FACEBOOK PIXEL ", window.fbq);
+//     await cs.addToCart(v);
+//     await cs.loadCart();
+//     // console.log("FACEBOOK PIXEL ", window.fbq);
 
-    window.fbq("track", "AddToCart", {
-      content_ids: [v], // 'REQUIRED': array of product IDs
-      content_type: "product", // RECOMMENDED: Either product or product_group based on the content_ids or contents being passed.
-    });
-  } catch (error) {
-    console.log("Errore add to cart", error);
-  } finally {
-    isLoading.value = false;
-  }
-};
+//     window.fbq("track", "AddToCart", {
+//       content_ids: [v], // 'REQUIRED': array of product IDs
+//       content_type: "product", // RECOMMENDED: Either product or product_group based on the content_ids or contents being passed.
+//     });
+//   } catch (error) {
+//     console.log("Errore add to cart", error);
+//   } finally {
+//     isLoading.value = false;
+//   }
+// };
 </script>
 <template>
   <div class="justify-between overflow-hidden rounded-lg flex flex-col">
