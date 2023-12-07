@@ -70,7 +70,13 @@ onMounted(() => {
             ></NuxtImg>
           </li>
         </ul>
-        <div class="w-full h-full">
+        <div class="w-full h-full relative">
+          <div
+            v-if="ps.product.totalInventory < 1"
+            class="absolute bottom-3 py-2 bg-primary-500 px-8"
+          >
+            Sold out 🤷
+          </div>
           <NuxtImg
             v-if="ps.product.images?.nodes[activeImage]?.src"
             :src="ps.product.images.nodes[activeImage].src"

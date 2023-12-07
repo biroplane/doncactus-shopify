@@ -53,6 +53,7 @@ query getCollectionByHandle($handle:String!, $first:Int){
             }
           
         }
+        totalInventory
         title
         description
         handle

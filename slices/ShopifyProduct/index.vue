@@ -44,7 +44,7 @@ const loadNext = async () => {
     </h4>
 
     <div
-      class="grid items-stretch gap-4 md:gap-12 md:grid-cols-3 lg:grid-cols-4"
+      class="grid items-stretch gap-4 md:gap-12 grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
     >
       <ProductItem
         v-for="(product, p) in productStore.products"
@@ -54,6 +54,7 @@ const loadNext = async () => {
         :title="product.title"
         :images="product.images.nodes as any"
         :price="(product.variants.nodes[0] as any).priceV2.amount as number"
+        :inventory="product.totalInventory"
         :variation-id="product.variants.nodes[0].id"
       ></ProductItem>
       <button
