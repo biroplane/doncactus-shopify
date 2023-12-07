@@ -42,12 +42,12 @@ defineEmits<{ (e: "onAdd", v: any): void }>();
 // };
 </script>
 <template>
-  <div class="justify-between overflow-hidden rounded-lg flex flex-col">
+  <div class="flex flex-col justify-between overflow-hidden rounded-lg">
     <div class="group">
       <NuxtLink :to="`/products/${handle}`" class="relative">
         <div
           v-if="inventory < 1"
-          class="absolute bottom-3 py-2 bg-yellow-300 px-8"
+          class="absolute px-8 py-2 bg-yellow-300 bottom-3"
         >
           Sold out 🤷
         </div>
@@ -59,23 +59,24 @@ defineEmits<{ (e: "onAdd", v: any): void }>();
       </NuxtLink>
     </div>
     <div
-      class="flex flex-row items-start md:items-end justify-between gap-4 md:min-h-32 md:pb-2"
+      class="flex flex-row items-start justify-between md:items-end md:min-h-32 lg:pb-2"
     >
-      <div class="px-1 pt-4 font-barlow pl-2 w-3/5 flex-grow flex-shrink">
-        <h4 class="font-medium overflow-hidden whitespace-nowrap text-ellipsis">
+      <div class="flex-grow flex-shrink w-4/5 px-1 pt-4 pl-2 font-barlow">
+        <h4 class="text-xs font-medium cut-text md:text-sm lg:text-base">
           {{ title }}
         </h4>
         <p class="text-xl text-brown-700">{{ formatMoney(price) }}</p>
         <!-- <AddToCartButton variant-id="1" /> -->
       </div>
       <div
-        class="flex-none flex-shrink-0 h-full w-1/5 flex items-end justify-end"
+        class="flex items-end justify-end flex-none flex-shrink-0 w-1/5 h-full"
       >
         <AddToCartButton
+          v-if="inventory > 0"
           :variant-id="variationId"
           icon
           flat
-          class="h-full aspect-square"
+          class="w-full h-full"
         ></AddToCartButton>
         <!-- <button
           class="w-10 h-10 transition-all duration-100 rounded-md hover:text-brown-700 add_to_cart"

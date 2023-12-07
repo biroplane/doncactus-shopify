@@ -27,7 +27,8 @@ const addToCart = async (id: string) => {
 
 <template>
   <button
-    class="relative flex items-center justify-center text-white shadow-lg bg-primary-300 py-2 px-6 add_to_cart text-sm"
+    class="relative flex items-center justify-center py-2 text-sm text-white shadow-lg bg-primary-300 add_to_cart"
+    :class="{ 'px-6': !icon }"
     v-bind="$attrs"
     @click="addToCart(variantId)"
   >

@@ -50,6 +50,7 @@ onMounted(() => {
           </h4>
         </div>
         <AddToCartButton
+          v-if="ps.product.totalInventory > 0"
           :variant-id="ps.product.variants.nodes[activeVariant].id"
         />
       </div>
@@ -74,10 +75,10 @@ onMounted(() => {
             ></NuxtImg>
           </li>
         </ul>
-        <div class="w-full h-full relative">
+        <div class="relative w-full h-full">
           <div
             v-if="ps.product.totalInventory < 1"
-            class="absolute bottom-3 py-2 bg-primary-500 px-8"
+            class="absolute px-8 py-2 bottom-3 bg-primary-500"
           >
             Sold out 🤷
           </div>
@@ -107,6 +108,7 @@ onMounted(() => {
         </div>
         <div class="hidden md:block">
           <AddToCartButton
+          v-if="ps.product.totalInventory > 0"
             :disabled="!ps.product.variants.nodes[activeVariant]"
             :variant-id="ps.product.variants.nodes[activeVariant].id"
           />
