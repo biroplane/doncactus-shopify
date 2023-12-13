@@ -12,6 +12,15 @@ onClickOutside(cartList, () => {
 
 <template>
   <div
+    class="bg-primary text-white lg:h-8 w-full text-xs py-1 lg:text-sm text-center flex items-center justify-center"
+  >
+    <div class="container notch">
+      Vuoi portarle a casa in tempo per Natale? Allora scegli il ritiro in sede
+      (la spedizione non garantisce l'arrivo entro Natale)
+      <NuxtLink to="/contatti" class="underline">Ci trovi qui</NuxtLink>
+    </div>
+  </div>
+  <div
     class="fixed top-0 z-50 flex items-center justify-center w-full h-24 px-4 transition-all duration-1000 bg-white bg-opacity-90 filter backdrop-blur-lg"
   >
     <div ref="cartList" class="flex items-center justify-between w-full gap-8">
@@ -57,5 +66,9 @@ onClickOutside(cartList, () => {
     transform: translateX(0);
     opacity: 1;
   }
+}
+
+.notch {
+  text-wrap: balance;
 }
 </style>

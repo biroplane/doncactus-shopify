@@ -72,7 +72,7 @@ defineEmits<{ (e: "onAdd", v: any): void }>();
         class="flex items-end justify-end flex-none flex-shrink-0 w-1/5 h-full"
       >
         <AddToCartButton
-          v-if="inventory > 0"
+          :disabled="inventory <= 0"
           :variant-id="variationId"
           icon
           flat

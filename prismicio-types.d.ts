@@ -2765,6 +2765,58 @@ export type NewsletterSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *Notch → Primary*
+ */
+export interface NotchSliceDefaultPrimary {
+  /**
+   * Text field in *Notch → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: notch.primary.text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text: prismic.RichTextField;
+
+  /**
+   * Background Color field in *Notch → Primary*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: notch.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#color
+   */
+  background_color: prismic.ColorField;
+}
+
+/**
+ * Default variation for Notch Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type NotchSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<NotchSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Notch*
+ */
+type NotchSliceVariation = NotchSliceDefault;
+
+/**
+ * Notch Shared Slice
+ *
+ * - **API ID**: `notch`
+ * - **Description**: Notch
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type NotchSlice = prismic.SharedSlice<"notch", NotchSliceVariation>;
+
+/**
  * Primary content in *ProductsByCollection → Primary*
  */
 export interface ProductsByCollectionSliceDefaultPrimary {
@@ -3175,6 +3227,10 @@ declare module "@prismicio/client" {
       NewsletterSliceVariation,
       NewsletterSliceDefault,
       NewsletterSliceDark,
+      NotchSlice,
+      NotchSliceDefaultPrimary,
+      NotchSliceVariation,
+      NotchSliceDefault,
       ProductsByCollectionSlice,
       ProductsByCollectionSliceDefaultPrimary,
       ProductsByCollectionSliceVariation,
