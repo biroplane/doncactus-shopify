@@ -32,6 +32,7 @@ export const components = defineSliceZoneComponents({
   hero: defineAsyncComponent(() => import("./Hero/index.vue")),
   jumbotron: defineAsyncComponent(() => import("./Jumbotron/index.vue")),
   newsletter: defineAsyncComponent(() => import("./Newsletter/index.vue")),
+
   products_by_collection: defineAsyncComponent(
     () => import("./ProductsByCollection/index.vue")
   ),

@@ -108,7 +108,7 @@ onMounted(() => {
         </div>
         <div class="hidden md:block">
           <AddToCartButton
-          v-if="ps.product.totalInventory > 0"
+            v-if="ps.product.totalInventory > 0"
             :disabled="!ps.product.variants.nodes[activeVariant]"
             :variant-id="ps.product.variants.nodes[activeVariant].id"
           />
